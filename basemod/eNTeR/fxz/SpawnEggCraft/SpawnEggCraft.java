@@ -266,7 +266,7 @@ public class SpawnEggCraft {
 			"121", 
 			"010", 
 			Character.valueOf('0'), new ItemStack(Items.egg, 1),
-			Character.valueOf('1'), new ItemStack(Items.leaves, 1), 
+			Character.valueOf('1'), new ItemStack(Blocks.leaves, 1), 
 			Character.valueOf('2'), new ItemStack(Items.gunpowder, 1), 
 		});	
 		//Creeper2
@@ -275,9 +275,9 @@ public class SpawnEggCraft {
 			"121", 
 			"010", 
 			Character.valueOf('0'), new ItemStack(Items.egg, 1),
-			Character.valueOf('1'), new ItemStack(Items.leaves2, 1), 
+			Character.valueOf('1'), new ItemStack(Blocks.leaves2, 1), 
 			Character.valueOf('2'), new ItemStack(Items.gunpowder, 1), 
 		});	
 		}
 	} 
-	
+}
