@@ -233,15 +233,51 @@ public class SpawnEggCraft {
 			Character.valueOf('1'), new ItemStack(Items.wheat_seeds, 1), 
 			Character.valueOf('2'), new ItemStack(Items.slime_ball, 1), 
 		});	
-		/*//Slime
-		GameRegistry.addRecipe(new ItemStack(Items.spawn_egg, LANZ_JBU,55), new Object[]{
+		//Zombie
+		GameRegistry.addRecipe(new ItemStack(Items.spawn_egg, LANZ_JBU,54), new Object[]{
 			"010", 
 			"121", 
 			"010", 
 			Character.valueOf('0'), new ItemStack(Items.egg, 1),
-			Character.valueOf('1'), new ItemStack(Items.wheat_seeds, 1), 
-			Character.valueOf('2'), new ItemStack(Items.slime_ball, 1), 
-		});	*/
+			Character.valueOf('1'), new ItemStack(Items.feather, 1), 
+			Character.valueOf('2'), new ItemStack(Items.rotten_flesh, 1), 
+		});	
+		//Spider
+		GameRegistry.addRecipe(new ItemStack(Items.spawn_egg, LANZ_JBU,52), new Object[]{
+			"010", 
+			"121", 
+			"010", 
+			Character.valueOf('0'), new ItemStack(Items.egg, 1),
+			Character.valueOf('1'), new ItemStack(Items.string, 1), 
+			Character.valueOf('2'), new ItemStack(Items.spider_eye, 1), 
+		});	
+		//Skeleton
+		GameRegistry.addRecipe(new ItemStack(Items.spawn_egg, LANZ_JBU,51), new Object[]{
+			"010", 
+			"121", 
+			"010", 
+			Character.valueOf('0'), new ItemStack(Items.egg, 1),
+			Character.valueOf('1'), new ItemStack(Items.arrow, 1), 
+			Character.valueOf('2'), new ItemStack(Items.bone, 1), 
+		});	
+		//Creeper
+		GameRegistry.addRecipe(new ItemStack(Items.spawn_egg, LANZ_JBU,50), new Object[]{
+			"010", 
+			"121", 
+			"010", 
+			Character.valueOf('0'), new ItemStack(Items.egg, 1),
+			Character.valueOf('1'), new ItemStack(Items.leaves, 1), 
+			Character.valueOf('2'), new ItemStack(Items.gunpowder, 1), 
+		});	
+		//Creeper2
+		GameRegistry.addRecipe(new ItemStack(Items.spawn_egg, LANZ_JBU,50), new Object[]{
+			"010", 
+			"121", 
+			"010", 
+			Character.valueOf('0'), new ItemStack(Items.egg, 1),
+			Character.valueOf('1'), new ItemStack(Items.leaves2, 1), 
+			Character.valueOf('2'), new ItemStack(Items.gunpowder, 1), 
+		});	
 		}
 	} 
 	
