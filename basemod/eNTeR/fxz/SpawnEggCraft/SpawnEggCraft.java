@@ -1,7 +1,9 @@
 package eNTeR.fxz.SpawnEggCraft;
 
+import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.Mod.EventHandler;
@@ -19,7 +21,7 @@ public class SpawnEggCraft {
     public static String IsDoubleCraft = "true";
     public static String IsNotPeaceful = "true";
     //public static File ConfigFile = new File("\\config\\SpawnEggCraft.cfg");//!
-    
+    static public Item SpawnEggCraftItems;
     
 	@EventHandler
 	public void preLoad(FMLPreInitializationEvent event) throws Exception
@@ -277,7 +279,26 @@ public class SpawnEggCraft {
 			Character.valueOf('0'), new ItemStack(Items.egg, 1),
 			Character.valueOf('1'), new ItemStack(Blocks.leaves2, 1), 
 			Character.valueOf('2'), new ItemStack(Items.gunpowder, 1), 
-		});	
+		});
+		
+		//Items
+		//MobSpawner_Chicken
+		SpawnEggCraftItems = new SpawnEggCraftAddItems();
+		SpawnEggCraftItems.setUnlocalizedName("MobSpawner_Chicken");
+		SpawnEggCraftItems.setTextureName("eNTeR:MobSpawner_Chicken");
+		SpawnEggCraftItems.setMaxStackSize(64);
+		SpawnEggCraftItems.setCreativeTab(CreativeTabs.tabMisc);
+		GameRegistry.registerItem(SpawnEggCraftItems, "MobSpawner_Chicken");
+		//System.out.println(SpawnEggCraftItems.getUnlocalizedName()+":Chicken");
+		
+		//MobSpawner_Pig
+		SpawnEggCraftItems = new SpawnEggCraftAddItems();
+		SpawnEggCraftItems.setUnlocalizedName("MobSpawner_Pig");
+		SpawnEggCraftItems.setTextureName("eNTeR:MobSpawner_Pig");
+		SpawnEggCraftItems.setMaxStackSize(64);
+		SpawnEggCraftItems.setCreativeTab(CreativeTabs.tabMisc);
+		GameRegistry.registerItem(SpawnEggCraftItems, "MobSpawner_Pig");
+		//System.out.println(SpawnEggCraftItems.getUnlocalizedName()+":pig");
 		}
 	} 
 }
