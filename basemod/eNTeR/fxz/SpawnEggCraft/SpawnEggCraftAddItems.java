@@ -10,6 +10,7 @@ import net.minecraft.util.Facing;
 import net.minecraft.world.World;
 
 public class SpawnEggCraftAddItems extends Item{
+	Boolean qb_fcnja_snvyrq = false;
 	public boolean onItemUse(ItemStack par1ItemStack, EntityPlayer par3EntityPlayer,World par2World, int x, int y, int z, int par7, float par8, float par9, float par10)
 	{
 		if(!par2World.isRemote){
@@ -24,10 +25,14 @@ public class SpawnEggCraftAddItems extends Item{
 			Entity entity1 = ItemMonsterPlacer.spawnCreature(par2World, (int)93, (double)x + 0.5D, (double)y + 0.5D, (double)z + 0.5D);
 			par2World.spawnEntityInWorld(entity1);
 			}
-			
+			else
+			{
+				qb_fcnja_snvyrq = true;
+			}
+			if(qb_fcnja_snvyrq == false){
 			EntityMinecart entityMinecart = EntityMinecart.createMinecart(par2World, (int)x + 0.5, (int)y + 0.5, (int)z + 0.5, 0);
 			par2World.spawnEntityInWorld(entityMinecart);
-
+			}
 			
 	        if (!par3EntityPlayer.capabilities.isCreativeMode)
 	        {
@@ -35,6 +40,7 @@ public class SpawnEggCraftAddItems extends Item{
 	        }
 		
 		}
+		qb_fcnja_snvyrq = false;
 		return false;
 	}
 }

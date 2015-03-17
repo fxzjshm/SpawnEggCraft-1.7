@@ -1,8 +1,9 @@
 package eNTeR.fxz.SpawnEggCraft;
 
+import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.passive.EntityChicken;
 import net.minecraft.init.Items;
-import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
 
 public class SpawnEggCraftOverrideEntity_Chicken extends EntityChicken{
@@ -10,7 +11,7 @@ public class SpawnEggCraftOverrideEntity_Chicken extends EntityChicken{
 	public SpawnEggCraftOverrideEntity_Chicken(World p_i1682_1_) {
 		super(p_i1682_1_);
 	}
-	
+	{System.out.println("It looks like that Override loaded.");}
 	@Override
 	protected void dropFewItems(boolean p_70628_1_, int p_70628_2_)
     {
@@ -19,6 +20,9 @@ public class SpawnEggCraftOverrideEntity_Chicken extends EntityChicken{
         for (int k = 0; k < j; ++k)
         {
             this.dropItem(Items.experience_bottle, 1);
+            EntityItem entityitem = new EntityItem(this.worldObj, this.posX, this.posY + (double)0.0F, this.posZ, new ItemStack(Items.experience_bottle));
+            entityitem.delayBeforeCanPickup = 10;
+            this.worldObj.spawnEntityInWorld(entityitem);
             //entityDropItem(new ItemStack(Items.experience_bottle, 1, 0), 1);
         }
 
@@ -31,11 +35,4 @@ public class SpawnEggCraftOverrideEntity_Chicken extends EntityChicken{
             this.dropItem(Items.chicken, 1);
         }
     }
-	
-	@Override
-    protected Item getDropItem()
-    {
-        return Items.experience_bottle;
-    }
-
 }

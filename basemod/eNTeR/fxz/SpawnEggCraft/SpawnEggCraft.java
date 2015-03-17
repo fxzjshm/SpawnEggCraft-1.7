@@ -284,20 +284,20 @@ public class SpawnEggCraft {
 		//Items
 		//MobSpawner_Chicken
 		SpawnEggCraftItems = new SpawnEggCraftAddItems();
-		SpawnEggCraftItems.setUnlocalizedName("MobSpawner_Chicken");
-		SpawnEggCraftItems.setTextureName("eNTeR:MobSpawner_Chicken");
+		SpawnEggCraftItems.setUnlocalizedName("Specimen_Chicken");
+		SpawnEggCraftItems.setTextureName("eNTeR:Specimen_Chicken");
 		SpawnEggCraftItems.setMaxStackSize(64);
 		SpawnEggCraftItems.setCreativeTab(CreativeTabs.tabMisc);
-		GameRegistry.registerItem(SpawnEggCraftItems, "MobSpawner_Chicken");
+		GameRegistry.registerItem(SpawnEggCraftItems, "Specimen_Chicken");
 		//System.out.println(SpawnEggCraftItems.getUnlocalizedName()+":Chicken");
 		
 		//MobSpawner_Pig
 		SpawnEggCraftItems = new SpawnEggCraftAddItems();
-		SpawnEggCraftItems.setUnlocalizedName("MobSpawner_Pig");
-		SpawnEggCraftItems.setTextureName("eNTeR:MobSpawner_Pig");
+		SpawnEggCraftItems.setUnlocalizedName("Specimen_Pig");
+		SpawnEggCraftItems.setTextureName("eNTeR:Specimen_Pig");
 		SpawnEggCraftItems.setMaxStackSize(64);
 		SpawnEggCraftItems.setCreativeTab(CreativeTabs.tabMisc);
-		GameRegistry.registerItem(SpawnEggCraftItems, "MobSpawner_Pig");
+		GameRegistry.registerItem(SpawnEggCraftItems, "Specimen_Pig");
 		//System.out.println(SpawnEggCraftItems.getUnlocalizedName()+":pig");
 		}
 	} 
