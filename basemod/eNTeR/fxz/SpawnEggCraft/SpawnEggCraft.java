@@ -5,10 +5,13 @@ import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraftforge.common.MinecraftForge;
+import net.minecraftforge.event.entity.living.LivingDeathEvent;
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.Mod.EventHandler;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import cpw.mods.fml.common.event.FMLInitializationEvent;
+import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import cpw.mods.fml.common.registry.GameRegistry;
 
 @Mod(modid=SpawnEggCraft.MODID, name=SpawnEggCraft.NAME, version=SpawnEggCraft.VERSION)
@@ -21,7 +24,12 @@ public class SpawnEggCraft {
     public static String IsDoubleCraft = "true";
     public static String IsNotPeaceful = "true";
     //public static File ConfigFile = new File("\\config\\SpawnEggCraft.cfg");//!
-    static public Item SpawnEggCraftItems;
+    String SpawnEggCraft_String = "";
+    static public Item Specimen;
+    static public Item Specimen_Chicken;
+    static public Item Specimen_Pig;
+    static public Item Specimen_Cow;
+    static public Item Specimen_Sheep;
     
 	@EventHandler
 	public void preLoad(FMLPreInitializationEvent event) throws Exception
@@ -42,12 +50,35 @@ public class SpawnEggCraft {
 		//Mob
 		
 		//EntityRegistry.registerModEntity(EntityAnimal.class,"Chicken_SpawnEggCraft",1,this,64,3,true);
-		  
-		 
+	    
+		//Items
+		//Specimen
+		SpawnEggCraft_String = "Specimen";//1
+	    Specimen = new SpawnEggCraftAddItems();
+	    Specimen.setUnlocalizedName(SpawnEggCraft_String).setTextureName("eNTeR:"+SpawnEggCraft_String).setMaxStackSize(64).setCreativeTab(CreativeTabs.tabMisc);
+		GameRegistry.registerItem(Specimen, SpawnEggCraft_String);//2
+		//Specimen_Chicken
+		SpawnEggCraft_String = "Specimen_Chicken";
+		Specimen_Chicken = new SpawnEggCraftAddItems();
+		Specimen_Chicken.setUnlocalizedName(SpawnEggCraft_String).setTextureName("eNTeR:"+SpawnEggCraft_String).setMaxStackSize(64).setCreativeTab(CreativeTabs.tabMisc);
+		GameRegistry.registerItem(Specimen_Chicken, SpawnEggCraft_String);
+		//Specimen_Pig
+		SpawnEggCraft_String = "Specimen_Pig";
+		Specimen_Pig = new SpawnEggCraftAddItems();
+		Specimen_Pig.setUnlocalizedName(SpawnEggCraft_String).setTextureName("eNTeR:"+SpawnEggCraft_String).setMaxStackSize(64).setCreativeTab(CreativeTabs.tabMisc);
+		GameRegistry.registerItem(Specimen_Pig, SpawnEggCraft_String);
+		//Specimen_Cow
+		SpawnEggCraft_String = "Specimen_Cow";
+		Specimen_Cow = new SpawnEggCraftAddItems();
+		Specimen_Cow.setUnlocalizedName(SpawnEggCraft_String).setTextureName("eNTeR:"+SpawnEggCraft_String).setMaxStackSize(64).setCreativeTab(CreativeTabs.tabMisc);
+		GameRegistry.registerItem(Specimen_Cow, SpawnEggCraft_String);
+		//Specimen_Sheep
+		SpawnEggCraft_String = "Specimen_Sheep";
+		Specimen_Sheep = new SpawnEggCraftAddItems();
+		Specimen_Sheep.setUnlocalizedName(SpawnEggCraft_String).setTextureName("eNTeR:"+SpawnEggCraft_String).setMaxStackSize(64).setCreativeTab(CreativeTabs.tabMisc);
+		GameRegistry.registerItem(Specimen_Sheep, SpawnEggCraft_String);
 		}
-		
-
-	 
+ 
 	@EventHandler
 	public void load(FMLInitializationEvent event)
 	{
@@ -280,25 +311,24 @@ public class SpawnEggCraft {
 			Character.valueOf('1'), new ItemStack(Blocks.leaves2, 1), 
 			Character.valueOf('2'), new ItemStack(Items.gunpowder, 1), 
 		});
-		
-		//Items
-		//MobSpawner_Chicken
-		SpawnEggCraftItems = new SpawnEggCraftAddItems();
-		SpawnEggCraftItems.setUnlocalizedName("Specimen_Chicken");
-		SpawnEggCraftItems.setTextureName("eNTeR:Specimen_Chicken");
-		SpawnEggCraftItems.setMaxStackSize(64);
-		SpawnEggCraftItems.setCreativeTab(CreativeTabs.tabMisc);
-		GameRegistry.registerItem(SpawnEggCraftItems, "Specimen_Chicken");
-		//System.out.println(SpawnEggCraftItems.getUnlocalizedName()+":Chicken");
-		
-		//MobSpawner_Pig
-		SpawnEggCraftItems = new SpawnEggCraftAddItems();
-		SpawnEggCraftItems.setUnlocalizedName("Specimen_Pig");
-		SpawnEggCraftItems.setTextureName("eNTeR:Specimen_Pig");
-		SpawnEggCraftItems.setMaxStackSize(64);
-		SpawnEggCraftItems.setCreativeTab(CreativeTabs.tabMisc);
-		GameRegistry.registerItem(SpawnEggCraftItems, "Specimen_Pig");
-		//System.out.println(SpawnEggCraftItems.getUnlocalizedName()+":pig");
+		//Specimen
+		GameRegistry.addRecipe(new ItemStack(Specimen, LANZ_JBU,50), new Object[]{
+			"01",
+			Character.valueOf('0'), new ItemStack(Items.book, 1),
+			Character.valueOf('1'), new ItemStack(Items.nether_star, 1), 
+		});
+		MinecraftForge.EVENT_BUS.register(this);
 		}
-	} 
+		}
+	
+	
+	@SubscribeEvent
+	public void LivingDeath(LivingDeathEvent event){
+		System.out.println("----------------------------------------------I'm here!----------------------------------------------");
+		System.out.println(event.entity.getEntityId());
+		/*if(event.entity.getEntityId()==93){
+            EntityItem entityitem = new EntityItem(event.entity.worldObj, event.entity.posX, event.entity.posY + (double)0.0F, event.entity.posZ, new ItemStack(Items.experience_bottle));
+            entityitem.delayBeforeCanPickup = 10;
+            event.entity.worldObj.spawnEntityInWorld(entityitem);*/
+		}
 }

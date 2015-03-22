@@ -19,16 +19,29 @@ public class SpawnEggCraftAddItems extends Item{
             z += Facing.offsetsZForSide[par7];
             
 			//AddCodes
-            
-			if(par1ItemStack.getUnlocalizedName()=="item.MobSpawner_Chicken")
+    		System.out.println(par1ItemStack.getUnlocalizedName());
+			if(par1ItemStack.getUnlocalizedName()=="item.Specimen_Chicken")
 			{
 			Entity entity1 = ItemMonsterPlacer.spawnCreature(par2World, (int)93, (double)x + 0.5D, (double)y + 0.5D, (double)z + 0.5D);
 			par2World.spawnEntityInWorld(entity1);
+			}
+			else if(par1ItemStack.getUnlocalizedName()=="item.Specimen_Pig"){
+				Entity entity1 = ItemMonsterPlacer.spawnCreature(par2World, (int)90, (double)x + 0.5D, (double)y + 0.5D, (double)z + 0.5D);
+				par2World.spawnEntityInWorld(entity1);
+			}
+			else if(par1ItemStack.getUnlocalizedName()=="item.Specimen_Cow"){
+				Entity entity1 = ItemMonsterPlacer.spawnCreature(par2World, (int)92, (double)x + 0.5D, (double)y + 0.5D, (double)z + 0.5D);
+				par2World.spawnEntityInWorld(entity1);
+			}
+			else if(par1ItemStack.getUnlocalizedName()=="item.Specimen_Sheep"){
+				Entity entity1 = ItemMonsterPlacer.spawnCreature(par2World, (int)91, (double)x + 0.5D, (double)y + 0.5D, (double)z + 0.5D);
+				par2World.spawnEntityInWorld(entity1);
 			}
 			else
 			{
 				qb_fcnja_snvyrq = true;
 			}
+			
 			if(qb_fcnja_snvyrq == false){
 			EntityMinecart entityMinecart = EntityMinecart.createMinecart(par2World, (int)x + 0.5, (int)y + 0.5, (int)z + 0.5, 0);
 			par2World.spawnEntityInWorld(entityMinecart);

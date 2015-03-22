@@ -6,12 +6,13 @@ import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
 
+//@Mod(modid="SpawnEggCraftOverrideEntity_Chicken", name="SpawnEggCraftOverrideEntity_Chicken", version="0.0.1")
 public class SpawnEggCraftOverrideEntity_Chicken extends EntityChicken{
 
 	public SpawnEggCraftOverrideEntity_Chicken(World p_i1682_1_) {
 		super(p_i1682_1_);
+		System.out.println("It looks like that Override loaded.");
 	}
-	{System.out.println("It looks like that Override loaded.");}
 	@Override
 	protected void dropFewItems(boolean p_70628_1_, int p_70628_2_)
     {
