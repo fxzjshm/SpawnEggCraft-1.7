@@ -24,6 +24,7 @@ public class SpawnEggCraftAddItems extends Item{
 			{
 			Entity entity1 = ItemMonsterPlacer.spawnCreature(par2World, (int)93, (double)x + 0.5D, (double)y + 0.5D, (double)z + 0.5D);
 			par2World.spawnEntityInWorld(entity1);
+			System.out.println("Spawned chicken.");
 			}
 			else if(par1ItemStack.getUnlocalizedName()=="item.Specimen_Pig"){
 				Entity entity1 = ItemMonsterPlacer.spawnCreature(par2World, (int)90, (double)x + 0.5D, (double)y + 0.5D, (double)z + 0.5D);

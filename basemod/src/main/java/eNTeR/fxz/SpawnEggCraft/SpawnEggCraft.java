@@ -1,6 +1,7 @@
 package eNTeR.fxz.SpawnEggCraft;
 
 import net.minecraft.creativetab.CreativeTabs;
+import net.minecraft.entity.item.EntityItem;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.Item;
@@ -55,27 +56,27 @@ public class SpawnEggCraft {
 		//Specimen
 		SpawnEggCraft_String = "Specimen";//1
 	    Specimen = new SpawnEggCraftAddItems();
-	    Specimen.setUnlocalizedName(SpawnEggCraft_String).setTextureName("eNTeR:"+SpawnEggCraft_String).setMaxStackSize(64).setCreativeTab(CreativeTabs.tabMisc);
+	    Specimen.setUnlocalizedName(SpawnEggCraft_String).setTextureName("SpawnEggCraft:"+SpawnEggCraft_String).setMaxStackSize(64).setCreativeTab(CreativeTabs.tabMisc);
 		GameRegistry.registerItem(Specimen, SpawnEggCraft_String);//2
 		//Specimen_Chicken
 		SpawnEggCraft_String = "Specimen_Chicken";
 		Specimen_Chicken = new SpawnEggCraftAddItems();
-		Specimen_Chicken.setUnlocalizedName(SpawnEggCraft_String).setTextureName("eNTeR:"+SpawnEggCraft_String).setMaxStackSize(64).setCreativeTab(CreativeTabs.tabMisc);
+		Specimen_Chicken.setUnlocalizedName(SpawnEggCraft_String).setTextureName("SpawnEggCraft:"+SpawnEggCraft_String).setMaxStackSize(64).setCreativeTab(CreativeTabs.tabMisc);
 		GameRegistry.registerItem(Specimen_Chicken, SpawnEggCraft_String);
 		//Specimen_Pig
 		SpawnEggCraft_String = "Specimen_Pig";
 		Specimen_Pig = new SpawnEggCraftAddItems();
-		Specimen_Pig.setUnlocalizedName(SpawnEggCraft_String).setTextureName("eNTeR:"+SpawnEggCraft_String).setMaxStackSize(64).setCreativeTab(CreativeTabs.tabMisc);
+		Specimen_Pig.setUnlocalizedName(SpawnEggCraft_String).setTextureName("SpawnEggCraft:"+SpawnEggCraft_String).setMaxStackSize(64).setCreativeTab(CreativeTabs.tabMisc);
 		GameRegistry.registerItem(Specimen_Pig, SpawnEggCraft_String);
 		//Specimen_Cow
 		SpawnEggCraft_String = "Specimen_Cow";
 		Specimen_Cow = new SpawnEggCraftAddItems();
-		Specimen_Cow.setUnlocalizedName(SpawnEggCraft_String).setTextureName("eNTeR:"+SpawnEggCraft_String).setMaxStackSize(64).setCreativeTab(CreativeTabs.tabMisc);
+		Specimen_Cow.setUnlocalizedName(SpawnEggCraft_String).setTextureName("SpawnEggCraft:"+SpawnEggCraft_String).setMaxStackSize(64).setCreativeTab(CreativeTabs.tabMisc);
 		GameRegistry.registerItem(Specimen_Cow, SpawnEggCraft_String);
 		//Specimen_Sheep
 		SpawnEggCraft_String = "Specimen_Sheep";
 		Specimen_Sheep = new SpawnEggCraftAddItems();
-		Specimen_Sheep.setUnlocalizedName(SpawnEggCraft_String).setTextureName("eNTeR:"+SpawnEggCraft_String).setMaxStackSize(64).setCreativeTab(CreativeTabs.tabMisc);
+		Specimen_Sheep.setUnlocalizedName(SpawnEggCraft_String).setTextureName("SpawnEggCraft:"+SpawnEggCraft_String).setMaxStackSize(64).setCreativeTab(CreativeTabs.tabMisc);
 		GameRegistry.registerItem(Specimen_Sheep, SpawnEggCraft_String);
 		}
  
@@ -317,18 +318,23 @@ public class SpawnEggCraft {
 			Character.valueOf('0'), new ItemStack(Items.book, 1),
 			Character.valueOf('1'), new ItemStack(Items.nether_star, 1), 
 		});
-		MinecraftForge.EVENT_BUS.register(this);
 		}
+		MinecraftForge.EVENT_BUS.register(this);
 		}
 	
 	
 	@SubscribeEvent
 	public void LivingDeath(LivingDeathEvent event){
+		if(!event.entity.worldObj.isRemote){
 		System.out.println("----------------------------------------------I'm here!----------------------------------------------");
-		System.out.println(event.entity.getEntityId());
-		/*if(event.entity.getEntityId()==93){
+		//System.out.println("EntityId:"+String.valueOf(event.entity.getEntityId()));
+		//System.out.println("UniqueID:"+String.valueOf(event.entity.getUniqueID()));
+		System.out.println("CommandSenderName:"+String.valueOf(event.entity.getCommandSenderName()));
+		/*if(event.entity.getEntityId()==93){*/
             EntityItem entityitem = new EntityItem(event.entity.worldObj, event.entity.posX, event.entity.posY + (double)0.0F, event.entity.posZ, new ItemStack(Items.experience_bottle));
             entityitem.delayBeforeCanPickup = 10;
-            event.entity.worldObj.spawnEntityInWorld(entityitem);*/
+            event.entity.worldObj.spawnEntityInWorld(entityitem);
+            //}
+		}
 		}
 }
