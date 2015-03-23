@@ -1,0 +1,16 @@
+[
+{
+  "modid": "SpawnEggCraft_basemod",
+  "name": "SpawnEggCraft",
+  "description": "Craft spawn_eggs!",
+  "version": "${version}",
+  "mcversion": "${mcversion}",
+  "url": "",
+  "updateUrl": "",
+  "authorList": ["fxz"],
+  "credits": "http://tieba.baidu.com/p/2391304552",
+  "logoFile": "",
+  "screenshots": [],
+  "dependencies": []
+}
+]
