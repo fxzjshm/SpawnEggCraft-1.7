@@ -31,6 +31,9 @@ public class SpawnEggCraft {
     static public Item Specimen_Pig;
     static public Item Specimen_Cow;
     static public Item Specimen_Sheep;
+    static public Item Specimen_Villager;
+    static public Item Specimen_Wolf;
+    //static public Item Specimens;
     
 	@EventHandler
 	public void preLoad(FMLPreInitializationEvent event) throws Exception
@@ -54,7 +57,8 @@ public class SpawnEggCraft {
 	    
 		//Items
 		//Specimen
-		SpawnEggCraft_String = "Specimen";//1
+		
+	    SpawnEggCraft_String = "Specimen";//1
 	    Specimen = new SpawnEggCraftAddItems();
 	    Specimen.setUnlocalizedName(SpawnEggCraft_String).setTextureName("SpawnEggCraft:"+SpawnEggCraft_String).setMaxStackSize(64).setCreativeTab(CreativeTabs.tabMisc);
 		GameRegistry.registerItem(Specimen, SpawnEggCraft_String);//2
@@ -78,6 +82,16 @@ public class SpawnEggCraft {
 		Specimen_Sheep = new SpawnEggCraftAddItems();
 		Specimen_Sheep.setUnlocalizedName(SpawnEggCraft_String).setTextureName("SpawnEggCraft:"+SpawnEggCraft_String).setMaxStackSize(64).setCreativeTab(CreativeTabs.tabMisc);
 		GameRegistry.registerItem(Specimen_Sheep, SpawnEggCraft_String);
+		//Specimen_Villager
+		SpawnEggCraft_String = "Specimen_Villager";
+		Specimen_Villager = new SpawnEggCraftAddItems();
+		Specimen_Villager.setUnlocalizedName(SpawnEggCraft_String).setTextureName("SpawnEggCraft:"+SpawnEggCraft_String).setMaxStackSize(64).setCreativeTab(CreativeTabs.tabMisc);
+		GameRegistry.registerItem(Specimen_Villager, SpawnEggCraft_String);
+		//Specimen_Wolf
+		SpawnEggCraft_String = "Specimen_Wolf";
+		Specimen_Wolf = new SpawnEggCraftAddItems();
+		Specimen_Wolf.setUnlocalizedName(SpawnEggCraft_String).setTextureName("SpawnEggCraft:"+SpawnEggCraft_String).setMaxStackSize(64).setCreativeTab(CreativeTabs.tabMisc);
+		GameRegistry.registerItem(Specimen_Wolf, SpawnEggCraft_String);
 		}
  
 	@EventHandler
