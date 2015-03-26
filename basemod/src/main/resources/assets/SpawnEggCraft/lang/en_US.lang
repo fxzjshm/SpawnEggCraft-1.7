@@ -1,2 +1,7 @@
-item.Specimen_Chicken.name=Specimen of Chicken
-item.Specimen_Pig.name=Specimen of Pig
+item.Specimen_Chicken.name=Specimen of Chickens
+item.Specimen_Pig.name=Specimen of Pigs
+item.Specimen_Cow.name=Specimen of Cows
+item.Specimen_Sheep.name=Specimen of Sheep
+item.Specimen_Villager.name=Specimen of Villagers
+item.Specimen_Wolf.name=Specimen of Wolves
+item.Specimen.name=Specimen
