@@ -1,6 +1,7 @@
 package eNTeR.fxz.SpawnEggCraft;
 
 import net.minecraft.creativetab.CreativeTabs;
+import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
@@ -344,11 +345,13 @@ public class SpawnEggCraft {
 		//System.out.println("EntityId:"+String.valueOf(event.entity.getEntityId()));
 		//System.out.println("UniqueID:"+String.valueOf(event.entity.getUniqueID()));
 		System.out.println("CommandSenderName:"+String.valueOf(event.entity.getCommandSenderName()));
-		/*if(event.entity.getEntityId()==93){*/
-            EntityItem entityitem = new EntityItem(event.entity.worldObj, event.entity.posX, event.entity.posY + (double)0.0F, event.entity.posZ, new ItemStack(Items.experience_bottle));
-            entityitem.delayBeforeCanPickup = 10;
-            event.entity.worldObj.spawnEntityInWorld(entityitem);
-            //}
+			if(event.entityLiving.getEntityAttribute(SharedMonsterAttributes.maxHealth).getBaseValue()==4.0D&&
+					event.entityLiving.getEntityAttribute(SharedMonsterAttributes.movementSpeed).getBaseValue()==0.25D)
+			{
+				EntityItem entityitem = new EntityItem(event.entity.worldObj, event.entity.posX, event.entity.posY + (double)0.0F, event.entity.posZ, new ItemStack(Items.experience_bottle));
+				entityitem.delayBeforeCanPickup = 10;
+				event.entity.worldObj.spawnEntityInWorld(entityitem);
+            }
 		}
-		}
+	}
 }
