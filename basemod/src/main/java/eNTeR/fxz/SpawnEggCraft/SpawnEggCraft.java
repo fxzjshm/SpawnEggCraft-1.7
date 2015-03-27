@@ -61,49 +61,49 @@ public class SpawnEggCraft {
 		//Specimen
 	    SpawnEggCraft_String = "Specimen";//1
 	    Specimen = new SpawnEggCraftAddItems();
-	    Specimen.setUnlocalizedName(SpawnEggCraft_String).setTextureName("eNTeR:"+SpawnEggCraft_String).setMaxStackSize(64).setCreativeTab(CreativeTabs.tabMisc);
+	    Specimen.setUnlocalizedName(SpawnEggCraft_String).setTextureName("fxz:"+SpawnEggCraft_String).setMaxStackSize(64).setCreativeTab(CreativeTabs.tabMisc);
 		GameRegistry.registerItem(Specimen, SpawnEggCraft_String);//2
 		System.out.println(SpawnEggCraft_String);
 		System.out.println(Specimen.getUnlocalizedName());
 		//Specimen_Chicken
 		SpawnEggCraft_String = "Specimen_Chicken";
 		Specimen_Chicken = new SpawnEggCraftAddItems();
-		Specimen_Chicken.setUnlocalizedName(SpawnEggCraft_String).setTextureName("eNTeR:"+SpawnEggCraft_String).setMaxStackSize(64).setCreativeTab(CreativeTabs.tabMisc);
+		Specimen_Chicken.setUnlocalizedName(SpawnEggCraft_String).setTextureName("fxz:"+SpawnEggCraft_String).setMaxStackSize(64).setCreativeTab(CreativeTabs.tabMisc);
 		GameRegistry.registerItem(Specimen_Chicken, SpawnEggCraft_String);
 		System.out.println(SpawnEggCraft_String);
 		System.out.println(Specimen_Chicken.getUnlocalizedName());
 		//Specimen_Pig
 		SpawnEggCraft_String = "Specimen_Pig";
 		Specimen_Pig = new SpawnEggCraftAddItems();
-		Specimen_Pig.setUnlocalizedName(SpawnEggCraft_String).setTextureName("eNTeR:"+SpawnEggCraft_String).setMaxStackSize(64).setCreativeTab(CreativeTabs.tabMisc);
+		Specimen_Pig.setUnlocalizedName(SpawnEggCraft_String).setTextureName("fxz:"+SpawnEggCraft_String).setMaxStackSize(64).setCreativeTab(CreativeTabs.tabMisc);
 		GameRegistry.registerItem(Specimen_Pig, SpawnEggCraft_String);
 		System.out.println(SpawnEggCraft_String);
 		System.out.println(Specimen_Pig.getUnlocalizedName());
 		//Specimen_Cow
 		SpawnEggCraft_String = "Specimen_Cow";
 		Specimen_Cow = new SpawnEggCraftAddItems();
-		Specimen_Cow.setUnlocalizedName(SpawnEggCraft_String).setTextureName("eNTeR:"+SpawnEggCraft_String).setMaxStackSize(64).setCreativeTab(CreativeTabs.tabMisc);
+		Specimen_Cow.setUnlocalizedName(SpawnEggCraft_String).setTextureName("fxz:"+SpawnEggCraft_String).setMaxStackSize(64).setCreativeTab(CreativeTabs.tabMisc);
 		GameRegistry.registerItem(Specimen_Cow, SpawnEggCraft_String);
 		System.out.println(SpawnEggCraft_String);
 		System.out.println(Specimen_Cow.getUnlocalizedName());
 		//Specimen_Sheep
 		SpawnEggCraft_String = "Specimen_Sheep";
 		Specimen_Sheep = new SpawnEggCraftAddItems();
-		Specimen_Sheep.setUnlocalizedName(SpawnEggCraft_String).setTextureName("eNTeR:"+SpawnEggCraft_String).setMaxStackSize(64).setCreativeTab(CreativeTabs.tabMisc);
+		Specimen_Sheep.setUnlocalizedName(SpawnEggCraft_String).setTextureName("fxz:"+SpawnEggCraft_String).setMaxStackSize(64).setCreativeTab(CreativeTabs.tabMisc);
 		GameRegistry.registerItem(Specimen_Sheep, SpawnEggCraft_String);
 		System.out.println(SpawnEggCraft_String);
 		System.out.println(Specimen_Sheep.getUnlocalizedName());
 		//Specimen_Villager
 		SpawnEggCraft_String = "Specimen_Villager";
 		Specimen_Villager = new SpawnEggCraftAddItems();
-		Specimen_Villager.setUnlocalizedName(SpawnEggCraft_String).setTextureName("eNTeR:"+SpawnEggCraft_String).setMaxStackSize(64).setCreativeTab(CreativeTabs.tabMisc);
+		Specimen_Villager.setUnlocalizedName(SpawnEggCraft_String).setTextureName("fxz:"+SpawnEggCraft_String).setMaxStackSize(64).setCreativeTab(CreativeTabs.tabMisc);
 		GameRegistry.registerItem(Specimen_Villager, SpawnEggCraft_String);
 		System.out.println(SpawnEggCraft_String);
 		System.out.println(Specimen_Villager.getUnlocalizedName());
 		//Specimen_Wolf
 		SpawnEggCraft_String = "Specimen_Wolf";
 		Specimen_Wolf = new SpawnEggCraftAddItems();
-		Specimen_Wolf.setUnlocalizedName(SpawnEggCraft_String).setTextureName("eNTeR:"+SpawnEggCraft_String).setMaxStackSize(64).setCreativeTab(CreativeTabs.tabMisc);
+		Specimen_Wolf.setUnlocalizedName(SpawnEggCraft_String).setTextureName("fxz:Specimen_Wolf").setMaxStackSize(64).setCreativeTab(CreativeTabs.tabMisc);
 		GameRegistry.registerItem(Specimen_Wolf, SpawnEggCraft_String);
 		System.out.println(SpawnEggCraft_String);
 		System.out.println(Specimen_Wolf.getUnlocalizedName());
