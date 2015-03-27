@@ -1,7 +1,7 @@
 [
 {
   "modid": "SpawnEggCraft_basemod",
-  "name": "SpawnEggCraft",
+  "name": "SpawnEggCraft_basemod",
   "description": "Craft spawn_eggs!",
   "version": "${version}",
   "mcversion": "${mcversion}",

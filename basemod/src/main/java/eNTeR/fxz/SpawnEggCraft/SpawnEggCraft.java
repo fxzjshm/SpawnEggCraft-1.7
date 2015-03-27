@@ -20,7 +20,7 @@ import cpw.mods.fml.common.registry.GameRegistry;
 //@Mod(modid="SpawnEggCraft", name="SpawnEggCraft", version="0.0.1")
 public class SpawnEggCraft {
     public static final String MODID = "SpawnEggCraft_basemod";
-    public static final String NAME = "SpawnEggCraft";
+    public static final String NAME = "SpawnEggCraft_basemod";
     public static final String VERSION = "0.0.1";
     public static int LANZ_JBU = 1;
     public static String IsDoubleCraft = "true";
@@ -39,60 +39,74 @@ public class SpawnEggCraft {
 	@EventHandler
 	public void preLoad(FMLPreInitializationEvent event) throws Exception
 	{
+		SpawnEggCraftConfig.InitliazeConfig(event.getSuggestedConfigurationFile());
+		try
+		{
+			IsDoubleCraft = SpawnEggCraftConfig.GetGeneralProperties("IsDoubleCraft","true");
+			IsNotPeaceful = SpawnEggCraftConfig.GetGeneralProperties("IsNotPeaceful","true");
+		}
+		catch(Exception error)
+		{ 
+		    System.out.println(error.getMessage());
+		    System.out.println(error.getStackTrace());
+		}
+		SpawnEggCraftConfig.SaveConfig();
 		
-		/*SpawnEggCraftConfig.InitliazeConfig(ConfigFile);
-		System.out.println("IsDoubleCraft == " + IsDoubleCraft);
-		System.out.println("IsNotPeaceful == " + IsNotPeaceful);
-		IsDoubleCraft = SpawnEggCraftConfig.GetGeneralProperties("IsDoubleCraft","true");
-		IsNotPeaceful = SpawnEggCraftConfig.GetGeneralProperties("IsNotPeaceful","");
-		System.out.println("IsDoubleCraft == " + IsDoubleCraft);
-		System.out.println("IsNotPeaceful == " + IsNotPeaceful);*/
 	    if(IsDoubleCraft=="true")
 	    {
 	    	LANZ_JBU=2;
 	    }
-		
-		//Mob
-		
-		//EntityRegistry.registerModEntity(EntityAnimal.class,"Chicken_SpawnEggCraft",1,this,64,3,true);
-	    
 		//Items
+	    
 		//Specimen
-		
 	    SpawnEggCraft_String = "Specimen";//1
 	    Specimen = new SpawnEggCraftAddItems();
-	    Specimen.setUnlocalizedName(SpawnEggCraft_String).setTextureName("SpawnEggCraft:"+SpawnEggCraft_String).setMaxStackSize(64).setCreativeTab(CreativeTabs.tabMisc);
+	    Specimen.setUnlocalizedName(SpawnEggCraft_String).setTextureName("eNTeR:"+SpawnEggCraft_String).setMaxStackSize(64).setCreativeTab(CreativeTabs.tabMisc);
 		GameRegistry.registerItem(Specimen, SpawnEggCraft_String);//2
+		System.out.println(SpawnEggCraft_String);
+		System.out.println(Specimen.getUnlocalizedName());
 		//Specimen_Chicken
 		SpawnEggCraft_String = "Specimen_Chicken";
 		Specimen_Chicken = new SpawnEggCraftAddItems();
-		Specimen_Chicken.setUnlocalizedName(SpawnEggCraft_String).setTextureName("SpawnEggCraft:"+SpawnEggCraft_String).setMaxStackSize(64).setCreativeTab(CreativeTabs.tabMisc);
+		Specimen_Chicken.setUnlocalizedName(SpawnEggCraft_String).setTextureName("eNTeR:"+SpawnEggCraft_String).setMaxStackSize(64).setCreativeTab(CreativeTabs.tabMisc);
 		GameRegistry.registerItem(Specimen_Chicken, SpawnEggCraft_String);
+		System.out.println(SpawnEggCraft_String);
+		System.out.println(Specimen_Chicken.getUnlocalizedName());
 		//Specimen_Pig
 		SpawnEggCraft_String = "Specimen_Pig";
 		Specimen_Pig = new SpawnEggCraftAddItems();
-		Specimen_Pig.setUnlocalizedName(SpawnEggCraft_String).setTextureName("SpawnEggCraft:"+SpawnEggCraft_String).setMaxStackSize(64).setCreativeTab(CreativeTabs.tabMisc);
+		Specimen_Pig.setUnlocalizedName(SpawnEggCraft_String).setTextureName("eNTeR:"+SpawnEggCraft_String).setMaxStackSize(64).setCreativeTab(CreativeTabs.tabMisc);
 		GameRegistry.registerItem(Specimen_Pig, SpawnEggCraft_String);
+		System.out.println(SpawnEggCraft_String);
+		System.out.println(Specimen_Pig.getUnlocalizedName());
 		//Specimen_Cow
 		SpawnEggCraft_String = "Specimen_Cow";
 		Specimen_Cow = new SpawnEggCraftAddItems();
-		Specimen_Cow.setUnlocalizedName(SpawnEggCraft_String).setTextureName("SpawnEggCraft:"+SpawnEggCraft_String).setMaxStackSize(64).setCreativeTab(CreativeTabs.tabMisc);
+		Specimen_Cow.setUnlocalizedName(SpawnEggCraft_String).setTextureName("eNTeR:"+SpawnEggCraft_String).setMaxStackSize(64).setCreativeTab(CreativeTabs.tabMisc);
 		GameRegistry.registerItem(Specimen_Cow, SpawnEggCraft_String);
+		System.out.println(SpawnEggCraft_String);
+		System.out.println(Specimen_Cow.getUnlocalizedName());
 		//Specimen_Sheep
 		SpawnEggCraft_String = "Specimen_Sheep";
 		Specimen_Sheep = new SpawnEggCraftAddItems();
-		Specimen_Sheep.setUnlocalizedName(SpawnEggCraft_String).setTextureName("SpawnEggCraft:"+SpawnEggCraft_String).setMaxStackSize(64).setCreativeTab(CreativeTabs.tabMisc);
+		Specimen_Sheep.setUnlocalizedName(SpawnEggCraft_String).setTextureName("eNTeR:"+SpawnEggCraft_String).setMaxStackSize(64).setCreativeTab(CreativeTabs.tabMisc);
 		GameRegistry.registerItem(Specimen_Sheep, SpawnEggCraft_String);
+		System.out.println(SpawnEggCraft_String);
+		System.out.println(Specimen_Sheep.getUnlocalizedName());
 		//Specimen_Villager
 		SpawnEggCraft_String = "Specimen_Villager";
 		Specimen_Villager = new SpawnEggCraftAddItems();
-		Specimen_Villager.setUnlocalizedName(SpawnEggCraft_String).setTextureName("SpawnEggCraft:"+SpawnEggCraft_String).setMaxStackSize(64).setCreativeTab(CreativeTabs.tabMisc);
+		Specimen_Villager.setUnlocalizedName(SpawnEggCraft_String).setTextureName("eNTeR:"+SpawnEggCraft_String).setMaxStackSize(64).setCreativeTab(CreativeTabs.tabMisc);
 		GameRegistry.registerItem(Specimen_Villager, SpawnEggCraft_String);
+		System.out.println(SpawnEggCraft_String);
+		System.out.println(Specimen_Villager.getUnlocalizedName());
 		//Specimen_Wolf
 		SpawnEggCraft_String = "Specimen_Wolf";
 		Specimen_Wolf = new SpawnEggCraftAddItems();
-		Specimen_Wolf.setUnlocalizedName(SpawnEggCraft_String).setTextureName("SpawnEggCraft:"+SpawnEggCraft_String).setMaxStackSize(64).setCreativeTab(CreativeTabs.tabMisc);
+		Specimen_Wolf.setUnlocalizedName(SpawnEggCraft_String).setTextureName("eNTeR:"+SpawnEggCraft_String).setMaxStackSize(64).setCreativeTab(CreativeTabs.tabMisc);
 		GameRegistry.registerItem(Specimen_Wolf, SpawnEggCraft_String);
+		System.out.println(SpawnEggCraft_String);
+		System.out.println(Specimen_Wolf.getUnlocalizedName());
 		}
  
 	@EventHandler
@@ -328,30 +342,83 @@ public class SpawnEggCraft {
 			Character.valueOf('2'), new ItemStack(Items.gunpowder, 1), 
 		});
 		//Specimen
-		GameRegistry.addRecipe(new ItemStack(Specimen, LANZ_JBU,50), new Object[]{
+		GameRegistry.addRecipe(new ItemStack(Specimen,1), new Object[]{
 			"01",
 			Character.valueOf('0'), new ItemStack(Items.book, 1),
 			Character.valueOf('1'), new ItemStack(Items.nether_star, 1), 
 		});
 		}
 		MinecraftForge.EVENT_BUS.register(this);
+		
 		}
 	
 	
 	@SubscribeEvent
 	public void LivingDeath(LivingDeathEvent event){
 		if(!event.entity.worldObj.isRemote){
-		System.out.println("----------------------------------------------I'm here!----------------------------------------------");
-		//System.out.println("EntityId:"+String.valueOf(event.entity.getEntityId()));
-		//System.out.println("UniqueID:"+String.valueOf(event.entity.getUniqueID()));
-		System.out.println("CommandSenderName:"+String.valueOf(event.entity.getCommandSenderName()));
-			if(event.entityLiving.getEntityAttribute(SharedMonsterAttributes.maxHealth).getBaseValue()==4.0D&&
-					event.entityLiving.getEntityAttribute(SharedMonsterAttributes.movementSpeed).getBaseValue()==0.25D)
+			if(
+				(event.entityLiving.getEntityAttribute(SharedMonsterAttributes.maxHealth).getBaseValue()==0.0D&&
+				event.entityLiving.getEntityAttribute(SharedMonsterAttributes.movementSpeed).getBaseValue()==0.0D)
+				)
 			{
 				EntityItem entityitem = new EntityItem(event.entity.worldObj, event.entity.posX, event.entity.posY + (double)0.0F, event.entity.posZ, new ItemStack(Items.experience_bottle));
 				entityitem.delayBeforeCanPickup = 10;
 				event.entity.worldObj.spawnEntityInWorld(entityitem);
+            } 
+			else
+            if(
+            	/*(
+            	//Chicken
+            	(event.entityLiving.getEntityAttribute(SharedMonsterAttributes.maxHealth).getBaseValue()==4.0D&&
+    			event.entityLiving.getEntityAttribute(SharedMonsterAttributes.movementSpeed).getBaseValue()==0.25D)
+    			||
+    			//Cow
+    			(event.entityLiving.getEntityAttribute(SharedMonsterAttributes.maxHealth).getBaseValue()==10.0D&&
+    			event.entityLiving.getEntityAttribute(SharedMonsterAttributes.movementSpeed).getBaseValue()==0.20000000298023224D)
+    			||
+    			//Sheep
+    			(event.entityLiving.getEntityAttribute(SharedMonsterAttributes.maxHealth).getBaseValue()==8.0D&&
+    			event.entityLiving.getEntityAttribute(SharedMonsterAttributes.movementSpeed).getBaseValue()==0.23000000417232513D)
+    			||
+    			//Pig
+    			(event.entityLiving.getEntityAttribute(SharedMonsterAttributes.maxHealth).getBaseValue()==10.0D&&
+    			event.entityLiving.getEntityAttribute(SharedMonsterAttributes.movementSpeed).getBaseValue()==0.25D)
+    			||
+    			//Bat
+    			(event.entityLiving.getEntityAttribute(SharedMonsterAttributes.maxHealth).getBaseValue()==6.0D)
+    			||
+    			//Ocelot||Cat
+    			(event.entityLiving.getEntityAttribute(SharedMonsterAttributes.maxHealth).getBaseValue()==10.0D&&
+    			event.entityLiving.getEntityAttribute(SharedMonsterAttributes.movementSpeed).getBaseValue()==0.30000001192092896D)
+    			||
+    			//Wolf
+    			(event.entityLiving.getEntityAttribute(SharedMonsterAttributes.maxHealth).getBaseValue()==20.0D&&
+    			event.entityLiving.getEntityAttribute(SharedMonsterAttributes.movementSpeed).getBaseValue()==8.0D)
+            	)*/
+            	String.valueOf(event.entity.getClass().getName())=="net.minecraft.entity.passive.EntityCow"||String.valueOf(event.entity.getClass().getName())=="wh"
+            	||
+            	String.valueOf(event.entity.getClass().getName())=="net.minecraft.entity.passive.EntitySheep"||String.valueOf(event.entity.getClass().getName())=="wp"
+            	||
+            	String.valueOf(event.entity.getClass().getName())=="net.minecraft.entity.passive.EntityPig"||String.valueOf(event.entity.getClass().getName())=="wo"
+            	||
+            	String.valueOf(event.entity.getClass().getName())=="net.minecraft.entity.passive.EntityChicken"||String.valueOf(event.entity.getClass().getName())=="wg"
+            	||
+            	String.valueOf(event.entity.getClass().getName())=="net.minecraft.entity.passive.EntityMooshroom"||String.valueOf(event.entity.getClass().getName())=="wm"
+            	||
+            	String.valueOf(event.entity.getClass().getName())=="net.minecraft.entity.passive.EntityBat"||String.valueOf(event.entity.getClass().getName())=="we"
+            	||
+            	String.valueOf(event.entity.getClass().getName())=="net.minecraft.entity.passive.EntityOcelot"||String.valueOf(event.entity.getClass().getName())=="wn"
+            	||
+            	String.valueOf(event.entity.getClass().getName())=="net.minecraft.entity.passive.EntityWolf"||String.valueOf(event.entity.getClass().getName())=="wv"
+    			)
+    			
+            {
+				EntityItem entityitem = new EntityItem(event.entity.worldObj, event.entity.posX, event.entity.posY + (double)0.0F, event.entity.posZ, new ItemStack(Items.nether_star));
+				entityitem.delayBeforeCanPickup = 10;
+				event.entity.worldObj.spawnEntityInWorld(entityitem);
             }
+			System.out.println(String.valueOf(event.entity.getClass()));
+			System.out.println(event.entity.getClass().getName());
 		}
 	}
 }
