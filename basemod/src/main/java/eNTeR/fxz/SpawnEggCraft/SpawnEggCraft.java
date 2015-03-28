@@ -1,7 +1,8 @@
 package eNTeR.fxz.SpawnEggCraft;
 
+import java.util.Random;
+
 import net.minecraft.creativetab.CreativeTabs;
-import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
@@ -17,7 +18,6 @@ import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import cpw.mods.fml.common.registry.GameRegistry;
 
 @Mod(modid=SpawnEggCraft.MODID, name=SpawnEggCraft.NAME, version=SpawnEggCraft.VERSION)
-//@Mod(modid="SpawnEggCraft", name="SpawnEggCraft", version="0.0.1")
 public class SpawnEggCraft {
     public static final String MODID = "SpawnEggCraft_basemod";
     public static final String NAME = "SpawnEggCraft_basemod";
@@ -25,7 +25,6 @@ public class SpawnEggCraft {
     public static int LANZ_JBU = 1;
     public static String IsDoubleCraft = "true";
     public static String IsNotPeaceful = "true";
-    //public static File ConfigFile = new File("\\config\\SpawnEggCraft.cfg");//!
     String SpawnEggCraft_String = "";
     static public Item Specimen;
     static public Item Specimen_Chicken;
@@ -34,6 +33,8 @@ public class SpawnEggCraft {
     static public Item Specimen_Sheep;
     static public Item Specimen_Villager;
     static public Item Specimen_Wolf;
+	Random ran1=new Random();
+	Random ran2=new Random();
     //static public Item Specimens;
     
 	@EventHandler
@@ -56,6 +57,7 @@ public class SpawnEggCraft {
 	    {
 	    	LANZ_JBU=2;
 	    }
+	    
 		//Items
 	    
 		//Specimen
@@ -357,44 +359,38 @@ public class SpawnEggCraft {
 	public void LivingDeath(LivingDeathEvent event){
 		if(!event.entity.worldObj.isRemote){
 			if(
-				(event.entityLiving.getEntityAttribute(SharedMonsterAttributes.maxHealth).getBaseValue()==0.0D&&
-				event.entityLiving.getEntityAttribute(SharedMonsterAttributes.movementSpeed).getBaseValue()==0.0D)
+					String.valueOf(event.entity.getClass().getName())=="net.minecraft.entity.moster.EntityCreeper"||String.valueOf(event.entity.getClass().getName())=="xz"
+					||
+					String.valueOf(event.entity.getClass().getName())=="net.minecraft.entity.passive.EntityZombie"||String.valueOf(event.entity.getClass().getName())=="yq"
+					||
+					String.valueOf(event.entity.getClass().getName())=="net.minecraft.entity.passive.EntitySkeleton"||String.valueOf(event.entity.getClass().getName())=="yl"
+					||
+					String.valueOf(event.entity.getClass().getName())=="net.minecraft.entity.passive.EntitySpider"||String.valueOf(event.entity.getClass().getName())=="yo"
+					||
+					String.valueOf(event.entity.getClass().getName())=="net.minecraft.entity.passive.EntityCaveSpider"||String.valueOf(event.entity.getClass().getName())=="xy"
+					||
+					String.valueOf(event.entity.getClass().getName())=="net.minecraft.entity.passive.EntityPigZombie"||String.valueOf(event.entity.getClass().getName())=="yh"
+					||
+					String.valueOf(event.entity.getClass().getName())=="net.minecraft.entity.passive.EntityBlaze"||String.valueOf(event.entity.getClass().getName())=="xx"
+					||
+					String.valueOf(event.entity.getClass().getName())=="net.minecraft.entity.passive.EntityGhast"||String.valueOf(event.entity.getClass().getName())=="yd"
+					||
+					String.valueOf(event.entity.getClass().getName())=="net.minecraft.entity.passive.EntitySlime"||String.valueOf(event.entity.getClass().getName())=="ym"
+					||
+					String.valueOf(event.entity.getClass().getName())=="net.minecraft.entity.passive.EntityMagmaCube"||String.valueOf(event.entity.getClass().getName())=="yf"
+					||
+					String.valueOf(event.entity.getClass().getName())=="net.minecraft.entity.passive.EntityEnderman"||String.valueOf(event.entity.getClass().getName())=="ya"
+					
 				)
 			{
-				EntityItem entityitem = new EntityItem(event.entity.worldObj, event.entity.posX, event.entity.posY + (double)0.0F, event.entity.posZ, new ItemStack(Items.experience_bottle));
-				entityitem.delayBeforeCanPickup = 10;
-				event.entity.worldObj.spawnEntityInWorld(entityitem);
+    			if((Math.abs(ran1.nextLong())%100)==50){
+    				EntityItem entityitem = new EntityItem(event.entity.worldObj, event.entity.posX, event.entity.posY + (double)0.0F, event.entity.posZ, new ItemStack(Items.experience_bottle));
+    				entityitem.delayBeforeCanPickup = 10;
+    				event.entity.worldObj.spawnEntityInWorld(entityitem);	
+    			}
             } 
 			else
             if(
-            	/*(
-            	//Chicken
-            	(event.entityLiving.getEntityAttribute(SharedMonsterAttributes.maxHealth).getBaseValue()==4.0D&&
-    			event.entityLiving.getEntityAttribute(SharedMonsterAttributes.movementSpeed).getBaseValue()==0.25D)
-    			||
-    			//Cow
-    			(event.entityLiving.getEntityAttribute(SharedMonsterAttributes.maxHealth).getBaseValue()==10.0D&&
-    			event.entityLiving.getEntityAttribute(SharedMonsterAttributes.movementSpeed).getBaseValue()==0.20000000298023224D)
-    			||
-    			//Sheep
-    			(event.entityLiving.getEntityAttribute(SharedMonsterAttributes.maxHealth).getBaseValue()==8.0D&&
-    			event.entityLiving.getEntityAttribute(SharedMonsterAttributes.movementSpeed).getBaseValue()==0.23000000417232513D)
-    			||
-    			//Pig
-    			(event.entityLiving.getEntityAttribute(SharedMonsterAttributes.maxHealth).getBaseValue()==10.0D&&
-    			event.entityLiving.getEntityAttribute(SharedMonsterAttributes.movementSpeed).getBaseValue()==0.25D)
-    			||
-    			//Bat
-    			(event.entityLiving.getEntityAttribute(SharedMonsterAttributes.maxHealth).getBaseValue()==6.0D)
-    			||
-    			//Ocelot||Cat
-    			(event.entityLiving.getEntityAttribute(SharedMonsterAttributes.maxHealth).getBaseValue()==10.0D&&
-    			event.entityLiving.getEntityAttribute(SharedMonsterAttributes.movementSpeed).getBaseValue()==0.30000001192092896D)
-    			||
-    			//Wolf
-    			(event.entityLiving.getEntityAttribute(SharedMonsterAttributes.maxHealth).getBaseValue()==20.0D&&
-    			event.entityLiving.getEntityAttribute(SharedMonsterAttributes.movementSpeed).getBaseValue()==8.0D)
-            	)*/
             	String.valueOf(event.entity.getClass().getName())=="net.minecraft.entity.passive.EntityCow"||String.valueOf(event.entity.getClass().getName())=="wh"
             	||
             	String.valueOf(event.entity.getClass().getName())=="net.minecraft.entity.passive.EntitySheep"||String.valueOf(event.entity.getClass().getName())=="wp"
@@ -413,12 +409,21 @@ public class SpawnEggCraft {
     			)
     			
             {
+    			if((Math.abs(ran1.nextLong())%(ran2.nextLong()%400+100))==127){
 				EntityItem entityitem = new EntityItem(event.entity.worldObj, event.entity.posX, event.entity.posY + (double)0.0F, event.entity.posZ, new ItemStack(Items.nether_star));
 				entityitem.delayBeforeCanPickup = 10;
 				event.entity.worldObj.spawnEntityInWorld(entityitem);
+    			}
+            }else if(event.entity.isBurning()==true&&
+            		(String.valueOf(event.entity.getClass().getName())=="net.minecraft.entity.moster.EntityWitch"||String.valueOf(event.entity.getClass().getName())=="yp")
+            		)
+            {
+            	if((Math.abs(ran1.nextLong())%50)==25){
+            	EntityItem entityitem = new EntityItem(event.entity.worldObj, event.entity.posX, event.entity.posY + (double)0.0F, event.entity.posZ, new ItemStack(Items.experience_bottle,(int)(ran1.nextInt()%9)));
+				entityitem.delayBeforeCanPickup = 10;
+				event.entity.worldObj.spawnEntityInWorld(entityitem);
+            	}
             }
-			System.out.println(String.valueOf(event.entity.getClass()));
-			System.out.println(event.entity.getClass().getName());
 		}
 	}
 }

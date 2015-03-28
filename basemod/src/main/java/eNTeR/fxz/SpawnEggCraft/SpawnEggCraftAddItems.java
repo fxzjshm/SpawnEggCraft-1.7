@@ -14,51 +14,43 @@ import net.minecraft.util.Facing;
 import net.minecraft.world.World;
 
 public class SpawnEggCraftAddItems extends Item{
-
+	@Override
 	public boolean onItemUse(ItemStack par1ItemStack, EntityPlayer par3EntityPlayer,World par2World, int x, int y, int z, int par7, float par8, float par9, float par10)
 	{
 		Boolean qb_fcnja_snvyrq = false;
 		Boolean eranzr_fhprffshy = true;
 		Entity entity1 = null;
-		
+		int entityID = 0;
+		/*NBTTagCompound p_70109_1_ = new NBTTagCompound();
+		NBTTagCompound p_74782_2_ = new NBTTagCompound();*/
+		//NBTTagList NBTTagList1 = new NBTTagList();
 		if(!par2World.isRemote){
 			x += Facing.offsetsXForSide[par7];
             y += Facing.offsetsYForSide[par7];
             z += Facing.offsetsZForSide[par7];
             
 			//AddCodes
+            /*p_74782_2_.setInteger("Dimension", 0);
+            p_74782_2_.setString("id","MinecartRideable");
+            p_70109_1_.setTag("Riding", (NBTBase)p_74782_2_);*/
             
-    		System.out.println(par1ItemStack.getUnlocalizedName());
-			if(par1ItemStack.getUnlocalizedName()==SpawnEggCraft.Specimen_Chicken.getUnlocalizedName())
-			{
-				entity1 = ItemMonsterPlacer.spawnCreature(par2World, (int)93, (double)x + 0.5D, (double)y + 0.5D, (double)z + 0.5D);
-				par2World.spawnEntityInWorld(entity1);
-				System.out.println("Spawned chicken.");
+			if(par1ItemStack.getItem()==SpawnEggCraft.Specimen_Chicken){
+				entityID=93;
 			}
-			else if(par1ItemStack.getUnlocalizedName()==SpawnEggCraft.Specimen_Pig.getUnlocalizedName()){
-				entity1 = ItemMonsterPlacer.spawnCreature(par2World, (int)90, (double)x + 0.5D, (double)y + 0.5D, (double)z + 0.5D);
-				par2World.spawnEntityInWorld(entity1);
-				System.out.println("Spawned pig.");
+			else if(par1ItemStack.getItem()==SpawnEggCraft.Specimen_Pig){
+				entityID=90;
 			}
-			else if(par1ItemStack.getUnlocalizedName()==SpawnEggCraft.Specimen_Cow.getUnlocalizedName()){
-				entity1 = ItemMonsterPlacer.spawnCreature(par2World, (int)92, (double)x + 0.5D, (double)y + 0.5D, (double)z + 0.5D);
-				par2World.spawnEntityInWorld(entity1);
-				System.out.println("Spawned cow.");
+			else if(par1ItemStack.getItem()==SpawnEggCraft.Specimen_Cow){
+				entityID=92;
 			}
-			else if(par1ItemStack.getUnlocalizedName()==SpawnEggCraft.Specimen_Sheep.getUnlocalizedName()){
-				entity1 = ItemMonsterPlacer.spawnCreature(par2World, (int)91, (double)x + 0.5D, (double)y + 0.5D, (double)z + 0.5D);
-				par2World.spawnEntityInWorld(entity1);
-				System.out.println("Spawned sheep.");
+			else if(par1ItemStack.getItem()==SpawnEggCraft.Specimen_Sheep){
+				entityID=91;
 			}
-			else if(par1ItemStack.getUnlocalizedName()==SpawnEggCraft.Specimen_Villager.getUnlocalizedName()){
-				entity1 = ItemMonsterPlacer.spawnCreature(par2World, (int)120, (double)x + 0.5D, (double)y + 0.5D, (double)z + 0.5D);
-				par2World.spawnEntityInWorld(entity1);
-				System.out.println("Spawned villager.");
+			else if(par1ItemStack.getItem()==SpawnEggCraft.Specimen_Villager){
+				entityID=120;
 			}
-			else if(par1ItemStack.getUnlocalizedName()==SpawnEggCraft.Specimen_Wolf.getUnlocalizedName()){
-				entity1 = ItemMonsterPlacer.spawnCreature(par2World, (int)95, (double)x + 0.5D, (double)y + 0.5D, (double)z + 0.5D);
-				par2World.spawnEntityInWorld(entity1);
-				System.out.println("Spawned wolf.");
+			else if(par1ItemStack.getItem()==SpawnEggCraft.Specimen_Wolf){
+				entityID=95;
 			}
 			else
 			{
@@ -66,22 +58,24 @@ public class SpawnEggCraftAddItems extends Item{
 			}
 			
 			if(qb_fcnja_snvyrq == false){
-			EntityMinecart entityMinecart = EntityMinecart.createMinecart(par2World, (int)x + 0.5, (int)y + 0.5, (int)z + 0.5, 0);
+				
+			EntityMinecart entityMinecart = EntityMinecart.createMinecart(par2World, (int)x + 0.75, (int)y + 0.5, (int)z + 0.75, 0);
 			par2World.spawnEntityInWorld(entityMinecart);
+			
+			entity1 = ItemMonsterPlacer.spawnCreature(par2World, (int)entityID, (double)x + 0.25D, (double)y + 0.5D, (double)z + 0.25D);
+			par2World.spawnEntityInWorld(entity1);
+			
 			EntityLiving entityliving = (EntityLiving)entity1;
 			eranzr_fhprffshy = this.itemInteractionForEntityChanged(par1ItemStack, entityliving);
-			if(!eranzr_fhprffshy){
+				if(!eranzr_fhprffshy){
 				EntityItem entityitem = new EntityItem(par2World, x, y + (double)0.0F, z, new ItemStack(Items.name_tag));
 				entityitem.delayBeforeCanPickup = 0;
-			}
-	        	/*if (!par3EntityPlayer.capabilities.isCreativeMode)
-	        	{
-	        		--par1ItemStack.stackSize;
-	        	}*/
+				
+				}
 			}
 		}
 		qb_fcnja_snvyrq = false;
-		return false;
+		return true;
 	}
 	
 	//from net.minecraft.item.ItemNameTag_20
@@ -102,5 +96,9 @@ public class SpawnEggCraftAddItems extends Item{
         {
         	return false;
         }
+    }
+    @Override
+    public ItemStack onItemRightClick(ItemStack par1ItemStack, World par2World, EntityPlayer par3EntityPlayer){
+		return par1ItemStack;
     }
 }

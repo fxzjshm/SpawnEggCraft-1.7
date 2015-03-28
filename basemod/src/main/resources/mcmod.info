@@ -3,7 +3,7 @@
   "modid": "SpawnEggCraft_basemod",
   "name": "SpawnEggCraft_basemod",
   "description": "Craft spawn_eggs!",
-  "version": "${version}",
+  "version": "",
   "mcversion": "${mcversion}",
   "url": "",
   "updateUrl": "",
