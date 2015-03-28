@@ -70,8 +70,11 @@ public class SpawnEggCraftAddItems extends Item{
 				if(!eranzr_fhprffshy){
 				EntityItem entityitem = new EntityItem(par2World, x, y + (double)0.0F, z, new ItemStack(Items.name_tag));
 				entityitem.delayBeforeCanPickup = 0;
-				
 				}
+	        	if (!par3EntityPlayer.capabilities.isCreativeMode)
+	        	{
+	        		--par1ItemStack.stackSize;
+	        	}
 			}
 		}
 		qb_fcnja_snvyrq = false;
