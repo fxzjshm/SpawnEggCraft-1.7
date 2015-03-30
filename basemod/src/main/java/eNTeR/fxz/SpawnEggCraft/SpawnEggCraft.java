@@ -66,6 +66,7 @@ public class SpawnEggCraft {
 	    Specimen = new SpawnEggCraftAddItems();
 	    Specimen.setUnlocalizedName(SpawnEggCraft_String).setTextureName("fxz:"+SpawnEggCraft_String).setMaxStackSize(64).setCreativeTab(CreativeTabs.tabMisc);
 		GameRegistry.registerItem(Specimen, SpawnEggCraft_String);//2
+		/*
 		//Specimen_Chicken
 		SpawnEggCraft_String = "Specimen_Chicken";
 		Specimen_Chicken = new SpawnEggCraftAddItems();
@@ -96,7 +97,7 @@ public class SpawnEggCraft {
 		Specimen_Wolf = new SpawnEggCraftAddItems();
 		Specimen_Wolf.setUnlocalizedName(SpawnEggCraft_String).setTextureName("fxz:Specimen_Wolf").setMaxStackSize(64).setCreativeTab(CreativeTabs.tabMisc);
 		GameRegistry.registerItem(Specimen_Wolf, SpawnEggCraft_String);
-		
+		*/
 		}
  
 	@EventHandler

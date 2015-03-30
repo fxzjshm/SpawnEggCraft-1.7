@@ -105,7 +105,7 @@ public class SpawnEggCraftAddItems extends Item{
 		return par1ItemStack;
     }
     
-    //@SideOnly(Side.SERVER)
+    @SideOnly(Side.SERVER)
     @Override
     public boolean itemInteractionForEntity(ItemStack p_111207_1_, EntityPlayer p_111207_2_, EntityLivingBase p_111207_3_)
     {
@@ -115,8 +115,8 @@ public class SpawnEggCraftAddItems extends Item{
         }
         else if (p_111207_3_ instanceof EntityLiving)
         {
-        	if(!p_111207_2_.isClientWorld())
-        	{
+        	//if(!p_111207_2_.isClientWorld())
+        	//{
             EntityLiving entityliving = (EntityLiving)p_111207_3_;
             entityliving.setCustomNameTag(p_111207_1_.getDisplayName());
             entityliving.func_110163_bv();
@@ -124,9 +124,9 @@ public class SpawnEggCraftAddItems extends Item{
 			p_111207_2_.getEntityWorld().spawnEntityInWorld(entityMinecart);
             --p_111207_1_.stackSize;
             return true;
-        	} else {
-                return false;
-        	}
+        	//} else {
+               //return false;
+        	//}
         }
         else
         {
