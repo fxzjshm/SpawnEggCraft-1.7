@@ -2,10 +2,10 @@ package eNTeR.fxz.SpawnEggCraft;
 
 import net.minecraft.client.gui.GuiScreen;
 
-public class SpawnEggCraftGUIOfSpawnEggMachine extends GuiScreen{
+public class SpawnEggCraftGUIOfSpawnEggCopyingMachine extends GuiScreen{
     private GuiScreen parentScreen;
     
-    public SpawnEggCraftGUIOfSpawnEggMachine(GuiScreen parent)
+    public SpawnEggCraftGUIOfSpawnEggCopyingMachine(GuiScreen parent)
     {
          parentScreen = parent; //记下是哪个界面打开了它,以便以后返回那个界面
         //在这里初始化与界面无关的数据,或者是只需初始化一次的数据.

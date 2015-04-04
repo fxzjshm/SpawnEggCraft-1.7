@@ -1,7 +1,3 @@
-﻿item.Specimen_Chicken.name=鸡的标本
-item.Specimen_Pig.name=猪的标本
-item.Specimen_Cow.name=牛的标本
-item.Specimen_Sheep.name=羊的标本
-item.Specimen_Villager.name=村民的标本
-item.Specimen_Wolf.name=狼的标本
 item.Specimen.name=标本
+
+message.renameSpecimen=请重命名这个标本！

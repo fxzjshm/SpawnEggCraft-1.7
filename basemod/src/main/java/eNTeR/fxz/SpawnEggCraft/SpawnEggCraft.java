@@ -4,6 +4,7 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Random;
 
+import net.minecraft.block.Block;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.item.EntityItem;
@@ -34,15 +35,12 @@ public class SpawnEggCraft {
     public static String IsDoubleCraft = "true";
     String SpawnEggCraft_String = "";
     static public Item Specimen;
-    static public Item Specimen_Chicken;
-    static public Item Specimen_Pig;
-    static public Item Specimen_Cow;
-    static public Item Specimen_Sheep;
-    static public Item Specimen_Villager;
-    static public Item Specimen_Wolf;
+    static public Block SpawnEggCopyingMachine;
 	Random ran1=new Random();
 	Random ran2=new Random();
 	String Number = "2";
+	String NumberofSlimeOutput = "1";
+	String NumberofSlimeInput = "1";
     
 	@EventHandler
 	public void preLoad(FMLPreInitializationEvent event) throws Exception
@@ -51,7 +49,9 @@ public class SpawnEggCraft {
 		try
 		{
 			Number = SpawnEggCraftConfig.GetGeneralProperties("Number","2");
-			System.out.println(IsDoubleCraft);
+			NumberofSlimeOutput = SpawnEggCraftConfig.GetGeneralProperties("Number of Slime(Output)","1");
+			NumberofSlimeInput = SpawnEggCraftConfig.GetGeneralProperties("Number of Slime(Input)","1");
+			
 		}
 		catch(Exception error)
 		{ 
@@ -62,42 +62,10 @@ public class SpawnEggCraft {
 		//Items
 	    
 		//Specimen
-	    SpawnEggCraft_String = "Specimen";//1
+	    SpawnEggCraft_String = "Specimen";
 	    Specimen = new SpawnEggCraftAddItems();
 	    Specimen.setUnlocalizedName(SpawnEggCraft_String).setTextureName("fxz:"+SpawnEggCraft_String).setMaxStackSize(64).setCreativeTab(CreativeTabs.tabMisc);
-		GameRegistry.registerItem(Specimen, SpawnEggCraft_String);//2
-		/*
-		//Specimen_Chicken
-		SpawnEggCraft_String = "Specimen_Chicken";
-		Specimen_Chicken = new SpawnEggCraftAddItems();
-		Specimen_Chicken.setUnlocalizedName(SpawnEggCraft_String).setTextureName("fxz:"+SpawnEggCraft_String).setMaxStackSize(64).setCreativeTab(CreativeTabs.tabMisc);
-		GameRegistry.registerItem(Specimen_Chicken, SpawnEggCraft_String);
-		//Specimen_Pig
-		SpawnEggCraft_String = "Specimen_Pig";
-		Specimen_Pig = new SpawnEggCraftAddItems();
-		Specimen_Pig.setUnlocalizedName(SpawnEggCraft_String).setTextureName("fxz:"+SpawnEggCraft_String).setMaxStackSize(64).setCreativeTab(CreativeTabs.tabMisc);
-		GameRegistry.registerItem(Specimen_Pig, SpawnEggCraft_String);
-		//Specimen_Cow
-		SpawnEggCraft_String = "Specimen_Cow";
-		Specimen_Cow = new SpawnEggCraftAddItems();
-		Specimen_Cow.setUnlocalizedName(SpawnEggCraft_String).setTextureName("fxz:"+SpawnEggCraft_String).setMaxStackSize(64).setCreativeTab(CreativeTabs.tabMisc);
-		GameRegistry.registerItem(Specimen_Cow, SpawnEggCraft_String);
-		//Specimen_Sheep
-		SpawnEggCraft_String = "Specimen_Sheep";
-		Specimen_Sheep = new SpawnEggCraftAddItems();
-		Specimen_Sheep.setUnlocalizedName(SpawnEggCraft_String).setTextureName("fxz:"+SpawnEggCraft_String).setMaxStackSize(64).setCreativeTab(CreativeTabs.tabMisc);
-		GameRegistry.registerItem(Specimen_Sheep, SpawnEggCraft_String);
-		//Specimen_Villager
-		SpawnEggCraft_String = "Specimen_Villager";
-		Specimen_Villager = new SpawnEggCraftAddItems();
-		Specimen_Villager.setUnlocalizedName(SpawnEggCraft_String).setTextureName("fxz:"+SpawnEggCraft_String).setMaxStackSize(64).setCreativeTab(CreativeTabs.tabMisc);
-		GameRegistry.registerItem(Specimen_Villager, SpawnEggCraft_String);
-		//Specimen_Wolf
-		SpawnEggCraft_String = "Specimen_Wolf";
-		Specimen_Wolf = new SpawnEggCraftAddItems();
-		Specimen_Wolf.setUnlocalizedName(SpawnEggCraft_String).setTextureName("fxz:Specimen_Wolf").setMaxStackSize(64).setCreativeTab(CreativeTabs.tabMisc);
-		GameRegistry.registerItem(Specimen_Wolf, SpawnEggCraft_String);
-		*/
+		GameRegistry.registerItem(Specimen, SpawnEggCraft_String);
 		}
  
 	@EventHandler
@@ -280,13 +248,13 @@ public class SpawnEggCraft {
 					Character.valueOf('2'), new ItemStack(Items.ghast_tear, 1), 
 				});	
 				//Slime
-				GameRegistry.addRecipe(new ItemStack(Items.spawn_egg, LANZ_JBU,55), new Object[]{
+				GameRegistry.addRecipe(new ItemStack(Items.spawn_egg, Integer.valueOf(NumberofSlimeOutput),55), new Object[]{
 					"010", 
 					"121", 
 					"010", 
-					Character.valueOf('0'), new ItemStack(Items.egg, 1),
-					Character.valueOf('1'), new ItemStack(Items.wheat_seeds, 1), 
-					Character.valueOf('2'), new ItemStack(Items.slime_ball, 1), 
+					Character.valueOf('0'), new ItemStack(Items.egg, Integer.valueOf(NumberofSlimeInput)),
+					Character.valueOf('1'), new ItemStack(Items.wheat_seeds, Integer.valueOf(NumberofSlimeInput)), 
+					Character.valueOf('2'), new ItemStack(Items.slime_ball, Integer.valueOf(NumberofSlimeInput)), 
 				});	
 				//Zombie
 				GameRegistry.addRecipe(new ItemStack(Items.spawn_egg, LANZ_JBU,54), new Object[]{
@@ -429,9 +397,9 @@ public class SpawnEggCraft {
             if(eventHANDRU.getResult() == Result.ALLOW)
             {
                 //这个长的让人发指的东西是获取玩家附近的生物
-                List list = player.worldObj.getEntitiesWithinAABB(EntityLiving.class, AxisAlignedBB.getBoundingBox(player.posX-30D, player.posY-20D, player.posZ-30D, player.posX+30D, player.posY+20D, player.posZ+30D));
+                List<?> list = player.worldObj.getEntitiesWithinAABB(EntityLiving.class, AxisAlignedBB.getBoundingBox(player.posX-30D, player.posY-20D, player.posZ-30D, player.posX+30D, player.posY+20D, player.posZ+30D));
                 //值得一提的是我这里使用的是遍历器,传统的下标遍历因为无法锁定资源可能导致ConcurrentModificationException...
-                for(Iterator iterator = list.iterator();iterator.hasNext();)
+                for(Iterator<?> iterator = list.iterator();iterator.hasNext();)
                 {
                     EntityLiving entity = (EntityLiving)iterator.next();
                     if(entity.equals(player)) //别把自己也给炸了...
