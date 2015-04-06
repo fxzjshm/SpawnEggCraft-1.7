@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Random;
 
 import net.minecraft.block.Block;
+import net.minecraft.block.material.Material;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.item.EntityItem;
@@ -18,6 +19,7 @@ import net.minecraft.util.ChatComponentText;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.ServerChatEvent;
 import net.minecraftforge.event.entity.living.LivingDeathEvent;
+import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.Mod.EventHandler;
 import cpw.mods.fml.common.event.FMLInitializationEvent;
@@ -39,8 +41,8 @@ public class SpawnEggCraft {
 	Random ran1=new Random();
 	Random ran2=new Random();
 	String Number = "2";
-	String NumberofSlimeOutput = "1";
 	String NumberofSlimeInput = "1";
+	
     
 	@EventHandler
 	public void preLoad(FMLPreInitializationEvent event) throws Exception
@@ -49,8 +51,7 @@ public class SpawnEggCraft {
 		try
 		{
 			Number = SpawnEggCraftConfig.GetGeneralProperties("Number","2");
-			NumberofSlimeOutput = SpawnEggCraftConfig.GetGeneralProperties("Number of Slime(Output)","1");
-			NumberofSlimeInput = SpawnEggCraftConfig.GetGeneralProperties("Number of Slime(Input)","1");
+			NumberofSlimeInput = SpawnEggCraftConfig.GetGeneralProperties("Number of Slime(Input)","5");
 			
 		}
 		catch(Exception error)
@@ -60,12 +61,24 @@ public class SpawnEggCraft {
 		}
 		SpawnEggCraftConfig.SaveConfig();
 		//Items
-	    
 		//Specimen
 	    SpawnEggCraft_String = "Specimen";
 	    Specimen = new SpawnEggCraftAddItems();
 	    Specimen.setUnlocalizedName(SpawnEggCraft_String).setTextureName("fxz:"+SpawnEggCraft_String).setMaxStackSize(64).setCreativeTab(CreativeTabs.tabMisc);
 		GameRegistry.registerItem(Specimen, SpawnEggCraft_String);
+		
+		//Blocks
+		//SpawnEggCopyingMachine
+		SpawnEggCopyingMachine = new SpawnEggCraftAddBlocks(Material.rock);
+		SpawnEggCopyingMachine.setBlockName("SpawnEggCopyingMachine");
+		SpawnEggCopyingMachine.setBlockTextureName("fxz:SpawnEggCopyingMachine");
+		SpawnEggCopyingMachine.setHardness(3.0f); 
+		SpawnEggCopyingMachine.setResistance(20.0f);
+		SpawnEggCopyingMachine.setLightLevel(0.0f);
+		SpawnEggCopyingMachine.setStepSound(Block.soundTypeStone);
+		SpawnEggCopyingMachine.setCreativeTab(CreativeTabs.tabDecorations);
+		SpawnEggCopyingMachine.setHarvestLevel("pickaxe", -1);
+		GameRegistry.registerBlock(SpawnEggCopyingMachine,"SpawnEggCopyingMachine");
 		}
  
 	@EventHandler
@@ -248,7 +261,7 @@ public class SpawnEggCraft {
 					Character.valueOf('2'), new ItemStack(Items.ghast_tear, 1), 
 				});	
 				//Slime
-				GameRegistry.addRecipe(new ItemStack(Items.spawn_egg, Integer.valueOf(NumberofSlimeOutput),55), new Object[]{
+				GameRegistry.addRecipe(new ItemStack(Items.spawn_egg, LANZ_JBU,55), new Object[]{
 					"010", 
 					"121", 
 					"010", 
@@ -309,6 +322,7 @@ public class SpawnEggCraft {
 				});
 				
 				MinecraftForge.EVENT_BUS.register(this);
+				FMLCommonHandler.instance().bus().register(this);
 		
 		}
 	
@@ -385,37 +399,4 @@ public class SpawnEggCraft {
 		}
 	}
 	
-    @SubscribeEvent
-    public void letsrock(ServerChatEvent event)
-    {
-        if(event.message.equals("KABOOM"))
-        {
-            event.setCanceled(true);//截获玩家的指令并不让它显示在屏幕上,用来模拟游戏指令(Command)
-            EntityPlayer player = event.player;
-            EventHANDRU eventHANDRU = new EventHANDRU(player);//初始化一个事件
-            MinecraftForge.EVENT_BUS.post(eventHANDRU);//发布它
-            if(eventHANDRU.getResult() == Result.ALLOW)
-            {
-                //这个长的让人发指的东西是获取玩家附近的生物
-                List<?> list = player.worldObj.getEntitiesWithinAABB(EntityLiving.class, AxisAlignedBB.getBoundingBox(player.posX-30D, player.posY-20D, player.posZ-30D, player.posX+30D, player.posY+20D, player.posZ+30D));
-                //值得一提的是我这里使用的是遍历器,传统的下标遍历因为无法锁定资源可能导致ConcurrentModificationException...
-                for(Iterator<?> iterator = list.iterator();iterator.hasNext();)
-                {
-                    EntityLiving entity = (EntityLiving)iterator.next();
-                    if(entity.equals(player)) //别把自己也给炸了...
-                    {
-                        continue;
-                    }
-                    player.worldObj.createExplosion(player, entity.posX, entity.posY, entity.posZ, 4f, true);
-                }
-            }
-        }
-    }
- 
-    @SubscribeEvent
-    public void goodbyeRenko(EventHANDRU event)
-    {
-    	event.entityPlayer.addChatMessage(new ChatComponentText("Have a nice day, Renko Usami."));//欢迎来到冥界,宇佐见莲子.
-        event.setResult(Result.ALLOW);
-    }
 }
