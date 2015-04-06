@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Random;
 
 import net.minecraft.block.Block;
+import net.minecraft.block.material.Material;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.item.EntityItem;
@@ -18,6 +19,7 @@ import net.minecraft.util.ChatComponentText;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.ServerChatEvent;
 import net.minecraftforge.event.entity.living.LivingDeathEvent;
+import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.Mod.EventHandler;
 import cpw.mods.fml.common.event.FMLInitializationEvent;
@@ -39,8 +41,8 @@ public class SpawnEggCraft {
 	Random ran1=new Random();
 	Random ran2=new Random();
 	String Number = "2";
-	String NumberofSlimeOutput = "1";
 	String NumberofSlimeInput = "1";
+	
     
 	@EventHandler
 	public void preLoad(FMLPreInitializationEvent event) throws Exception
@@ -49,8 +51,7 @@ public class SpawnEggCraft {
 		try
 		{
 			Number = SpawnEggCraftConfig.GetGeneralProperties("Number","2");
-			NumberofSlimeOutput = SpawnEggCraftConfig.GetGeneralProperties("Number of Slime(Output)","1");
-			NumberofSlimeInput = SpawnEggCraftConfig.GetGeneralProperties("Number of Slime(Input)","1");
+			NumberofSlimeInput = SpawnEggCraftConfig.GetGeneralProperties("Number of Slime(Input)","5");
 			
 		}
 		catch(Exception error)
@@ -60,12 +61,24 @@ public class SpawnEggCraft {
 		}
 		SpawnEggCraftConfig.SaveConfig();
 		//Items
-	    
 		//Specimen
 	    SpawnEggCraft_String = "Specimen";
 	    Specimen = new SpawnEggCraftAddItems();
 	    Specimen.setUnlocalizedName(SpawnEggCraft_String).setTextureName("fxz:"+SpawnEggCraft_String).setMaxStackSize(64).setCreativeTab(CreativeTabs.tabMisc);
 		GameRegistry.registerItem(Specimen, SpawnEggCraft_String);
+		
+		//Blocks
+		//SpawnEggCopyingMachine
+		SpawnEggCopyingMachine = new SpawnEggCraftAddBlocks(Material.rock);
+		SpawnEggCopyingMachine.setBlockName("SpawnEggCopyingMachine");
+		SpawnEggCopyingMachine.setBlockTextureName("fxz:SpawnEggCopyingMachine");
+		SpawnEggCopyingMachine.setHardness(3.0f); 
+		SpawnEggCopyingMachine.setResistance(20.0f);
+		SpawnEggCopyingMachine.setLightLevel(0.0f);
+		SpawnEggCopyingMachine.setStepSound(Block.soundTypeStone);
+		SpawnEggCopyingMachine.setCreativeTab(CreativeTabs.tabDecorations);
+		SpawnEggCopyingMachine.setHarvestLevel("pickaxe", -1);
+		GameRegistry.registerBlock(SpawnEggCopyingMachine,"SpawnEggCopyingMachine");
 		}
  
 	@EventHandler
@@ -248,7 +261,7 @@ public class SpawnEggCraft {
 					Character.valueOf('2'), new ItemStack(Items.ghast_tear, 1), 
 				});	
 				//Slime
-				GameRegistry.addRecipe(new ItemStack(Items.spawn_egg, Integer.valueOf(NumberofSlimeOutput),55), new Object[]{
+				GameRegistry.addRecipe(new ItemStack(Items.spawn_egg, LANZ_JBU,55), new Object[]{
 					"010", 
 					"121", 
 					"010", 
@@ -309,6 +322,7 @@ public class SpawnEggCraft {
 				});
 				
 				MinecraftForge.EVENT_BUS.register(this);
+				FMLCommonHandler.instance().bus().register(this);
 		
 		}
 	
