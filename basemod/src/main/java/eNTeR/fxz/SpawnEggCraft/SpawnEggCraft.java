@@ -1,34 +1,28 @@
 package eNTeR.fxz.SpawnEggCraft;
 
-import java.util.Iterator;
-import java.util.List;
-import java.util.Random;
 
+import java.util.Random;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.creativetab.CreativeTabs;
-import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.item.EntityItem;
-import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.AxisAlignedBB;
-import net.minecraft.util.ChatComponentText;
 import net.minecraftforge.common.MinecraftForge;
-import net.minecraftforge.event.ServerChatEvent;
 import net.minecraftforge.event.entity.living.LivingDeathEvent;
 import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.Mod.EventHandler;
 import cpw.mods.fml.common.event.FMLInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
-import cpw.mods.fml.common.eventhandler.Event.Result;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import cpw.mods.fml.common.registry.GameRegistry;
+import cpw.mods.fml.common.network.NetworkRegistry;
 
 @Mod(modid=SpawnEggCraft.MODID, name=SpawnEggCraft.NAME, version=SpawnEggCraft.VERSION)
+
 public class SpawnEggCraft {
     public static final String MODID = "SpawnEggCraft_basemod";
     public static final String NAME = "SpawnEggCraft_basemod";
@@ -38,15 +32,37 @@ public class SpawnEggCraft {
     String SpawnEggCraft_String = "";
     static public Item Specimen;
     static public Block SpawnEggCopyingMachine;
-	Random ran1=new Random();
+	public static Object instance = new SpawnEggCraft();
+	static Random ran1=new Random();
 	Random ran2=new Random();
 	String Number = "2";
 	String NumberofSlimeInput = "1";
+	public static int GUI_ID_SAMPLE = 20;
 	
+	/*String test;
+	String test2;
+	int test_1 = 196;
+	int test2_1;
+	double i;
+	boolean a = true;*/
     
 	@EventHandler
 	public void preLoad(FMLPreInitializationEvent event) throws Exception
 	{
+		//test
+		
+		/*while(a){
+			test2_1 = myReserve(test_1);
+			test_1 = test_1 + test2_1;
+			System.out.println(test_1);
+			i++;
+			if(test_1==myReserve(test_1))
+			{
+				break;
+			}
+		}
+		System.out.println(i);*/
+		
 		SpawnEggCraftConfig.InitliazeConfig(event.getSuggestedConfigurationFile());
 		try
 		{
@@ -60,16 +76,19 @@ public class SpawnEggCraft {
 		    System.out.println(error.getStackTrace());
 		}
 		SpawnEggCraftConfig.SaveConfig();
+		
+		//NetworkRegistry.registerGuiHandler(this, this);
+		
 		//Items
 		//Specimen
 	    SpawnEggCraft_String = "Specimen";
-	    Specimen = new SpawnEggCraftAddItems();
+	    Specimen = new eNTeR.fxz.SpawnEggCraft.item.Specimen();
 	    Specimen.setUnlocalizedName(SpawnEggCraft_String).setTextureName("fxz:"+SpawnEggCraft_String).setMaxStackSize(64).setCreativeTab(CreativeTabs.tabMisc);
 		GameRegistry.registerItem(Specimen, SpawnEggCraft_String);
 		
 		//Blocks
 		//SpawnEggCopyingMachine
-		SpawnEggCopyingMachine = new SpawnEggCraftAddBlocks(Material.rock);
+		SpawnEggCopyingMachine = new CopyingMachine(Material.rock);
 		SpawnEggCopyingMachine.setBlockName("SpawnEggCopyingMachine");
 		SpawnEggCopyingMachine.setBlockTextureName("fxz:SpawnEggCopyingMachine");
 		SpawnEggCopyingMachine.setHardness(3.0f); 
@@ -79,8 +98,10 @@ public class SpawnEggCraft {
 		SpawnEggCopyingMachine.setCreativeTab(CreativeTabs.tabDecorations);
 		SpawnEggCopyingMachine.setHarvestLevel("pickaxe", -1);
 		GameRegistry.registerBlock(SpawnEggCopyingMachine,"SpawnEggCopyingMachine");
+		GameRegistry.registerTileEntity(SpawnEggCraftTileEntityCopyingMachine.class, "SpawnEggCopyingTileEntity");
+		NetworkRegistry.INSTANCE.registerGuiHandler(this, new SpawnEggCopyingMachineGuiHandler());
 		}
- 
+
 	@EventHandler
 	public void load(FMLInitializationEvent event)
 	{
@@ -398,5 +419,21 @@ public class SpawnEggCraft {
             }
 		}
 	}
+	
+	/*public int myReserve(int oriNum){  
+	    int tempNum=oriNum,count,result=0;  
+	    for(count=0;tempNum>0;tempNum/=10,count++);//算出该数有多少位  
+	  
+	    while(oriNum>0){  
+	        int num=oriNum%10;//取出该位上的数.  
+	        for(int i=1;i<count;i++){//count标识当前正在处理第几位数.  
+	            num*=10;  
+	        }  
+	        count--;//标识向前移一位.  
+	        result+=num;  
+	        oriNum/=10;//切掉处理过的位数.  
+	    };  
+	    return result;  
+	}*/  
 	
 }

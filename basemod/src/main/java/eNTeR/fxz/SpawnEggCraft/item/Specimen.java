@@ -1,4 +1,4 @@
-package eNTeR.fxz.SpawnEggCraft;
+package eNTeR.fxz.SpawnEggCraft.item;
 
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.EntityLivingBase;
@@ -8,7 +8,7 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
 
-public class SpawnEggCraftAddItems extends Item{
+public class Specimen extends Item{
 	
 	//from net.minecraft.item.ItemNameTag_20
     public boolean itemInteractionForEntityChanged(ItemStack p_111207_1_, EntityLivingBase p_111207_3_)
