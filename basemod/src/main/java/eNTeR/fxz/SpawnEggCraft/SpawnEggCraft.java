@@ -1,5 +1,7 @@
+/**
+ * @author fxz
+*/
 package eNTeR.fxz.SpawnEggCraft;
-
 
 import java.util.Random;
 import net.minecraft.block.Block;
@@ -21,15 +23,11 @@ import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import cpw.mods.fml.common.registry.GameRegistry;
 import cpw.mods.fml.common.network.NetworkRegistry;
 
-@Mod(modid=SpawnEggCraft.MODID, name=SpawnEggCraft.NAME, version=SpawnEggCraft.VERSION)
+@Mod(modid="SpawnEggCraft_basemod", name="SpawnEggCraft_basemod", version="0.1.1")
 
 public class SpawnEggCraft {
-    public static final String MODID = "SpawnEggCraft_basemod";
-    public static final String NAME = "SpawnEggCraft_basemod";
-    public static final String VERSION = "0.1.1";
     public static int LANZ_JBU = 1;
     public static String IsDoubleCraft = "true";
-    String SpawnEggCraft_String = "";
     static public Item Specimen;
     static public Block SpawnEggCopyingMachine;
 	public static Object instance = new SpawnEggCraft();
@@ -81,22 +79,14 @@ public class SpawnEggCraft {
 		
 		//Items
 		//Specimen
-	    SpawnEggCraft_String = "Specimen";
 	    Specimen = new eNTeR.fxz.SpawnEggCraft.item.Specimen();
-	    Specimen.setUnlocalizedName(SpawnEggCraft_String).setTextureName("fxz:"+SpawnEggCraft_String).setMaxStackSize(64).setCreativeTab(CreativeTabs.tabMisc);
-		GameRegistry.registerItem(Specimen, SpawnEggCraft_String);
+	    Specimen.setUnlocalizedName("Specimen").setTextureName("fxz:Specimen").setMaxStackSize(64).setCreativeTab(CreativeTabs.tabMisc);
+		GameRegistry.registerItem(Specimen, "Specimen");
 		
 		//Blocks
 		//SpawnEggCopyingMachine
 		SpawnEggCopyingMachine = new CopyingMachine(Material.rock);
-		SpawnEggCopyingMachine.setBlockName("SpawnEggCopyingMachine");
-		SpawnEggCopyingMachine.setBlockTextureName("fxz:SpawnEggCopyingMachine");
-		SpawnEggCopyingMachine.setHardness(3.0f); 
-		SpawnEggCopyingMachine.setResistance(20.0f);
-		SpawnEggCopyingMachine.setLightLevel(0.0f);
-		SpawnEggCopyingMachine.setStepSound(Block.soundTypeStone);
-		SpawnEggCopyingMachine.setCreativeTab(CreativeTabs.tabDecorations);
-		SpawnEggCopyingMachine.setHarvestLevel("pickaxe", -1);
+		SpawnEggCopyingMachine.setBlockName("SpawnEggCopyingMachine").setBlockTextureName("fxz:SpawnEggCopyingMachine").setHardness(3.0f).setResistance(20.0f).setLightLevel(0.0f).setStepSound(Block.soundTypeStone).setCreativeTab(CreativeTabs.tabDecorations).setHarvestLevel("pickaxe", -1);
 		GameRegistry.registerBlock(SpawnEggCopyingMachine,"SpawnEggCopyingMachine");
 		GameRegistry.registerTileEntity(SpawnEggCraftTileEntityCopyingMachine.class, "SpawnEggCopyingTileEntity");
 		NetworkRegistry.INSTANCE.registerGuiHandler(this, new SpawnEggCopyingMachineGuiHandler());
