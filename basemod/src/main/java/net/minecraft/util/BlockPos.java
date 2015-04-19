@@ -1,7 +1,9 @@
 package net.minecraft.util;
 
 import com.google.common.collect.AbstractIterator;
+
 import java.util.Iterator;
+
 import net.minecraft.entity.Entity;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
@@ -18,7 +20,8 @@ public class BlockPos extends Vec3i
     private static final long X_MASK = (1L << NUM_X_BITS) - 1L;
     private static final long Y_MASK = (1L << NUM_Y_BITS) - 1L;
     private static final long Z_MASK = (1L << NUM_Z_BITS) - 1L;
-    private static final String __OBFID = "CL_00002334";
+    @SuppressWarnings("unused")
+	private static final String __OBFID = "CL_00002334";
 
     public BlockPos(int x, int y, int z)
     {
@@ -243,19 +246,22 @@ public class BlockPos extends Vec3i
      * @param from The first corner (inclusive)
      * @param to the second corner (exclusive)
      */
-    public static Iterable getAllInBox(BlockPos from, BlockPos to)
+    @SuppressWarnings("rawtypes")
+	public static Iterable getAllInBox(BlockPos from, BlockPos to)
     {
         final BlockPos blockpos2 = new BlockPos(Math.min(from.getX(), to.getX()), Math.min(from.getY(), to.getY()), Math.min(from.getZ(), to.getZ()));
         final BlockPos blockpos3 = new BlockPos(Math.max(from.getX(), to.getX()), Math.max(from.getY(), to.getY()), Math.max(from.getZ(), to.getZ()));
         return new Iterable()
         {
-            private static final String __OBFID = "CL_00002333";
+            @SuppressWarnings("unused")
+			private static final String __OBFID = "CL_00002333";
             public Iterator iterator()
             {
                 return new AbstractIterator()
                 {
                     private BlockPos lastReturned = null;
-                    private static final String __OBFID = "CL_00002332";
+                    @SuppressWarnings("unused")
+					private static final String __OBFID = "CL_00002332";
                     /**
                      * Synthetic method called by computeNext
                      */
@@ -312,19 +318,22 @@ public class BlockPos extends Vec3i
      * @param from The first corner (inclusive)
      * @param to the second corner (exclusive)
      */
-    public static Iterable getAllInBoxMutable(BlockPos from, BlockPos to)
+    @SuppressWarnings("rawtypes")
+	public static Iterable getAllInBoxMutable(BlockPos from, BlockPos to)
     {
         final BlockPos blockpos2 = new BlockPos(Math.min(from.getX(), to.getX()), Math.min(from.getY(), to.getY()), Math.min(from.getZ(), to.getZ()));
         final BlockPos blockpos3 = new BlockPos(Math.max(from.getX(), to.getX()), Math.max(from.getY(), to.getY()), Math.max(from.getZ(), to.getZ()));
         return new Iterable()
         {
-            private static final String __OBFID = "CL_00002331";
+            @SuppressWarnings("unused")
+			private static final String __OBFID = "CL_00002331";
             public Iterator iterator()
             {
                 return new AbstractIterator()
                 {
                     private BlockPos.MutableBlockPos theBlockPos = null;
-                    private static final String __OBFID = "CL_00002330";
+                    @SuppressWarnings("unused")
+					private static final String __OBFID = "CL_00002330";
                     /**
                      * Synthetic method called by computeNext
                      */
@@ -392,7 +401,8 @@ public class BlockPos extends Vec3i
             public int y;
             /** Mutable Z Coordinate */
             public int z;
-            private static final String __OBFID = "CL_00002329";
+            @SuppressWarnings("unused")
+			private static final String __OBFID = "CL_00002329";
 
             private MutableBlockPos(int x_, int y_, int z_)
             {

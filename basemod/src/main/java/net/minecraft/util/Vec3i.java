@@ -2,6 +2,7 @@ package net.minecraft.util;
 
 import com.google.common.base.Objects;
 
+@SuppressWarnings("rawtypes")
 public class Vec3i implements Comparable
 {
     /** The Null vector constant (0, 0, 0) */
@@ -12,7 +13,8 @@ public class Vec3i implements Comparable
     private final int y;
     /** Z coordinate */
     private final int z;
-    private static final String __OBFID = "CL_00002315";
+    @SuppressWarnings("unused")
+	private static final String __OBFID = "CL_00002315";
 
     public Vec3i(int xIn, int yIn, int zIn)
     {

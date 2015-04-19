@@ -12,7 +12,8 @@ import cpw.mods.fml.relauncher.SideOnly;
 
 public class BlockSlime extends BlockBreakable
 {
-    private static final String __OBFID = "CL_00002063";
+    @SuppressWarnings("unused")
+	private static final String __OBFID = "CL_00002063";
 
     public BlockSlime()
     {

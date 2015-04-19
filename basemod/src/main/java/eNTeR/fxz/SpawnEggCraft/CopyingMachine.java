@@ -25,14 +25,6 @@ public class CopyingMachine extends BlockContainer{
         p_149727_5_.openGui(SpawnEggCopyingMachineGuiHandler.instance, SpawnEggCraft.GUI_ID_SAMPLE, p_149727_1_, p_149727_2_, p_149727_3_, p_149727_4_);
         return true;
     }
-    
-    /*
-    @Override
-    public TileEntity createTileEntity(World world, int metadata)
-    {
-           // TODO Auto-generated method stub
-           return new SpawnEggCraftTileEntityCopyingMachine();
-    }*/
 
 	@Override
 	public TileEntity createNewTileEntity(World p_149915_1_, int p_149915_2_) {
