@@ -25,41 +25,21 @@ import cpw.mods.fml.common.network.NetworkRegistry;
 
 @Mod(modid="SpawnEggCraft_basemod", name="SpawnEggCraft_basemod", version="0.1.1")
 
-public class SpawnEggCraft {
+public class SpawnEggCraft{
     public static int LANZ_JBU = 1;
     public static String IsDoubleCraft = "true";
-    static public Item Specimen;
-    static public Block SpawnEggCopyingMachine;
-	public static Object instance = new SpawnEggCraft();
-	static Random ran1=new Random();
-	Random ran2=new Random();
+    public static Item Specimen;
+    public static Block SpawnEggCopyingMachine;
+    public static Block BlockSlime;
+
+	public static Random ran1=new Random();
 	String Number = "2";
 	String NumberofSlimeInput = "1";
-	public static int GUI_ID_SAMPLE = 20;
-	
-	/*String test;
-	String test2;
-	int test_1 = 196;
-	int test2_1;
-	double i;
-	boolean a = true;*/
+	public static final int GUI_ID_SAMPLE = 20;
     
 	@EventHandler
 	public void preLoad(FMLPreInitializationEvent event) throws Exception
 	{
-		//test
-		
-		/*while(a){
-			test2_1 = myReserve(test_1);
-			test_1 = test_1 + test2_1;
-			System.out.println(test_1);
-			i++;
-			if(test_1==myReserve(test_1))
-			{
-				break;
-			}
-		}
-		System.out.println(i);*/
 		
 		SpawnEggCraftConfig.InitliazeConfig(event.getSuggestedConfigurationFile());
 		try
@@ -75,8 +55,6 @@ public class SpawnEggCraft {
 		}
 		SpawnEggCraftConfig.SaveConfig();
 		
-		//NetworkRegistry.registerGuiHandler(this, this);
-		
 		//Items
 		//Specimen
 	    Specimen = new eNTeR.fxz.SpawnEggCraft.item.Specimen();
@@ -89,6 +67,10 @@ public class SpawnEggCraft {
 		SpawnEggCopyingMachine.setBlockName("SpawnEggCopyingMachine").setBlockTextureName("fxz:SpawnEggCopyingMachine").setHardness(3.0f).setResistance(20.0f).setLightLevel(0.0f).setStepSound(Block.soundTypeStone).setCreativeTab(CreativeTabs.tabDecorations).setHarvestLevel("pickaxe", -1);
 		GameRegistry.registerBlock(SpawnEggCopyingMachine,"SpawnEggCopyingMachine");
 		GameRegistry.registerTileEntity(SpawnEggCraftTileEntityCopyingMachine.class, "SpawnEggCopyingTileEntity");
+		//BlockSlime
+		BlockSlime = new eNTeR.fxz.SpawnEggCraft.block.BlockSlime();
+		GameRegistry.registerBlock(BlockSlime,"BlockSlime");
+		
 		NetworkRegistry.INSTANCE.registerGuiHandler(this, new SpawnEggCopyingMachineGuiHandler());
 		}
 
@@ -97,7 +79,7 @@ public class SpawnEggCraft {
 	{
 	    LANZ_JBU=Integer.valueOf(Number);
 				//Recipes
-				//spawn_eggs
+				//Spawn_eggs
 				//Chicken
 				GameRegistry.addRecipe(new ItemStack(Items.spawn_egg, LANZ_JBU,93), new Object[]{
 					"010", 
@@ -276,9 +258,9 @@ public class SpawnEggCraft {
 					"010", 
 					"121", 
 					"010", 
-					Character.valueOf('0'), new ItemStack(Items.egg, Integer.valueOf(NumberofSlimeInput)),
-					Character.valueOf('1'), new ItemStack(Items.wheat_seeds, Integer.valueOf(NumberofSlimeInput)), 
-					Character.valueOf('2'), new ItemStack(Items.slime_ball, Integer.valueOf(NumberofSlimeInput)), 
+					Character.valueOf('0'), new ItemStack(Items.egg,1),
+					Character.valueOf('1'), new ItemStack(Items.wheat_seeds,1), 
+					Character.valueOf('2'), new ItemStack(BlockSlime,1), 
 				});	
 				//Zombie
 				GameRegistry.addRecipe(new ItemStack(Items.spawn_egg, LANZ_JBU,54), new Object[]{
@@ -330,6 +312,13 @@ public class SpawnEggCraft {
 					"01",
 					Character.valueOf('0'), new ItemStack(Items.book, 1),
 					Character.valueOf('1'), new ItemStack(Items.nether_star, 1), 
+				});
+				//BlockSlime
+				GameRegistry.addRecipe(new ItemStack(BlockSlime,1), new Object[]{
+					"000",
+					"000",
+					"000",
+					Character.valueOf('0'), new ItemStack(Items.slime_ball, 1),
 				});
 				
 				MinecraftForge.EVENT_BUS.register(this);
@@ -392,7 +381,7 @@ public class SpawnEggCraft {
     			)
     			
             {
-    			if((Math.abs(ran1.nextLong())%(Math.abs(ran2.nextLong()%400)+100)==127)){
+    			if((Math.abs(ran1.nextLong())%(Math.abs(ran1.nextLong()%400)+100)==127)){
 				EntityItem entityitem = new EntityItem(event.entity.worldObj, event.entity.posX, event.entity.posY + (double)0.0F, event.entity.posZ, new ItemStack(Items.nether_star));
 				entityitem.delayBeforeCanPickup = 10;
 				event.entity.worldObj.spawnEntityInWorld(entityitem);
@@ -410,20 +399,5 @@ public class SpawnEggCraft {
 		}
 	}
 	
-	/*public int myReserve(int oriNum){  
-	    int tempNum=oriNum,count,result=0;  
-	    for(count=0;tempNum>0;tempNum/=10,count++);//算出该数有多少位  
-	  
-	    while(oriNum>0){  
-	        int num=oriNum%10;//取出该位上的数.  
-	        for(int i=1;i<count;i++){//count标识当前正在处理第几位数.  
-	            num*=10;  
-	        }  
-	        count--;//标识向前移一位.  
-	        result+=num;  
-	        oriNum/=10;//切掉处理过的位数.  
-	    };  
-	    return result;  
-	}*/  
-	
+
 }

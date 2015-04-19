@@ -7,6 +7,7 @@ import cpw.mods.fml.common.network.IGuiHandler;
 
 public class SpawnEggCopyingMachineGuiHandler implements IGuiHandler {
 
+	public static final Object instance = new SpawnEggCopyingMachineGuiHandler();
     @Override
     /**
      * 返回服务器端的GUI元素，对于方块GUI，返回一个Container子类，或null。

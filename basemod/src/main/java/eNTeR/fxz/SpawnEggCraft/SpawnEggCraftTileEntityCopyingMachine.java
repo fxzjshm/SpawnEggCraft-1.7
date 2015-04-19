@@ -13,7 +13,7 @@ public class SpawnEggCraftTileEntityCopyingMachine extends TileEntity implements
     public void updateEntity() {
            // TODO Auto-generated method stub
            super.updateEntity();
-           System.out.println("Hello GUI");
+           //System.out.println("Hello GUI");
     }
 
 	@Override
