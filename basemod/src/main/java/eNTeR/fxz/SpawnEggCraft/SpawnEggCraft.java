@@ -346,6 +346,11 @@ public class SpawnEggCraft implements ModContainer{
 					"000",
 					Character.valueOf('0'), new ItemStack(Items.slime_ball, 1),
 				});
+				//SlimeBall
+				GameRegistry.addRecipe(new ItemStack(Items.slime_ball, 9), new Object[]{
+					"0",
+					Character.valueOf('0'), new ItemStack(BlockSlime, 1),
+				});
 
 		}
 	
