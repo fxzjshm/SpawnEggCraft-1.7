@@ -42,7 +42,7 @@ public class BlockSlime extends BlockBreakable
         else
         {
         	//Mistakes
-            //entityIn.fall(fallDistance,0.0F);
+            //entityIn.fall(fallDistance);
         }
     }
 
@@ -54,7 +54,7 @@ public class BlockSlime extends BlockBreakable
     {
         if (entityIn.isSneaking())
         {
-            onLanded1(worldIn, entityIn);
+            onLanded(worldIn, entityIn);
         }
         else if (entityIn.motionY < 0.0D)
         {

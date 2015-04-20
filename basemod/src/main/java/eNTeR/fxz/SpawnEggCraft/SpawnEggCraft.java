@@ -1,9 +1,14 @@
-/**
- * @author fxz
-*/
+/**@author fxz*/
 package eNTeR.fxz.SpawnEggCraft;
-
+import java.io.File;
+import java.security.cert.Certificate;
+import java.util.List;
+import java.util.Map;
 import java.util.Random;
+import java.util.Set;
+
+import com.google.common.eventbus.EventBus;
+
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.creativetab.CreativeTabs;
@@ -14,24 +19,33 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.entity.living.LivingDeathEvent;
+import net.minecraftforge.event.entity.living.LivingFallEvent;
 import cpw.mods.fml.common.FMLCommonHandler;
+import cpw.mods.fml.common.LoadController;
+import cpw.mods.fml.common.MetadataCollection;
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.Mod.EventHandler;
+import cpw.mods.fml.common.ModContainer;
+import cpw.mods.fml.common.ModMetadata;
 import cpw.mods.fml.common.event.FMLInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import cpw.mods.fml.common.registry.GameRegistry;
+import cpw.mods.fml.common.versioning.ArtifactVersion;
+import cpw.mods.fml.common.versioning.VersionRange;
 import cpw.mods.fml.common.network.NetworkRegistry;
-
 @Mod(modid="SpawnEggCraft_basemod", name="SpawnEggCraft_basemod", version="0.1.1")
 
-public class SpawnEggCraft{
+public class SpawnEggCraft implements ModContainer{
+	public static final String modid ="SpawnEggCraft_basemod";
+	public static final String name ="SpawnEggCraft_basemod";
+	public static final String version ="0.1.1";
     public static int LANZ_JBU = 1;
     public static String IsDoubleCraft = "true";
     public static Item Specimen;
     public static Block SpawnEggCopyingMachine;
     public static Block BlockSlime;
-
+	public static final Object instance = new SpawnEggCraft();
 	public static Random ran1=new Random();
 	String Number = "2";
 	String NumberofSlimeInput = "1";
@@ -69,9 +83,21 @@ public class SpawnEggCraft{
 		GameRegistry.registerTileEntity(SpawnEggCraftTileEntityCopyingMachine.class, "SpawnEggCopyingTileEntity");
 		//BlockSlime
 		BlockSlime = new eNTeR.fxz.SpawnEggCraft.block.BlockSlime();
+		BlockSlime.setBlockName("BlockSlime").setBlockTextureName("fxz:slime").setCreativeTab(CreativeTabs.tabDecorations);
+		BlockSlime.slipperiness = 0.8F;
 		GameRegistry.registerBlock(BlockSlime,"BlockSlime");
 		
+		//registry
+		//GUIHandler
 		NetworkRegistry.INSTANCE.registerGuiHandler(this, new SpawnEggCopyingMachineGuiHandler());
+		//Event_Bus
+		MinecraftForge.EVENT_BUS.register(this);
+		FMLCommonHandler.instance().bus().register(this);
+		//ModContainer
+		//Warning
+		//TODO Check It
+		NetworkRegistry.INSTANCE.register(this, SpawnEggCraft.class, "0.1.1", null);
+		
 		}
 
 	@EventHandler
@@ -320,10 +346,7 @@ public class SpawnEggCraft{
 					"000",
 					Character.valueOf('0'), new ItemStack(Items.slime_ball, 1),
 				});
-				
-				MinecraftForge.EVENT_BUS.register(this);
-				FMLCommonHandler.instance().bus().register(this);
-		
+
 		}
 	
 	
@@ -399,5 +422,158 @@ public class SpawnEggCraft{
 		}
 	}
 	
+	@SubscribeEvent
+	public void LivingFall_BlockSlime(LivingFallEvent event){
+		//if(event.entityLiving){
+			
+		//}
+	}
+
+	@Override
+	public String getModId() {
+		return SpawnEggCraft.modid;
+	}
+
+	@Override
+	public String getName() {
+		return SpawnEggCraft.name;
+	}
+
+	@Override
+	public String getVersion() {
+		return SpawnEggCraft.version;
+	}
+
+	@Override
+	public File getSource() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public ModMetadata getMetadata() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void bindMetadata(MetadataCollection mc) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void setEnabledState(boolean enabled) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public Set<ArtifactVersion> getRequirements() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<ArtifactVersion> getDependencies() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<ArtifactVersion> getDependants() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public String getSortingRules() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public boolean registerBus(EventBus bus, LoadController controller) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public boolean matches(Object mod) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public Object getMod() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public ArtifactVersion getProcessedVersion() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public boolean isImmutable() {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public String getDisplayVersion() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public VersionRange acceptableMinecraftVersionRange() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Certificate getSigningCertificate() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Map<String, String> getCustomModProperties() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Class<?> getCustomResourcePackClass() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Map<String, String> getSharedModDescriptor() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Disableable canBeDisabled() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public String getGuiClassName() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<String> getOwnedPackages() {
+		// TODO Auto-generated method stub
+		return null;
+	}
 
 }

@@ -4,35 +4,12 @@ import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.item.EntityMinecart;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.world.World;
+import net.minecraft.util.ChatComponentText;
 
 public class Specimen extends Item{
-	
-	//from net.minecraft.item.ItemNameTag_20
-    public boolean itemInteractionForEntityChanged(ItemStack p_111207_1_, EntityLivingBase p_111207_3_)
-    {
-        if (!p_111207_1_.hasDisplayName())
-        {
-            return false;
-        }
-        else if (p_111207_3_ instanceof EntityLiving)
-        {
-            EntityLiving entityliving = (EntityLiving)p_111207_3_;
-            entityliving.setCustomNameTag(p_111207_1_.getDisplayName());
-            entityliving.func_110163_bv();
-            return true;
-        }
-        else
-        {
-        	return false;
-        }
-    }
-    @Override
-    public ItemStack onItemRightClick(ItemStack par1ItemStack, World par2World, EntityPlayer par3EntityPlayer){
-		return par1ItemStack;
-    }
     
     @Override
     public boolean itemInteractionForEntity(ItemStack p_111207_1_, EntityPlayer p_111207_2_, EntityLivingBase p_111207_3_)
@@ -54,10 +31,14 @@ public class Specimen extends Item{
         			if(p_111207_3_.isRiding()==false){
         			EntityMinecart entityMinecart = EntityMinecart.createMinecart(p_111207_2_.getEntityWorld(), (int)p_111207_3_.posX + 0.75, (int)p_111207_3_.posY + 0.5, (int)p_111207_3_.posZ + 0.75, 0);
         			p_111207_2_.getEntityWorld().spawnEntityInWorld(entityMinecart);
+        			}else{
+        				p_111207_2_.addChatMessage(new ChatComponentText("Specimen:It is riding something.Cannot let it ride minecart.#@!@#"));
         			}
         			--p_111207_1_.stackSize;
+        			p_111207_2_.dropItem(Items.minecart, 1);
         			return true;
         		} else {
+        			p_111207_2_.addChatMessage(new ChatComponentText("Rename the Specimen,please!"));
         			return false;
         		}
         	}
