@@ -1,13 +1,12 @@
 /**@author fxz*/
 package eNTeR.fxz.SpawnEggCraft;
+
 import java.io.File;
 import java.security.cert.Certificate;
 import java.util.List;
 import java.util.Map;
 import java.util.Random;
 import java.util.Set;
-
-import com.google.common.eventbus.EventBus;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
@@ -20,6 +19,9 @@ import net.minecraft.item.ItemStack;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.entity.living.LivingDeathEvent;
 import net.minecraftforge.event.entity.living.LivingFallEvent;
+
+import com.google.common.eventbus.EventBus;
+
 import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.common.LoadController;
 import cpw.mods.fml.common.MetadataCollection;
@@ -30,11 +32,14 @@ import cpw.mods.fml.common.ModMetadata;
 import cpw.mods.fml.common.event.FMLInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
+import cpw.mods.fml.common.network.NetworkRegistry;
 import cpw.mods.fml.common.registry.GameRegistry;
 import cpw.mods.fml.common.versioning.ArtifactVersion;
 import cpw.mods.fml.common.versioning.VersionRange;
-import cpw.mods.fml.common.network.NetworkRegistry;
-@Mod(modid="SpawnEggCraft_basemod", name="SpawnEggCraft_basemod", version="0.1.1")
+
+import eNTeR.fxz.SpawnEggCraft.ASMDataTable.SpawnEggCraftASMDataTable;
+
+@Mod(modid=SpawnEggCraft.modid, name=SpawnEggCraft.name, version=SpawnEggCraft.version)
 
 public class SpawnEggCraft implements ModContainer{
 	public static final String modid ="SpawnEggCraft_basemod";
@@ -59,7 +64,6 @@ public class SpawnEggCraft implements ModContainer{
 		try
 		{
 			Number = SpawnEggCraftConfig.GetGeneralProperties("Number","2");
-			NumberofSlimeInput = SpawnEggCraftConfig.GetGeneralProperties("Number of Slime(Input)","5");
 			
 		}
 		catch(Exception error)
@@ -78,7 +82,7 @@ public class SpawnEggCraft implements ModContainer{
 		//Blocks
 		//SpawnEggCopyingMachine
 		SpawnEggCopyingMachine = new CopyingMachine(Material.rock);
-		SpawnEggCopyingMachine.setBlockName("SpawnEggCopyingMachine").setBlockTextureName("fxz:SpawnEggCopyingMachine").setHardness(3.0f).setResistance(20.0f).setLightLevel(0.0f).setStepSound(Block.soundTypeStone).setCreativeTab(CreativeTabs.tabDecorations).setHarvestLevel("pickaxe", -1);
+		SpawnEggCopyingMachine.setBlockName("SpawnEggCopyingMachine").setBlockTextureName("fxz:SpawnEggCopyingMachine").setHardness(3.0f).setResistance(20.0f).setCreativeTab(CreativeTabs.tabDecorations);
 		GameRegistry.registerBlock(SpawnEggCopyingMachine,"SpawnEggCopyingMachine");
 		GameRegistry.registerTileEntity(SpawnEggCraftTileEntityCopyingMachine.class, "SpawnEggCopyingTileEntity");
 		//BlockSlime
@@ -96,7 +100,7 @@ public class SpawnEggCraft implements ModContainer{
 		//ModContainer
 		//Warning
 		//TODO Check It
-		NetworkRegistry.INSTANCE.register(this, SpawnEggCraft.class, "0.1.1", null);
+		NetworkRegistry.INSTANCE.register(this, SpawnEggCraft.class, "0.1.1", new SpawnEggCraftASMDataTable());
 		
 		}
 
@@ -333,12 +337,19 @@ public class SpawnEggCraft implements ModContainer{
 					Character.valueOf('1'), new ItemStack(Blocks.leaves2, 1), 
 					Character.valueOf('2'), new ItemStack(Items.gunpowder, 1), 
 				});
+				//Items
 				//Specimen
 				GameRegistry.addRecipe(new ItemStack(Specimen,1), new Object[]{
 					"01",
 					Character.valueOf('0'), new ItemStack(Items.book, 1),
 					Character.valueOf('1'), new ItemStack(Items.nether_star, 1), 
 				});
+				//SlimeBall
+				GameRegistry.addRecipe(new ItemStack(Items.slime_ball, 9), new Object[]{
+					"0",
+					Character.valueOf('0'), new ItemStack(BlockSlime, 1),
+				});
+				//Blocks
 				//BlockSlime
 				GameRegistry.addRecipe(new ItemStack(BlockSlime,1), new Object[]{
 					"000",
@@ -346,40 +357,37 @@ public class SpawnEggCraft implements ModContainer{
 					"000",
 					Character.valueOf('0'), new ItemStack(Items.slime_ball, 1),
 				});
-				//SlimeBall
-				GameRegistry.addRecipe(new ItemStack(Items.slime_ball, 9), new Object[]{
-					"0",
-					Character.valueOf('0'), new ItemStack(BlockSlime, 1),
-				});
+
 
 		}
 	
 	
 	@SubscribeEvent
 	public void LivingDeath(LivingDeathEvent event){
+		String EntityName = event.entity.getClass().getName();
 		if(!event.entity.worldObj.isRemote){
 			if(
-					String.valueOf(event.entity.getClass().getName())=="net.minecraft.entity.moster.EntityCreeper"||String.valueOf(event.entity.getClass().getName())=="xz"
+					EntityName=="net.minecraft.entity.moster.EntityCreeper"||EntityName=="xz"
 					||
-					String.valueOf(event.entity.getClass().getName())=="net.minecraft.entity.passive.EntityZombie"||String.valueOf(event.entity.getClass().getName())=="yq"
+					EntityName=="net.minecraft.entity.passive.EntityZombie"||EntityName=="yq"
 					||
-					String.valueOf(event.entity.getClass().getName())=="net.minecraft.entity.passive.EntitySkeleton"||String.valueOf(event.entity.getClass().getName())=="yl"
+					EntityName=="net.minecraft.entity.passive.EntitySkeleton"||EntityName=="yl"
 					||
-					String.valueOf(event.entity.getClass().getName())=="net.minecraft.entity.passive.EntitySpider"||String.valueOf(event.entity.getClass().getName())=="yo"
+					EntityName=="net.minecraft.entity.passive.EntitySpider"||EntityName=="yo"
 					||
-					String.valueOf(event.entity.getClass().getName())=="net.minecraft.entity.passive.EntityCaveSpider"||String.valueOf(event.entity.getClass().getName())=="xy"
+					EntityName=="net.minecraft.entity.passive.EntityCaveSpider"||EntityName=="xy"
 					||
-					String.valueOf(event.entity.getClass().getName())=="net.minecraft.entity.passive.EntityPigZombie"||String.valueOf(event.entity.getClass().getName())=="yh"
+					EntityName=="net.minecraft.entity.passive.EntityPigZombie"||EntityName=="yh"
 					||
-					String.valueOf(event.entity.getClass().getName())=="net.minecraft.entity.passive.EntityBlaze"||String.valueOf(event.entity.getClass().getName())=="xx"
+					EntityName=="net.minecraft.entity.passive.EntityBlaze"||EntityName=="xx"
 					||
-					String.valueOf(event.entity.getClass().getName())=="net.minecraft.entity.passive.EntityGhast"||String.valueOf(event.entity.getClass().getName())=="yd"
+					EntityName=="net.minecraft.entity.passive.EntityGhast"||EntityName=="yd"
 					||
-					String.valueOf(event.entity.getClass().getName())=="net.minecraft.entity.passive.EntitySlime"||String.valueOf(event.entity.getClass().getName())=="ym"
+					EntityName=="net.minecraft.entity.passive.EntitySlime"||EntityName=="ym"
 					||
-					String.valueOf(event.entity.getClass().getName())=="net.minecraft.entity.passive.EntityMagmaCube"||String.valueOf(event.entity.getClass().getName())=="yf"
+					EntityName=="net.minecraft.entity.passive.EntityMagmaCube"||EntityName=="yf"
 					||
-					String.valueOf(event.entity.getClass().getName())=="net.minecraft.entity.passive.EntityEnderman"||String.valueOf(event.entity.getClass().getName())=="ya"
+					EntityName=="net.minecraft.entity.passive.EntityEnderman"||EntityName=="ya"
 					
 				)
 			{
@@ -391,39 +399,41 @@ public class SpawnEggCraft implements ModContainer{
             } 
 			else
             if(
-            		String.valueOf(event.entity.getClass().getName())=="net.minecraft.entity.passive.EntityCow"||String.valueOf(event.entity.getClass().getName())=="wh"
+            		EntityName=="net.minecraft.entity.passive.EntityCow"||EntityName=="wh"
             		||
-            		String.valueOf(event.entity.getClass().getName())=="net.minecraft.entity.passive.EntitySheep"||String.valueOf(event.entity.getClass().getName())=="wp"
+            		EntityName=="net.minecraft.entity.passive.EntitySheep"||EntityName=="wp"
             		||
-            		String.valueOf(event.entity.getClass().getName())=="net.minecraft.entity.passive.EntityPig"||String.valueOf(event.entity.getClass().getName())=="wo"
+            		EntityName=="net.minecraft.entity.passive.EntityPig"||EntityName=="wo"
             		||
-            		String.valueOf(event.entity.getClass().getName())=="net.minecraft.entity.passive.EntityChicken"||String.valueOf(event.entity.getClass().getName())=="wg"
+            		EntityName=="net.minecraft.entity.passive.EntityChicken"||EntityName=="wg"
             		||
-            		String.valueOf(event.entity.getClass().getName())=="net.minecraft.entity.passive.EntityMooshroom"||String.valueOf(event.entity.getClass().getName())=="wm"
+            		EntityName=="net.minecraft.entity.passive.EntityMooshroom"||EntityName=="wm"
             		||
-            		String.valueOf(event.entity.getClass().getName())=="net.minecraft.entity.passive.EntityBat"||String.valueOf(event.entity.getClass().getName())=="we"
+            		EntityName=="net.minecraft.entity.passive.EntityBat"||EntityName=="we"
             		||
-            		String.valueOf(event.entity.getClass().getName())=="net.minecraft.entity.passive.EntityOcelot"||String.valueOf(event.entity.getClass().getName())=="wn"
+            		EntityName=="net.minecraft.entity.passive.EntityOcelot"||EntityName=="wn"
             		||
-            		String.valueOf(event.entity.getClass().getName())=="net.minecraft.entity.passive.EntityWolf"||String.valueOf(event.entity.getClass().getName())=="wv"
+            		EntityName=="net.minecraft.entity.passive.EntityWolf"||EntityName=="wv"
     			)
     			
             {
     			if((Math.abs(ran1.nextLong())%(Math.abs(ran1.nextLong()%400)+100)==127)){
-				EntityItem entityitem = new EntityItem(event.entity.worldObj, event.entity.posX, event.entity.posY + (double)0.0F, event.entity.posZ, new ItemStack(Items.nether_star));
+				EntityItem entityitem = new EntityItem(event.entity.worldObj, event.entity.posX, event.entity.posY, event.entity.posZ, new ItemStack(Items.nether_star));
 				entityitem.delayBeforeCanPickup = 10;
 				event.entity.worldObj.spawnEntityInWorld(entityitem);
     			}
             }else if(event.entity.isBurning()==true&&
-            		(String.valueOf(event.entity.getClass().getName())=="net.minecraft.entity.moster.EntityWitch"||String.valueOf(event.entity.getClass().getName())=="yp")
+            		(EntityName=="net.minecraft.entity.moster.EntityWitch"||EntityName=="yp")
             		)
             {
             	if((Math.abs(ran1.nextLong())%50)==25){
-            	EntityItem entityitem = new EntityItem(event.entity.worldObj, event.entity.posX, event.entity.posY + (double)0.0F, event.entity.posZ, new ItemStack(Items.experience_bottle,(int)(ran1.nextInt()%9)));
+            	EntityItem entityitem = new EntityItem(event.entity.worldObj, event.entity.posX, event.entity.posY, event.entity.posZ, new ItemStack(Items.experience_bottle,(int)(ran1.nextInt()%9)));
 				entityitem.delayBeforeCanPickup = 10;
 				event.entity.worldObj.spawnEntityInWorld(entityitem);
             	}
             }
+			System.out.println("------------------------Did it kill an entity?------------------------");
+			System.out.println(event.source.getSourceOfDamage().getClass().getName());
 		}
 	}
 	
@@ -572,7 +582,7 @@ public class SpawnEggCraft implements ModContainer{
 	@Override
 	public String getGuiClassName() {
 		// TODO Auto-generated method stub
-		return null;
+		return "eNTeR.fxz.SpawnEggCraft.SpawnEggCopyingMachineGuiHandler";
 	}
 
 	@Override

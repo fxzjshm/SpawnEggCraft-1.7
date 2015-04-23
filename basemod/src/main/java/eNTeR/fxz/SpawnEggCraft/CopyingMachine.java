@@ -9,7 +9,6 @@ import net.minecraft.world.World;
 public class CopyingMachine extends BlockContainer{
 
 	protected CopyingMachine(Material p_i45394_1_) {
-		
 		super(p_i45394_1_);
 	}
 	
@@ -23,14 +22,14 @@ public class CopyingMachine extends BlockContainer{
                 return false;
         }
         //在这里打开GUI：参数1为Mod实例类，参数2为GUI的ID（在主类中声明），后面的参数分别是世界和坐标
-        try{
-        p_149727_5_.openGui(SpawnEggCopyingMachineGuiHandler.instance, SpawnEggCraft.GUI_ID_SAMPLE, p_149727_1_, p_149727_2_, p_149727_3_, p_149727_4_);
-        }
-        catch(Exception error){
-		    System.out.println(error.getMessage());
-		    System.out.println(error.getStackTrace());
-        }
-        finally{
+        //try{
+        //p_149727_5_.openGui(SpawnEggCopyingMachineGuiHandler.instance, SpawnEggCraft.GUI_ID_SAMPLE, p_149727_1_, p_149727_2_, p_149727_3_, p_149727_4_);
+        //}
+        //catch(Exception error){
+		    //System.out.println(error.getMessage());
+		    //System.out.println(error.getStackTrace());
+        //}
+        //finally{
         	try{
         		p_149727_5_.openGui(SpawnEggCraft.instance, SpawnEggCraft.GUI_ID_SAMPLE, p_149727_1_, p_149727_2_, p_149727_3_, p_149727_4_);
         }
@@ -41,7 +40,7 @@ public class CopyingMachine extends BlockContainer{
         	finally{
         		return true;
         		}
-        	}
+        	//}
         
         
     }
