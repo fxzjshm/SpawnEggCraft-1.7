@@ -44,20 +44,4 @@ public class SpawnEggCraftConfig {
         }
         return SpawnEggCraftConfig.instance.config.get("general", PropertyName, DefaultValue).getString();
     }
-    /*public static int GetItemID(String ItemName, int DefaultValue) throws Exception
-    {
-        if(SpawnEggCraftConfig.instance == null)
-        {
-            throw new Exception("没有初始化配置文件！");
-        }
-        return SpawnEggCraftConfig.instance.config.getItem("item", "ID." + ItemName, DefaultValue).getInt();
-    }
-    public static int GetBlockID(String BlockName, int DefaultID) throws Exception
-    {
-        if(SpawnEggCraftConfig.instance == null)
-        {
-            throw new Exception("没有初始化配置文件！");
-        }
-        return SpawnEggCraftConfig.instance.config.getBlock("ID." + BlockName, DefaultID).getInt();
-    }*/
 }

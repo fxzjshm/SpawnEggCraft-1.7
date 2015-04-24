@@ -7,7 +7,7 @@ import net.minecraft.inventory.Container;
 
 public class SpawnEggCraftContainerCopyingMachine extends Container{
 
-    //在Container中放TileEntity句柄方便访问
+    /**在Container中放TileEntity句柄方便访问*/
     private SpawnEggCraftTileEntityCopyingMachine theTile;
     
     public SpawnEggCraftContainerCopyingMachine(SpawnEggCraftTileEntityCopyingMachine tileEntity, InventoryPlayer invPlayer) {
