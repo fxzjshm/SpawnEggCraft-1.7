@@ -1,9 +1,12 @@
-package eNTeR.fxz.SpawnEggCraft;
+package eNTeR.fxz.SpawnEggCraft.gui;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
 import cpw.mods.fml.common.network.IGuiHandler;
+import eNTeR.fxz.SpawnEggCraft.SpawnEggCraft;
+import eNTeR.fxz.SpawnEggCraft.container.SpawnEggCraftContainerCopyingMachine;
+import eNTeR.fxz.SpawnEggCraft.tileentity.SpawnEggCraftTileEntityCopyingMachine;
 
 public class SpawnEggCopyingMachineGuiHandler implements IGuiHandler {
 

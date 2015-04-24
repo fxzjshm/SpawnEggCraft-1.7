@@ -36,8 +36,11 @@ import cpw.mods.fml.common.network.NetworkRegistry;
 import cpw.mods.fml.common.registry.GameRegistry;
 import cpw.mods.fml.common.versioning.ArtifactVersion;
 import cpw.mods.fml.common.versioning.VersionRange;
-
-import eNTeR.fxz.SpawnEggCraft.ASMDataTable.SpawnEggCraftASMDataTable;
+import eNTeR.fxz.SpawnEggCraft.asmdatatable.*;
+import eNTeR.fxz.SpawnEggCraft.block.*;
+import eNTeR.fxz.SpawnEggCraft.config.*;
+import eNTeR.fxz.SpawnEggCraft.gui.*;
+import eNTeR.fxz.SpawnEggCraft.tileentity.*;
 
 @Mod(modid=SpawnEggCraft.modid, name=SpawnEggCraft.name, version=SpawnEggCraft.version)
 
@@ -86,7 +89,7 @@ public class SpawnEggCraft implements ModContainer{
 		GameRegistry.registerBlock(SpawnEggCopyingMachine,"SpawnEggCopyingMachine");
 		GameRegistry.registerTileEntity(SpawnEggCraftTileEntityCopyingMachine.class, "SpawnEggCopyingTileEntity");
 		//BlockSlime
-		BlockSlime = new eNTeR.fxz.SpawnEggCraft.block.BlockSlime();
+		BlockSlime = new net.minecraft.block.BlockSlime();
 		BlockSlime.setBlockName("BlockSlime").setBlockTextureName("fxz:slime").setCreativeTab(CreativeTabs.tabDecorations);
 		BlockSlime.slipperiness = 0.8F;
 		GameRegistry.registerBlock(BlockSlime,"BlockSlime");

@@ -1,4 +1,4 @@
-package eNTeR.fxz.SpawnEggCraft.block;
+package net.minecraft.block;
 
 import net.minecraft.block.BlockBreakable;
 import net.minecraft.block.material.Material;

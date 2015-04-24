@@ -1,5 +1,7 @@
-package eNTeR.fxz.SpawnEggCraft;
+package eNTeR.fxz.SpawnEggCraft.block;
 
+import eNTeR.fxz.SpawnEggCraft.SpawnEggCraft;
+import eNTeR.fxz.SpawnEggCraft.tileentity.*;
 import net.minecraft.block.BlockContainer;
 import net.minecraft.block.material.Material;
 import net.minecraft.entity.player.EntityPlayer;
@@ -8,7 +10,7 @@ import net.minecraft.world.World;
 
 public class CopyingMachine extends BlockContainer{
 
-	protected CopyingMachine(Material p_i45394_1_) {
+	public CopyingMachine(Material p_i45394_1_) {
 		super(p_i45394_1_);
 	}
 	
