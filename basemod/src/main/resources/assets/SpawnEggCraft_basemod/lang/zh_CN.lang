@@ -1,4 +1,5 @@
 item.Specimen.name=标本
 tile.SpawnEggCopyingMachine.name=刷怪蛋复刻机
+tile.BlockSlime.name=史莱姆方块
 
 message.renameSpecimen=请重命名这个标本！

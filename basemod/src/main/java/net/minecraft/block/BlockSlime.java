@@ -4,7 +4,6 @@ import net.minecraft.block.BlockBreakable;
 import net.minecraft.block.material.Material;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.Entity;
-import net.minecraft.util.BlockPos;
 import net.minecraft.util.EnumWorldBlockLayer;
 import net.minecraft.world.World;
 import cpw.mods.fml.relauncher.Side;
@@ -33,11 +32,11 @@ public class BlockSlime extends BlockBreakable
      *  
      * @param fallDistance The distance the entity has fallen before landing
      */
-    public void onFallenUpon(World worldIn, BlockPos pos, Entity entityIn, float fallDistance)
+    public void onFallenUpon(World worldIn, int p_149746_2_, int p_149746_3_, int p_149746_4_, Entity entityIn, float fallDistance)
     {
         if (entityIn.isSneaking())
         {
-            super.onFallenUpon(worldIn, pos.getX(),pos.getY(),pos.getZ(), entityIn, fallDistance);
+            super.onFallenUpon(worldIn, p_149746_2_, p_149746_3_, p_149746_4_, entityIn, fallDistance);
         }
         else
         {
@@ -65,7 +64,7 @@ public class BlockSlime extends BlockBreakable
     /**
      * Triggered whenever an entity collides with this block (enters into the block)
      */
-    public void onEntityCollidedWithBlock(World worldIn, BlockPos pos, Entity entityIn)
+    public void onEntityCollidedWithBlock(World worldIn, int p_149670_2_, int p_149670_3_, int p_149670_4_, Entity entityIn)
     {
         if (Math.abs(entityIn.motionY) < 0.1D && !entityIn.isSneaking())
         {
@@ -74,13 +73,6 @@ public class BlockSlime extends BlockBreakable
             entityIn.motionZ *= d0;
         }
 
-        super.onEntityCollidedWithBlock(worldIn, pos.getX(),pos.getY(),pos.getZ(), entityIn);
-    }
-    //Added from Block.java
-    public void onLanded1(World worldIn, Entity entityIn)
-    {
-        entityIn.motionY = 0.0D;
-    }
-    //Added from Entity.java
-    
+        super.onEntityCollidedWithBlock(worldIn, p_149670_2_, p_149670_3_, p_149670_4_, entityIn);
+    }    
 }

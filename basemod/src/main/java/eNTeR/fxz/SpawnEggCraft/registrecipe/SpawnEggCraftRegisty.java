@@ -6,9 +6,9 @@ import net.minecraft.item.ItemStack;
 import cpw.mods.fml.common.registry.GameRegistry;
 import eNTeR.fxz.SpawnEggCraft.SpawnEggCraft;
 
-public class SpawnEggCraftRegistRecipe {
+public class SpawnEggCraftRegisty {
 	
-	public static void SpawnEggCraftDoRegistRecipe(int LANZ_JBU){
+	public static void SpawnEggCraftRegistRecipe(int LANZ_JBU){
 		//Recipes
 		//Spawn_eggs
 		//Chicken
