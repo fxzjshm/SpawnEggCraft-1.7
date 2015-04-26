@@ -3,10 +3,14 @@ package eNTeR.fxz.SpawnEggCraft.tileentity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.nbt.NBTTagList;
 import net.minecraft.tileentity.TileEntity;
 
 public class SpawnEggCraftTileEntityCopyingMachine extends TileEntity implements IInventory{
 
+	public int tableBurnTime = 0;
+	public int maxBurnTime = 0;
 	private ItemStack stack[] = new ItemStack[3];
 	
     @Override
@@ -19,13 +23,13 @@ public class SpawnEggCraftTileEntityCopyingMachine extends TileEntity implements
 	@Override
 	public int getSizeInventory() {
 		// TODO Auto-generated method stub
-		return 0;
+		return stack.length;
 	}
 
 	@Override
 	public ItemStack getStackInSlot(int p_70301_1_) {
 		// TODO Auto-generated method stub
-		return null;
+		return stack[p_70301_1_];
 	}
 
 	@Override
@@ -62,7 +66,7 @@ public class SpawnEggCraftTileEntityCopyingMachine extends TileEntity implements
 	@Override
 	public ItemStack getStackInSlotOnClosing(int p_70304_1_) {
 		// TODO Auto-generated method stub
-		return null;
+		return stack[p_70304_1_];
 	}
 
 	@Override
@@ -77,20 +81,18 @@ public class SpawnEggCraftTileEntityCopyingMachine extends TileEntity implements
 
 	@Override
 	public String getInventoryName() {
-		// TODO Auto-generated method stub
-		return null;
+		return "The Tile Entity of Copying Machine";
 	}
 
 	@Override
 	public boolean hasCustomInventoryName() {
-		// TODO Auto-generated method stub
-		return false;
+		// TODO ?
+		return true;
 	}
 
 	@Override
 	public int getInventoryStackLimit() {
-		// TODO Auto-generated method stub
-		return 0;
+		return 64;
 	}
 
 	@Override
@@ -116,6 +118,42 @@ public class SpawnEggCraftTileEntityCopyingMachine extends TileEntity implements
 		// TODO Auto-generated method stub
 		return false;
 	}
+	public void readFromNBT(NBTTagCompound par1NBTTagCompound)
+    {
+        super.readFromNBT(par1NBTTagCompound);
+        NBTTagList var2 = par1NBTTagCompound.getTagList("Items",0);
+        this.stack = new ItemStack[this.getSizeInventory()];
+        for (int var3 = 0; var3 < var2.tagCount(); ++var3)
+        {
+        	//TODO
+            NBTTagCompound var4 = (NBTTagCompound)var2.getCompoundTagAt(var3);
+            byte var5 = var4.getByte("Slot");
+            if (var5 >= 0 && var5 < this.stack.length)
+            {
+                this.stack[var5] = ItemStack.loadItemStackFromNBT(var4);
+            }
+        }
+        this.tableBurnTime = par1NBTTagCompound.getShort("tableBurnTime");
+        this.maxBurnTime = par1NBTTagCompound.getShort("maxBurnTime");
+    }
 
+    public void writeToNBT(NBTTagCompound par1NBTTagCompound)
+    {
+        super.writeToNBT(par1NBTTagCompound);
+        par1NBTTagCompound.setShort("tableBurnTime", (short)this.tableBurnTime);
+        par1NBTTagCompound.setShort("maxBurnTime", (short)this.maxBurnTime);
+        NBTTagList var2 = new NBTTagList();
+        for (int var3 = 0; var3 < this.stack.length; ++var3)
+        {
+            if (this.stack[var3] != null)
+            {
+                NBTTagCompound var4 = new NBTTagCompound();
+                var4.setByte("Slot", (byte)var3);
+                this.stack[var3].writeToNBT(var4);
+                var2.appendTag(var4);
+            }
+        }
+        par1NBTTagCompound.setTag("Items", var2);
+    }
     
 }
