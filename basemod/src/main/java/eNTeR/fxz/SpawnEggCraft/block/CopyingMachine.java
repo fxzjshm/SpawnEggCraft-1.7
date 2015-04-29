@@ -1,13 +1,19 @@
 package eNTeR.fxz.SpawnEggCraft.block;
 
+import io.netty.channel.embedded.EmbeddedChannel;
 import cpw.mods.fml.common.FMLCommonHandler;
+import cpw.mods.fml.common.network.FMLOutboundHandler;
+import cpw.mods.fml.common.network.FMLOutboundHandler.OutboundTarget;
 import eNTeR.fxz.SpawnEggCraft.SpawnEggCraft;
+import eNTeR.fxz.SpawnEggCraft.container.SpawnEggCraftContainerCopyingMachine;
 import eNTeR.fxz.SpawnEggCraft.event.SpawnEggCraftOpenGUIEvent;
 import eNTeR.fxz.SpawnEggCraft.gui.SpawnEggCopyingMachineGUI;
 import eNTeR.fxz.SpawnEggCraft.tileentity.*;
 import net.minecraft.block.BlockContainer;
 import net.minecraft.block.material.Material;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.player.EntityPlayerMP;
+import net.minecraft.inventory.Container;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.ChatComponentText;
 import net.minecraft.world.World;
@@ -33,7 +39,29 @@ public class CopyingMachine extends BlockContainer{
         		SpawnEggCraftOpenGUIEvent OpenGUIEvent = new SpawnEggCraftOpenGUIEvent(SpawnEggCraft.GUI_ID_SAMPLE);
         		MinecraftForge.EVENT_BUS.post(OpenGUIEvent);
         		if(!p_149727_1_.isRemote){
-        			p_149727_5_.openGui(SpawnEggCraft.instance, SpawnEggCraft.GUI_ID_SAMPLE, p_149727_1_, p_149727_2_, p_149727_3_, p_149727_4_);
+            		//p_149727_5_.openGui(new SpawnEggCraft(), SpawnEggCraft.GUI_ID_SAMPLE, p_149727_1_, p_149727_2_, p_149727_3_, p_149727_4_);
+        			
+        	        //ModContainer mc = (ModContainer)new SpawnEggCraftContainerCopyingMachine((SpawnEggCraftTileEntityCopyingMachine)p_149727_1_.getTileEntity(p_149727_2_, p_149727_3_, p_149727_4_), p_149727_5_.inventory);
+        	        if (p_149727_5_ instanceof EntityPlayerMP)
+        	        {
+        	            EntityPlayerMP entityPlayerMP = (EntityPlayerMP) p_149727_5_;
+        	            Container remoteGuiContainer = new SpawnEggCraftContainerCopyingMachine((SpawnEggCraftTileEntityCopyingMachine)p_149727_1_.getTileEntity(p_149727_2_, p_149727_3_, p_149727_4_), p_149727_5_.inventory);
+        	            if (remoteGuiContainer != null)
+        	            {
+        	                entityPlayerMP.getNextWindowId();
+        	                entityPlayerMP.closeContainer();
+        	                int windowId = entityPlayerMP.currentWindowId;
+        	                //FMLMessage.OpenGui openGui = new FMLMessage.OpenGui(windowId, SpawnEggCraft.modid, SpawnEggCraft.GUI_ID_SAMPLE, p_149727_2_, p_149727_3_, p_149727_4_);
+        	                //EmbeddedChannel embeddedChannel = channelPair.get(Side.SERVER);
+        	                EmbeddedChannel embeddedChannel = new EmbeddedChannel();
+        	                embeddedChannel.attr(FMLOutboundHandler.FML_MESSAGETARGET).set(OutboundTarget.PLAYER);
+        	                embeddedChannel.attr(FMLOutboundHandler.FML_MESSAGETARGETARGS).set(entityPlayerMP);
+        	                //embeddedChannel.writeOutbound(openGui);
+        	                entityPlayerMP.openContainer = remoteGuiContainer;
+        	                entityPlayerMP.openContainer.windowId = windowId;
+        	                entityPlayerMP.openContainer.addCraftingToCrafters(entityPlayerMP);
+        	            }
+        	        }
         		}else{
         			FMLCommonHandler.instance().showGuiScreen(new SpawnEggCopyingMachineGUI((SpawnEggCraftTileEntityCopyingMachine)p_149727_1_.getTileEntity(p_149727_2_, p_149727_3_, p_149727_4_), p_149727_5_.inventory));
         		}
