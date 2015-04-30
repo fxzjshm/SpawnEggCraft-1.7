@@ -1,4 +1,4 @@
-package eNTeR.fxz.SpawnEggCraft;
+package eNTeR.fxz.spawneggcraft;
 
 import java.io.File;
 import java.security.cert.Certificate;
@@ -12,8 +12,11 @@ import com.google.common.eventbus.EventBus;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.creativetab.CreativeTabs;
+import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.Items;
 import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.ChatComponentText;
 import net.minecraft.world.World;
@@ -35,15 +38,13 @@ import cpw.mods.fml.common.network.NetworkRegistry;
 import cpw.mods.fml.common.registry.GameRegistry;
 import cpw.mods.fml.common.versioning.ArtifactVersion;
 import cpw.mods.fml.common.versioning.VersionRange;
-import eNTeR.fxz.SpawnEggCraft.block.CopyingMachine;
-import eNTeR.fxz.SpawnEggCraft.config.SpawnEggCraftConfig;
-import eNTeR.fxz.SpawnEggCraft.container.SpawnEggCraftContainerCopyingMachine;
-import eNTeR.fxz.SpawnEggCraft.event.SpawnEggCraftOpenGUIEvent;
-import eNTeR.fxz.SpawnEggCraft.eventhandler.SpawnEggCraftEventHandler;
-import eNTeR.fxz.SpawnEggCraft.gui.SpawnEggCopyingMachineGUI;
-import eNTeR.fxz.SpawnEggCraft.gui.SpawnEggCopyingMachineGuiHandler;
-import eNTeR.fxz.SpawnEggCraft.registrecipe.SpawnEggCraftRegisty;
-import eNTeR.fxz.SpawnEggCraft.tileentity.SpawnEggCraftTileEntityCopyingMachine;
+import eNTeR.fxz.spawneggcraft.block.CopyingMachine;
+import eNTeR.fxz.spawneggcraft.block.SpawnEggCraftTileEntityCopyingMachine;
+import eNTeR.fxz.spawneggcraft.config.SpawnEggCraftConfig;
+import eNTeR.fxz.spawneggcraft.gui.SpawnEggCopyingMachineGUI;
+import eNTeR.fxz.spawneggcraft.gui.SpawnEggCopyingMachineGuiHandler;
+import eNTeR.fxz.spawneggcraft.gui.SpawnEggCraftContainerCopyingMachine;
+import eNTeR.fxz.spawneggcraft.registrecipe.SpawnEggCraftRegisty;
 
 /**@author fxz*/
 @Mod(modid=SpawnEggCraft.modid, name=SpawnEggCraft.name, version=SpawnEggCraft.version)
@@ -54,7 +55,7 @@ public class SpawnEggCraft implements IGuiHandler,ModContainer {
 	public static final String version ="0.1.1";
     public static int LANZ_JBU = 1;
     public static String IsDoubleCraft = "true";
-    public static Item Specimen = new eNTeR.fxz.SpawnEggCraft.item.Specimen();
+    public static Item Specimen = new eNTeR.fxz.spawneggcraft.item.Specimen();
     public static Block SpawnEggCopyingMachine = new CopyingMachine(Material.rock);
     public static Block BlockSlime = new net.minecraft.block.BlockSlime();
 	public final static SpawnEggCraft instance = new SpawnEggCraft();
@@ -106,7 +107,7 @@ public class SpawnEggCraft implements IGuiHandler,ModContainer {
 		//GUIHandler
 		NetworkRegistry.INSTANCE.registerGuiHandler(this, new SpawnEggCopyingMachineGuiHandler());
 		//TODO ?
-		NetworkRegistry.INSTANCE.registerGuiHandler(this, this);
+		NetworkRegistry.INSTANCE.registerGuiHandler((Object)SpawnEggCraft.instance, this);
 		//Event_Bus
 		MinecraftForge.EVENT_BUS.register(this);
 		FMLCommonHandler.instance().bus().register(this);
@@ -116,19 +117,117 @@ public class SpawnEggCraft implements IGuiHandler,ModContainer {
 		//NetworkRegistry.INSTANCE.register(this, SpawnEggCraft.class, "0.1.1", new SpawnEggCraftASMDataTable());
 	}
 	
-	
 	@SubscribeEvent
-	public void LivingDeath(LivingDeathEvent event){
-		SpawnEggCraftEventHandler.LivingDeathEvent(event);
+	public static void LivingDeathEvent(LivingDeathEvent event){
+		String EntityName = event.entity.getClass().getName();
+		String KillerName = null;
+		try{
+		KillerName = event.source.getEntity().getClass().getName();
+		}
+		catch(Exception error){
+			System.out.println(error.getMessage());
+			System.out.println(error.getStackTrace());
+		}
+		if(!event.entity.worldObj.isRemote){
+			if(
+					EntityName=="net.minecraft.entity.moster.EntityCreeper"||EntityName=="xz"
+					||
+					EntityName=="net.minecraft.entity.passive.EntityZombie"||EntityName=="yq"
+					||
+					EntityName=="net.minecraft.entity.passive.EntitySkeleton"||EntityName=="yl"
+					||
+					EntityName=="net.minecraft.entity.passive.EntitySpider"||EntityName=="yo"
+					||
+					EntityName=="net.minecraft.entity.passive.EntityCaveSpider"||EntityName=="xy"
+					||
+					EntityName=="net.minecraft.entity.passive.EntityPigZombie"||EntityName=="yh"
+					||
+					EntityName=="net.minecraft.entity.passive.EntityBlaze"||EntityName=="xx"
+					||
+					EntityName=="net.minecraft.entity.passive.EntityGhast"||EntityName=="yd"
+					||
+					EntityName=="net.minecraft.entity.passive.EntitySlime"||EntityName=="ym"
+					||
+					EntityName=="net.minecraft.entity.passive.EntityMagmaCube"||EntityName=="yf"
+					||
+					EntityName=="net.minecraft.entity.passive.EntityEnderman"||EntityName=="ya"
+					
+				)
+			{
+    			if((Math.abs(ran1.nextLong())%100)==50){
+    				EntityItem entityitem = new EntityItem(event.entity.worldObj, event.entity.posX, event.entity.posY + (double)0.0F, event.entity.posZ, new ItemStack(Items.experience_bottle));
+    				entityitem.delayBeforeCanPickup = 10;
+    				event.entity.worldObj.spawnEntityInWorld(entityitem);
+    			}
+            } 
+			else
+            if(
+            		(
+            		EntityName=="net.minecraft.entity.passive.EntityCow"||EntityName=="wh"
+            		||
+            		EntityName=="net.minecraft.entity.passive.EntitySheep"||EntityName=="wp"
+            		||
+            		EntityName=="net.minecraft.entity.passive.EntityPig"||EntityName=="wo"
+            		||
+            		EntityName=="net.minecraft.entity.passive.EntityChicken"||EntityName=="wg"
+            		||
+            		EntityName=="net.minecraft.entity.passive.EntityMooshroom"||EntityName=="wm"
+            		||
+            		EntityName=="net.minecraft.entity.passive.EntityBat"||EntityName=="we"
+            		||
+            		EntityName=="net.minecraft.entity.passive.EntityOcelot"||EntityName=="wn"
+            		||
+            		EntityName=="net.minecraft.entity.passive.EntityWolf"||EntityName=="wv"
+            		)
+    			&&
+    				(
+    						KillerName=="net.minecraft.entity.moster.EntityCreeper"||KillerName=="xz"
+    						||
+    						KillerName=="net.minecraft.entity.passive.EntityZombie"||KillerName=="yq"
+    						||
+    						KillerName=="net.minecraft.entity.passive.EntitySkeleton"||KillerName=="yl"
+    						||
+    						KillerName=="net.minecraft.entity.passive.EntitySpider"||KillerName=="yo"
+    						||
+    						KillerName=="net.minecraft.entity.passive.EntityCaveSpider"||KillerName=="xy"
+    						||
+    						KillerName=="net.minecraft.entity.passive.EntityPigZombie"||KillerName=="yh"
+    						||
+    						KillerName=="net.minecraft.entity.passive.EntityBlaze"||KillerName=="xx"
+    						||
+    						KillerName=="net.minecraft.entity.passive.EntityGhast"||KillerName=="yd"
+    						||
+    						KillerName=="net.minecraft.entity.passive.EntitySlime"||KillerName=="ym"
+    						||
+    						KillerName=="net.minecraft.entity.passive.EntityMagmaCube"||KillerName=="yf"
+    						||
+    						KillerName=="net.minecraft.entity.passive.EntityEnderman"||KillerName=="ya"
+    				)
+    			)
+    			
+            {
+    			if((Math.abs(ran1.nextLong())%100==64)){
+				EntityItem entityitem = new EntityItem(event.entity.worldObj, event.entity.posX, event.entity.posY, event.entity.posZ, new ItemStack(Items.nether_star));
+				entityitem.delayBeforeCanPickup = 10;
+				event.entity.worldObj.spawnEntityInWorld(entityitem);
+    			}
+            }else if(event.entity.isBurning()==true&&
+            		(EntityName=="net.minecraft.entity.moster.EntityWitch"||EntityName=="yp")
+            		)
+            {
+            	if((Math.abs(ran1.nextLong())%50)==25){
+            	EntityItem entityitem = new EntityItem(event.entity.worldObj, event.entity.posX, event.entity.posY, event.entity.posZ, new ItemStack(Items.experience_bottle,(int)((ran1.nextInt()%9)+1)));
+				entityitem.delayBeforeCanPickup = 10;
+				event.entity.worldObj.spawnEntityInWorld(entityitem);
+            	}
+            }
+		}
 	}
 	
 	@SubscribeEvent
-	public void LivingFall_BlockSlime(LivingFallEvent event){
-		SpawnEggCraftEventHandler.LivingFallEvent_BlockSlime(event);
-	}
-	@SubscribeEvent
-	public void OpenCopyingMachineGUI(SpawnEggCraftOpenGUIEvent event){
-		
+	public static void LivingFallEvent_BlockSlime(LivingFallEvent event){
+		System.out.println(event.entityLiving.worldObj.getBlock(event.entityLiving.serverPosX, (event.entityLiving.serverPosY)-1, event.entityLiving.serverPosZ).getClass().getName());
+		if(event.entityLiving.worldObj.getBlock(event.entityLiving.serverPosX, (event.entityLiving.serverPosY)-1, event.entityLiving.serverPosZ)==SpawnEggCraft.BlockSlime){}
 	}
 
     @Override

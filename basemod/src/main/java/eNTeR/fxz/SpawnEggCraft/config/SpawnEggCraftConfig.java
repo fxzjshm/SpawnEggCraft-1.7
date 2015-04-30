@@ -1,4 +1,4 @@
-package eNTeR.fxz.SpawnEggCraft.config;
+package eNTeR.fxz.spawneggcraft.config;
 import java.io.File;
 import java.io.IOException;
 

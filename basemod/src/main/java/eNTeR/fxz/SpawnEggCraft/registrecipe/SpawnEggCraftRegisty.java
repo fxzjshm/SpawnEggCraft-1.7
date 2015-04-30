@@ -1,10 +1,10 @@
-package eNTeR.fxz.SpawnEggCraft.registrecipe;
+package eNTeR.fxz.spawneggcraft.registrecipe;
 
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 import cpw.mods.fml.common.registry.GameRegistry;
-import eNTeR.fxz.SpawnEggCraft.SpawnEggCraft;
+import eNTeR.fxz.spawneggcraft.SpawnEggCraft;
 
 public class SpawnEggCraftRegisty {
 	

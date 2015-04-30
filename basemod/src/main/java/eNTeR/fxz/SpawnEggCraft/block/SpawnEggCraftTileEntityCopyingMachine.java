@@ -1,4 +1,4 @@
-package eNTeR.fxz.SpawnEggCraft.tileentity;
+package eNTeR.fxz.spawneggcraft.block;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IInventory;

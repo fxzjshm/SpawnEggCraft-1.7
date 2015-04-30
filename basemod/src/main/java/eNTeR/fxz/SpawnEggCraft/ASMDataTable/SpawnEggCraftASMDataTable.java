@@ -1,4 +1,4 @@
-package eNTeR.fxz.SpawnEggCraft.asmdatatable;
+package eNTeR.fxz.spawneggcraft.asmdatatable;
 
 public class SpawnEggCraftASMDataTable extends cpw.mods.fml.common.discovery.ASMDataTable{
 

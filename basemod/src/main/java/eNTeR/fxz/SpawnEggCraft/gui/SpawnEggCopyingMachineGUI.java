@@ -1,9 +1,8 @@
-package eNTeR.fxz.SpawnEggCraft.gui;
+package eNTeR.fxz.spawneggcraft.gui;
 
 import org.lwjgl.opengl.GL11;
 
-import eNTeR.fxz.SpawnEggCraft.container.SpawnEggCraftContainerCopyingMachine;
-import eNTeR.fxz.SpawnEggCraft.tileentity.SpawnEggCraftTileEntityCopyingMachine;
+import eNTeR.fxz.spawneggcraft.block.SpawnEggCraftTileEntityCopyingMachine;
 import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.util.ResourceLocation;

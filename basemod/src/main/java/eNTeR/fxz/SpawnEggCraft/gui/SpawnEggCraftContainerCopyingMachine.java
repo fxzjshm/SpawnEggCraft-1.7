@@ -1,10 +1,10 @@
-package eNTeR.fxz.SpawnEggCraft.container;
+package eNTeR.fxz.spawneggcraft.gui;
 
 import java.util.Iterator;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
-import eNTeR.fxz.SpawnEggCraft.tileentity.SpawnEggCraftTileEntityCopyingMachine;
+import eNTeR.fxz.spawneggcraft.block.SpawnEggCraftTileEntityCopyingMachine;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.Container;

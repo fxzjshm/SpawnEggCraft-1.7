@@ -1,4 +1,4 @@
-package eNTeR.fxz.SpawnEggCraft.item;
+package eNTeR.fxz.spawneggcraft.item;
 
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.EntityLivingBase;
