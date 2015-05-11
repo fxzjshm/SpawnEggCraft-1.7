@@ -1,8 +1,18 @@
 package eNTeR.fxz.spawneggcraft.block;
 
+import cpw.mods.fml.common.registry.GameRegistry;
+import net.minecraft.block.Block;
+import net.minecraft.block.material.Material;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.Items;
 import net.minecraft.inventory.IInventory;
+import net.minecraft.item.Item;
+import net.minecraft.item.ItemArmor;
+import net.minecraft.item.ItemBlock;
+import net.minecraft.item.ItemHoe;
 import net.minecraft.item.ItemStack;
+import net.minecraft.item.ItemSword;
+import net.minecraft.item.ItemTool;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
 import net.minecraft.tileentity.TileEntity;
@@ -15,9 +25,104 @@ public class SpawnEggCraftTileEntityCopyingMachine extends TileEntity implements
 	
     @Override
     public void updateEntity() {
-           // TODO Auto-generated method stub
-           super.updateEntity();
-           //System.out.println("Hello GUI");
+            // TODO Auto-generated method stub
+            // 判断燃烧时间
+            if(tableBurnTime > 0)
+            {
+                    // 取得修复的物品
+                    ItemStack repairItem = getStackInSlot(0);
+                    // 取得修复好的物品
+                    ItemStack outputItem = getStackInSlot(1);
+                    // 确定开始修复的条件之一：修复物品槽不为空，已修复物品槽为空
+                    if(repairItem != null && outputItem == null)
+                    {
+                            // 判断被修复的物品是否为工具或武器
+                            if(repairItem.getItem() instanceof ItemTool || repairItem.getItem() instanceof ItemArmor)
+                            {
+                                    // 判断物品是否要修理
+                                    if(repairItem.getItemDamage() > 0)
+                                    {
+                                            // 修复物品
+                                            repairItem.setItemDamage(repairItem.getItemDamage() - 1);
+                                    }
+                            }
+                    }
+                    // 减少燃烧时间
+                    tableBurnTime -= 1;
+            }
+            else // 没有燃料的情况下
+            {
+                    // 如果有被修复的物品
+                    if(getStackInSlot(0) != null)
+                    {
+                            // 取得燃料槽的物品
+                            ItemStack burnItem = getStackInSlot(2);
+                            // 取得物品的燃烧值
+                        int getBurnTime = getItemBurnTime(burnItem);
+                        // 判断物品是否能燃烧
+                        if(getBurnTime > 0)
+                        {
+                                maxBurnTime = getBurnTime;
+                                tableBurnTime = getBurnTime;
+                                // 如果燃烧物品为岩浆桶
+                                if(burnItem.getItem().shiftedIndex == Items.lava_bucket.shiftedIndex)
+                                {
+                                        // 取得空桶
+                                        setInventorySlotContents(2, new ItemStack(Items.bucket, 1));
+                                }
+                                else
+                                {
+                                        // 其他物品就减少
+                                        if(burnItem.stackSize - 1 > 0)
+                                        {
+                                                burnItem.stackSize--;
+                                                setInventorySlotContents(2, burnItem);
+                                        }
+                                        else
+                                        {
+                                                setInventorySlotContents(2, null);
+                                        }
+                                }
+                        }
+                    }
+            }
+    }
+    
+    public static int getItemBurnTime(ItemStack par0ItemStack)
+    {
+        if (par0ItemStack == null)
+        {
+            return 0;
+        }
+        else
+        {
+            int var1 = par0ItemStack.getItem().shiftedIndex;
+            Item var2 = par0ItemStack.getItem();
+
+            if (par0ItemStack.getItem() instanceof ItemBlock && Block.blocksList[var1] != null)
+            {
+                Block var3 = Block.blocksList[var1];
+
+                if (var3 == Block.woodSingleSlab)
+                {
+                    return 150;
+                }
+
+                if (var3.blockMaterial == Material.wood)
+                {
+                    return 300;
+                }
+            }
+            if (var2 instanceof ItemTool && ((ItemTool) var2).getToolMaterialName().equals("WOOD")) return 200;
+            if (var2 instanceof ItemSword && ((ItemSword) var2).func_77825_f().equals("WOOD")) return 200;
+            if (var2 instanceof ItemHoe && ((ItemHoe) var2).func_77842_f().equals("WOOD")) return 200;
+            if (var1 == Item.stick.shiftedIndex) return 100;
+            if (var1 == Item.coal.shiftedIndex) return 1600;
+            if (var1 == Item.bucketLava.shiftedIndex) return 20000;
+            if (var1 == Block.sapling.blockID) return 100;
+            if (var1 == Item.blazeRod.shiftedIndex) return 2400;
+            return GameRegistry.getFuelValue(par0ItemStack);
+        }
     }
 
 	@Override

@@ -18,7 +18,6 @@ public class CopyingMachine extends BlockContainer{
 		super(p_i45394_1_);
 	}
 	
-	@SuppressWarnings("finally")
 	@Override
 	public boolean onBlockActivated(World p_149727_1_, int p_149727_2_, int p_149727_3_, int p_149727_4_, EntityPlayer p_149727_5_, int p_149727_6_, float p_149727_7_, float p_149727_8_, float p_149727_9_)
     {
@@ -64,12 +63,8 @@ public class CopyingMachine extends BlockContainer{
     		    p_149727_5_.addChatMessage(new ChatComponentText(error.toString()));
     		    p_149727_5_.addChatMessage(new ChatComponentText("GUI has crashed!"));
         	}
-        	finally{
         		return true;
-        		}
-        	//}
-        
-        
+        		
     }
 
 	@Override

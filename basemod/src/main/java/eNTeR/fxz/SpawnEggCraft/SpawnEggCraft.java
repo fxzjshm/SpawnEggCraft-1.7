@@ -1,17 +1,12 @@
 package eNTeR.fxz.spawneggcraft;
 
-import java.io.File;
-import java.security.cert.Certificate;
 import java.util.Iterator;
 import java.util.List;
-import java.util.Map;
 import java.util.Random;
-import java.util.Set;
-
-import com.google.common.eventbus.EventBus;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
+import net.minecraft.command.ServerCommandManager;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.boss.EntityDragon;
@@ -21,43 +16,30 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.util.ChatComponentText;
-import net.minecraft.world.World;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.ServerChatEvent;
 import net.minecraftforge.event.entity.living.LivingDeathEvent;
 import cpw.mods.fml.common.FMLCommonHandler;
-import cpw.mods.fml.common.LoadController;
-import cpw.mods.fml.common.MetadataCollection;
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.Mod.EventHandler;
-import cpw.mods.fml.common.ModContainer;
-import cpw.mods.fml.common.ModMetadata;
 import cpw.mods.fml.common.event.FMLInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
-import cpw.mods.fml.common.eventhandler.Event.Result;
+import cpw.mods.fml.common.event.FMLServerStartingEvent;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
-import cpw.mods.fml.common.network.IGuiHandler;
-import cpw.mods.fml.common.network.NetworkRegistry;
 import cpw.mods.fml.common.registry.GameRegistry;
-import cpw.mods.fml.common.versioning.ArtifactVersion;
-import cpw.mods.fml.common.versioning.VersionRange;
-import eNTeR.fxz.spawneggcraft.asmdatatable.SpawnEggCraftASMDataTable;
 import eNTeR.fxz.spawneggcraft.block.CopyingMachine;
 import eNTeR.fxz.spawneggcraft.block.SpawnEggCraftTileEntityCopyingMachine;
+import eNTeR.fxz.spawneggcraft.command.CommandBoom;
 import eNTeR.fxz.spawneggcraft.config.SpawnEggCraftConfig;
-import eNTeR.fxz.spawneggcraft.gui.SpawnEggCopyingMachineGUI;
-import eNTeR.fxz.spawneggcraft.gui.SpawnEggCopyingMachineGuiHandler;
-import eNTeR.fxz.spawneggcraft.gui.SpawnEggCraftContainerCopyingMachine;
 import eNTeR.fxz.spawneggcraft.registrecipe.SpawnEggCraftRegisty;
 
 /**The main class of SpawnEggCraft.
  * 
  * @author fxz*/
 @Mod(modid=SpawnEggCraft.modid, name=SpawnEggCraft.name, version=SpawnEggCraft.version)
-public class SpawnEggCraft implements IGuiHandler,ModContainer {
+public class SpawnEggCraft {
 	/**The ID of this mod.*/
 	public static final String modid ="SpawnEggCraft_basemod";
 	/**A user friendly name for this mod.*/
@@ -120,17 +102,9 @@ public class SpawnEggCraft implements IGuiHandler,ModContainer {
 	    SpawnEggCraftRegisty.SpawnEggCraftRegistRecipe(LANZ_JBU);
 	    
 		//registry
-		//GUIHandler
-		NetworkRegistry.INSTANCE.registerGuiHandler(this, new SpawnEggCopyingMachineGuiHandler());
-		//TODO ?
-		//NetworkRegistry.INSTANCE.registerGuiHandler((Object)SpawnEggCraft.instance, this);
 		//Event_Bus
 		MinecraftForge.EVENT_BUS.register(this);
 		FMLCommonHandler.instance().bus().register(this);
-		//ModContainer
-		//Warning
-		//TODO Check It
-		NetworkRegistry.INSTANCE.register(this, SpawnEggCraft.class, "0.1.1", new SpawnEggCraftASMDataTable());
 	}
 	
 	@SubscribeEvent
@@ -141,8 +115,7 @@ public class SpawnEggCraft implements IGuiHandler,ModContainer {
 		KillerName = event.source.getEntity().getClass().getName();
 		}
 		catch(Exception error){
-			EntityPlayer entityPlayer = (EntityPlayer)event.entity;
-			entityPlayer.addChatMessage(new ChatComponentText("Falled to get killer's name.Sorry!"));
+			System.out.println("Falled to get killer's name.Sorry!");
 			if((Math.abs(ran1.nextLong())%(Math.abs(ran1.nextLong()%400)+100)==127)&&
 					(
             		EntityName==classNameFront_passive+"Cow"||EntityName=="wh"
@@ -267,47 +240,7 @@ public class SpawnEggCraft implements IGuiHandler,ModContainer {
 		System.out.println(event.entityLiving.worldObj.getBlock(event.entityLiving.serverPosX, (event.entityLiving.serverPosY)-1, event.entityLiving.serverPosZ).getClass().getName());
 		if(event.entityLiving.worldObj.getBlock(event.entityLiving.serverPosX, (event.entityLiving.serverPosY)-1, event.entityLiving.serverPosZ)==SpawnEggCraft.BlockSlime){}
 	}*/
-
-    @Override
-    /**
-     * 返回服务器端的GUI元素，对于方块GUI，返回一个Container子类，或null�?
-     */
-    public Object getServerGuiElement(int ID, EntityPlayer player, World world, int x, int y, int z) {
-    	player.addChatMessage(new ChatComponentText("getServerGuiElement"));
-    	player.addChatMessage(new ChatComponentText("ID=="+ID));
-        if(ID == SpawnEggCraft.GUI_ID_SAMPLE) {
-            TileEntity tileEntity = world.getTileEntity(x, y, z);
-            //�?单的错误�?�?
-            if(tileEntity == null || !(tileEntity instanceof SpawnEggCraftTileEntityCopyingMachine)){
-                return null;
-        }else{
-            return new SpawnEggCraftContainerCopyingMachine((SpawnEggCraftTileEntityCopyingMachine)tileEntity, player.inventory);
-            }
-            }
-        return null;
-    }
-
-    @Override
-    /**
-     * 返回客户端的GUI元素。对于方块GUI，返回一个Gui子类�?
-     */
-    public Object getClientGuiElement(int ID, EntityPlayer player, World world, int x, int y, int z) {
-    	player.addChatMessage(new ChatComponentText("getClientGuiElement"));
-    	player.addChatMessage(new ChatComponentText("ID==" + ID));
-        if(ID == SpawnEggCraft.GUI_ID_SAMPLE) {
-            TileEntity tileEntity = world.getTileEntity(x, y, z);
-            //�?单的错误�?�?
-            if(tileEntity == null || !(tileEntity instanceof SpawnEggCraftTileEntityCopyingMachine)){
-                return null;
-            }
-            else
-            {
-            return new SpawnEggCopyingMachineGUI((SpawnEggCraftTileEntityCopyingMachine)tileEntity, player.inventory);
-            }
-            }
-        return null;
-    }
-    
+    /**@auther szszss*/
     @SubscribeEvent
     public void letsrock(ServerChatEvent event)
     {
@@ -315,10 +248,7 @@ public class SpawnEggCraft implements IGuiHandler,ModContainer {
         {
             event.setCanceled(true);//截获玩家的指令并不让它显示在屏幕�?,用来模拟游戏指令(Command)
             EntityPlayer player = event.player;
-            EventHANDRU eventHANDRU = new EventHANDRU(player);//初始化一个事�?
-            MinecraftForge.EVENT_BUS.post(eventHANDRU);//发布�?
-            if(eventHANDRU.getResult() == Result.ALLOW)
-            {
+            //player.addChatMessage(new ChatComponentText("Thanks,szszss."));//欢迎来到冥界,宇佐见莲�?.
                 //这个长的让人发指的东西是获取玩家附近的生�?
                 List<?> list = player.worldObj.getEntitiesWithinAABB(EntityLiving.class, AxisAlignedBB.getBoundingBox(player.posX-30D, player.posY-20D, player.posZ-30D, player.posX+30D, player.posY+20D, player.posZ+30D));
                 //值得�?提的是我这里使用的是遍历�?,传统的下标遍历因为无法锁定资源可能导致ConcurrentModificationException...
@@ -335,162 +265,12 @@ public class SpawnEggCraft implements IGuiHandler,ModContainer {
                     }
                     player.worldObj.createExplosion(player, entity.posX, entity.posY, entity.posZ, 4f, false);
                 }
-            }
         }
     }
- 
-    @SubscribeEvent
-    public void goodbyeRenko(EventHANDRU event)
-    {
-    	event.entityPlayer.addChatMessage(new ChatComponentText("Thanks,szszss."));//欢迎来到冥界,宇佐见莲�?.
-        event.setResult(Result.ALLOW);
-    }
-    
-
-	@Override
-	public String getModId() {
-		return SpawnEggCraft.modid;
-	}
-
-	@Override
-	public String getName() {
-		return SpawnEggCraft.name;
-	}
-
-	@Override
-	public String getVersion() {
-		return SpawnEggCraft.version;
-	}
-
-	@Override
-	public String getGuiClassName() {
-		// TODO Auto-generated method stub
-		return "eNTeR.fxz.SpawnEggCraft.SpawnEggCopyingMachineGUI";
-	}
-
-	@Override
-	public File getSource() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public ModMetadata getMetadata() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public void bindMetadata(MetadataCollection mc) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void setEnabledState(boolean enabled) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public Set<ArtifactVersion> getRequirements() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public List<ArtifactVersion> getDependencies() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public List<ArtifactVersion> getDependants() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public String getSortingRules() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public boolean registerBus(EventBus bus, LoadController controller) {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
-	@Override
-	public boolean matches(Object mod) {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
-	@Override
-	public Object getMod() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public ArtifactVersion getProcessedVersion() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public boolean isImmutable() {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
-	@Override
-	public String getDisplayVersion() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public VersionRange acceptableMinecraftVersionRange() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public Certificate getSigningCertificate() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public Map<String, String> getCustomModProperties() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public Class<?> getCustomResourcePackClass() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public Map<String, String> getSharedModDescriptor() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public Disableable canBeDisabled() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public List<String> getOwnedPackages() {
-		// TODO Auto-generated method stub
-		return null;
-	}
+	/**@auther darkyoooooo*/
+    @EventHandler
+    public void serverStarting(FMLServerStartingEvent event) {
+        ServerCommandManager serverCommandManager = (ServerCommandManager) event.getServer().getCommandManager();
+        serverCommandManager.registerCommand(new CommandBoom());
+     }
 }
