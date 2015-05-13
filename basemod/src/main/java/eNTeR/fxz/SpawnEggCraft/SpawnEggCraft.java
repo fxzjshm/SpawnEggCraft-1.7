@@ -17,7 +17,6 @@ import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.AxisAlignedBB;
-import net.minecraft.util.ChatComponentText;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.ServerChatEvent;
 import net.minecraftforge.event.entity.living.LivingDeathEvent;
@@ -118,6 +117,7 @@ public class SpawnEggCraft {
 			System.out.println("Falled to get killer's name.Sorry!");
 			if((Math.abs(ran1.nextLong())%(Math.abs(ran1.nextLong()%400)+100)==127)&&
 					(
+							//TODO equals()
             		EntityName==classNameFront_passive+"Cow"||EntityName=="wh"
             		||
             		EntityName==classNameFront_passive+"Sheep"||EntityName=="wp"

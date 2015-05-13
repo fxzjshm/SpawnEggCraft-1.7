@@ -4,6 +4,7 @@ import cpw.mods.fml.common.registry.GameRegistry;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.Item;
@@ -65,7 +66,7 @@ public class SpawnEggCraftTileEntityCopyingMachine extends TileEntity implements
                                 maxBurnTime = getBurnTime;
                                 tableBurnTime = getBurnTime;
                                 // 如果燃烧物品为岩浆桶
-                                if(burnItem.getItem().shiftedIndex == Items.lava_bucket.shiftedIndex)
+                                if(net.minecraft.item.Item.getIdFromItem(burnItem.getItem()) == net.minecraft.item.Item.getIdFromItem(Items.lava_bucket))
                                 {
                                         // 取得空桶
                                         setInventorySlotContents(2, new ItemStack(Items.bucket, 1));
@@ -96,31 +97,31 @@ public class SpawnEggCraftTileEntityCopyingMachine extends TileEntity implements
         }
         else
         {
-            int var1 = par0ItemStack.getItem().shiftedIndex;
+            int var1 = net.minecraft.item.Item.getIdFromItem(par0ItemStack.getItem());
             Item var2 = par0ItemStack.getItem();
 
-            if (par0ItemStack.getItem() instanceof ItemBlock && Block.blocksList[var1] != null)
+            if (par0ItemStack.getItem() instanceof ItemBlock && net.minecraft.block.Block.getBlockById(var1) != null)
             {
-                Block var3 = Block.blocksList[var1];
+                Block var3 = net.minecraft.block.Block.getBlockById(var1);
 
-                if (var3 == Block.woodSingleSlab)
+                if (var3 == Blocks.log)
                 {
                     return 150;
                 }
 
-                if (var3.blockMaterial == Material.wood)
+                if (var3.getMaterial() == Material.wood)
                 {
                     return 300;
                 }
             }
             if (var2 instanceof ItemTool && ((ItemTool) var2).getToolMaterialName().equals("WOOD")) return 200;
-            if (var2 instanceof ItemSword && ((ItemSword) var2).func_77825_f().equals("WOOD")) return 200;
-            if (var2 instanceof ItemHoe && ((ItemHoe) var2).func_77842_f().equals("WOOD")) return 200;
-            if (var1 == Item.stick.shiftedIndex) return 100;
-            if (var1 == Item.coal.shiftedIndex) return 1600;
-            if (var1 == Item.bucketLava.shiftedIndex) return 20000;
-            if (var1 == Block.sapling.blockID) return 100;
-            if (var1 == Item.blazeRod.shiftedIndex) return 2400;
+            if (var2 instanceof ItemSword && ((ItemSword) var2).getToolMaterialName().equals("WOOD")) return 200;
+            if (var2 instanceof ItemHoe && ((ItemHoe) var2).getToolMaterialName().equals("WOOD")) return 200;
+            if (var1 == net.minecraft.item.Item.getIdFromItem(Items.stick)) return 100;
+            if (var1 == net.minecraft.item.Item.getIdFromItem(Items.coal)) return 1600;
+            if (var1 == net.minecraft.item.Item.getIdFromItem(Items.lava_bucket)) return 20000;
+            if (var1 == net.minecraft.block.Block.getIdFromBlock(Blocks.sapling)) return 100;
+            if (var1 == net.minecraft.item.Item.getIdFromItem(Items.blaze_rod)) return 2400;
             return GameRegistry.getFuelValue(par0ItemStack);
         }
     }
