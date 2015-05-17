@@ -28,10 +28,8 @@ public class CopyingMachine extends BlockContainer{
         }
         //在这里打开GUI：参数1为Mod实例类，参数2为GUI的ID（在主类中声明），后面的参数分别是世界和坐标
         	try{
+        		//FMLNetworkHandler.openGui(p_149727_5_,SpawnEggCraft.instance, SpawnEggCraft.GUI_ID_SAMPLE, p_149727_1_, p_149727_2_, p_149727_3_, p_149727_4_);
         		if(!p_149727_1_.isRemote){
-            		//FMLNetworkHandler.openGui(p_149727_5_,(Object)new SpawnEggCraft(), SpawnEggCraft.GUI_ID_SAMPLE, p_149727_1_, p_149727_2_, p_149727_3_, p_149727_4_);
-            		
-            		
         	        if (p_149727_5_ instanceof EntityPlayerMP)
         	        {
         	            EntityPlayerMP entityPlayerMP = (EntityPlayerMP) p_149727_5_;
@@ -57,10 +55,6 @@ public class CopyingMachine extends BlockContainer{
         		}
         		}
         	catch(Exception error){
-        		p_149727_5_.addChatMessage(new ChatComponentText(error.getMessage()));
-    		    p_149727_5_.addChatMessage(new ChatComponentText(error.getStackTrace().toString()));
-    		    p_149727_5_.addChatMessage(new ChatComponentText(error.getLocalizedMessage()));
-    		    p_149727_5_.addChatMessage(new ChatComponentText(error.toString()));
     		    p_149727_5_.addChatMessage(new ChatComponentText("GUI has crashed!"));
         	}
         		return true;
@@ -71,6 +65,4 @@ public class CopyingMachine extends BlockContainer{
 	public TileEntity createNewTileEntity(World p_149915_1_, int p_149915_2_) {
 		return new SpawnEggCraftTileEntityCopyingMachine();
 	}
-    
-    
 }

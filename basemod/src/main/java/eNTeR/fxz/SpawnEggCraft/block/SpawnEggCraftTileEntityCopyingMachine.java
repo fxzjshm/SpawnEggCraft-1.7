@@ -45,6 +45,9 @@ public class SpawnEggCraftTileEntityCopyingMachine extends TileEntity implements
                                     {
                                             // 修复物品
                                             repairItem.setItemDamage(repairItem.getItemDamage() - 1);
+                                    }else{
+                                    	stack[1] = repairItem;
+                                    	stack[0] = null;
                                     }
                             }
                     }

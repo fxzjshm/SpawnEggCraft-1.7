@@ -37,6 +37,7 @@ public class SpawnEggCraftContainerCopyingMachine extends Container{
             this.addSlotToContainer(new Slot(invPlayer, var3, 8 + var3 * 18, 142));
         }
     }
+    
     @Override
     public boolean canInteractWith(EntityPlayer var1) {
         // TODO Auto-generated method stub
@@ -54,7 +55,7 @@ public class SpawnEggCraftContainerCopyingMachine extends Container{
     @SideOnly(Side.CLIENT)
     public void updateProgressBar(int par1, int par2)
     {
-            if (par1 == 0)
+    if (par1 == 0)
     {
         this.tile.tableBurnTime = par2;
     }
@@ -63,11 +64,28 @@ public class SpawnEggCraftContainerCopyingMachine extends Container{
         this.tile.maxBurnTime = par2;
     }
     }
-    @Override
+    
+    @SuppressWarnings("unchecked")
+	@Override
     public void detectAndSendChanges()
     {
     	// TODO Auto-generated method stub
-    	super.detectAndSendChanges();
+        for (int i = 0; i < this.inventorySlots.size(); ++i)
+        {
+            ItemStack itemstack = ((Slot)this.inventorySlots.get(i)).getStack();
+            ItemStack itemstack1 = (ItemStack)this.inventoryItemStacks.get(i);
+
+            if (!ItemStack.areItemStacksEqual(itemstack1, itemstack))
+            {
+                itemstack1 = itemstack == null ? null : itemstack.copy();
+                this.inventoryItemStacks.set(i, itemstack1);
+
+                for (int j = 0; j < this.crafters.size(); ++j)
+                {
+                    ((ICrafting)this.crafters.get(j)).sendSlotContents(this, i, itemstack1);
+                }
+            }
+        }
     	Iterator<?> var1 = this.crafters.iterator();
     	while (var1.hasNext())
     	{
@@ -86,6 +104,7 @@ public class SpawnEggCraftContainerCopyingMachine extends Container{
   	 this.lastTableBurnTime = this.tile.tableBurnTime;
   	 this.lastMaxBurnTime = this.tile.maxBurnTime;
 }
+    
     @Override
     public ItemStack transferStackInSlot(EntityPlayer par1EntityPlayer, int par2)
     {

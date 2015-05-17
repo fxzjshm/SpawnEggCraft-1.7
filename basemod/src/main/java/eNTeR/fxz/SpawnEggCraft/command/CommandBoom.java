@@ -11,7 +11,7 @@ import net.minecraft.entity.boss.EntityDragon;
 import net.minecraft.entity.boss.EntityWither;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.AxisAlignedBB;
-/**@auther darkyoooooo*/
+/**@author darkyoooooo*/
 public class CommandBoom extends CommandBase {
     // 这里可以给你的指令添加一点的权限需求
     // 返回的int值范围从1~4
