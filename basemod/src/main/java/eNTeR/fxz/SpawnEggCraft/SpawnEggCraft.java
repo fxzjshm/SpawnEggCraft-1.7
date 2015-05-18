@@ -531,7 +531,6 @@ public class SpawnEggCraft {
      }
     
     //TODO
-    @SideOnly(Side.SERVER)
     @SubscribeEvent(priority = EventPriority.HIGHEST,receiveCanceled = true)
     public void livingFallEvent(LivingFallEvent event){
     	if(event.entityLiving.isClientWorld()){
