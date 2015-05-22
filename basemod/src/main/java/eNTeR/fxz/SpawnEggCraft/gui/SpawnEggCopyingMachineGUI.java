@@ -15,6 +15,7 @@ public class SpawnEggCopyingMachineGUI extends GuiContainer{
 	public SpawnEggCopyingMachineGUI(SpawnEggCraftTileEntityCopyingMachine tile, InventoryPlayer inv) {
         //为该Container GUI制定正确的Container，也就是BlockExample的Container。
         super(new SpawnEggCraftContainerCopyingMachine(tile, inv));
+        this.tile = tile;
     }
 
 	 @Override

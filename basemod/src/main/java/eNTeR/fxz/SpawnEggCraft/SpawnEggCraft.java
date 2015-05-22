@@ -1,5 +1,6 @@
 package eNTeR.fxz.spawneggcraft;
 
+import java.io.File;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Random;
@@ -30,6 +31,7 @@ import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import cpw.mods.fml.common.event.FMLServerStartingEvent;
 import cpw.mods.fml.common.eventhandler.EventPriority;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
+import cpw.mods.fml.common.network.NetworkRegistry;
 import cpw.mods.fml.common.registry.GameRegistry;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
@@ -37,6 +39,7 @@ import eNTeR.fxz.spawneggcraft.block.CopyingMachine;
 import eNTeR.fxz.spawneggcraft.block.SpawnEggCraftTileEntityCopyingMachine;
 import eNTeR.fxz.spawneggcraft.command.CommandBoom;
 import eNTeR.fxz.spawneggcraft.config.SpawnEggCraftConfig;
+import eNTeR.fxz.spawneggcraft.gui.SpawnEggCopyingMachineGuiHandler;
 
 /**The main class of SpawnEggCraft.
  * 
@@ -58,21 +61,22 @@ public class SpawnEggCraft {
     /**The block: Slime block which in 1.8.*/
     public static final Block BlockSlime = new net.minecraft.block.BlockSlime().setBlockName("BlockSlime");
 	/**The instance of this class.*/
-    public static final SpawnEggCraft instance = new SpawnEggCraft();
+    public static final SpawnEggCraft INSTANCE = new SpawnEggCraft();
     /**An instance of java.util.Random.*/
-	public static Random ran1=new Random();
+	public static final Random ran1=new Random();
 	/**The number of the recipe output with spawn eggs.*/
 	public static String Number = "2";
 	/**The ID of GUI of Copying machine of spawn eggs.*/
-	public static final int GUI_ID_SAMPLE = 20;
+	public static final int GUI_ID_SAMPLE = INSTANCE.hashCode();
 	public static final String classNameFront_passive = "net.minecraft.entity.passive.Entity";
 	public static final String classNameFront_moster = "net.minecraft.entity.moster.Entity";
+	public static File file;
     
 	@EventHandler
 	public void preLoad(FMLPreInitializationEvent event) throws Exception
 	{
-		
-		SpawnEggCraftConfig.InitliazeConfig(event.getSuggestedConfigurationFile());
+		file = event.getSuggestedConfigurationFile();
+		SpawnEggCraftConfig.InitliazeConfig(file);
 		try
 		{
 			Number = SpawnEggCraftConfig.GetGeneralProperties("Number","2");
@@ -97,8 +101,9 @@ public class SpawnEggCraft {
 		GameRegistry.registerBlock(BlockSlime,"BlockSlime");
 		
 		//GuiHandler
-		//NetworkRegistry.INSTANCE.registerGuiHandler(this, new SpawnEggCopyingMachineGuiHandler());
-
+		NetworkRegistry.INSTANCE.registerGuiHandler(modid, new SpawnEggCopyingMachineGuiHandler());
+		
+		
 		}
 
 	@EventHandler
@@ -497,7 +502,7 @@ public class SpawnEggCraft {
     /**@author szszss*/
 	@SideOnly(Side.SERVER)
     @SubscribeEvent
-    public void letsrock(ServerChatEvent event)
+    public void kaboom(ServerChatEvent event)
     {
         if(event.message.equalsIgnoreCase("KABOOM"))
         {
@@ -525,7 +530,7 @@ public class SpawnEggCraft {
     
 	/**@author darkyoooooo*/
     @EventHandler
-    public void serverStarting(FMLServerStartingEvent event) {
+    public void registerCommand(FMLServerStartingEvent event) {
         ServerCommandManager serverCommandManager = (ServerCommandManager) event.getServer().getCommandManager();
         serverCommandManager.registerCommand(new CommandBoom());
      }
@@ -533,7 +538,7 @@ public class SpawnEggCraft {
     //TODO
     @SubscribeEvent(priority = EventPriority.HIGHEST,receiveCanceled = true)
     public void livingFallEvent(LivingFallEvent event){
-    	if(event.entityLiving.isClientWorld()){
+    	if(!event.entityLiving.worldObj.isRemote){
     	int x = (int)event.entityLiving.posX;
     	int y = (int)event.entityLiving.posY;
     	int z = (int)event.entityLiving.posZ;
