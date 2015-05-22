@@ -2,7 +2,6 @@ package eNTeR.fxz.spawneggcraft.gui;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.ChatComponentText;
 import net.minecraft.world.World;
 import cpw.mods.fml.common.network.IGuiHandler;
 import eNTeR.fxz.spawneggcraft.SpawnEggCraft;
@@ -17,8 +16,6 @@ public class SpawnEggCopyingMachineGuiHandler implements IGuiHandler {
      */
 	@Override
     public Object getServerGuiElement(int ID, EntityPlayer player, World world, int x, int y, int z) {
-    	player.addChatMessage(new ChatComponentText("getServerGuiElement"));
-    	player.addChatMessage(new ChatComponentText("ID=="+ID));
         if(ID == SpawnEggCraft.GUI_ID_SAMPLE) {
             TileEntity tileEntity = world.getTileEntity(x, y, z);
             //简单的错误检查
@@ -36,8 +33,6 @@ public class SpawnEggCopyingMachineGuiHandler implements IGuiHandler {
      */
     @Override
     public Object getClientGuiElement(int ID, EntityPlayer player, World world, int x, int y, int z) {
-    	player.addChatMessage(new ChatComponentText("getClientGuiElement"));
-    	player.addChatMessage(new ChatComponentText("ID=="+ID));
         if(ID == SpawnEggCraft.GUI_ID_SAMPLE) {
             TileEntity tileEntity = world.getTileEntity(x, y, z);
             //简单的错误检查
