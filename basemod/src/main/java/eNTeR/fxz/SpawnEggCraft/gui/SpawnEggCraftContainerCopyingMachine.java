@@ -16,6 +16,8 @@ public class SpawnEggCraftContainerCopyingMachine extends Container{
 
 	public int lastTableBurnTime = 0;
 	public int lastMaxBurnTime = 0;
+	public int lastHadCopyedTime = 0;
+	public int lastMaxCopyTime = 0;
 	
 	private SpawnEggCraftTileEntityCopyingMachine tile;
     public SpawnEggCraftContainerCopyingMachine(SpawnEggCraftTileEntityCopyingMachine tileEntity, InventoryPlayer invPlayer) {
@@ -50,6 +52,8 @@ public class SpawnEggCraftContainerCopyingMachine extends Container{
             super.addCraftingToCrafters(par1iCrafting);
             par1iCrafting.sendProgressBarUpdate(this, 0, this.tile.tableBurnTime);
             par1iCrafting.sendProgressBarUpdate(this, 1, this.tile.maxBurnTime);
+            par1iCrafting.sendProgressBarUpdate(this, 2, this.tile.hadCopyedTime);
+            par1iCrafting.sendProgressBarUpdate(this, 3, this.tile.maxCopyTime);
     }
     
     @SideOnly(Side.CLIENT)
@@ -63,29 +67,14 @@ public class SpawnEggCraftContainerCopyingMachine extends Container{
     {
         this.tile.maxBurnTime = par2;
     }
+    if(par1 == 2) this.tile.hadCopyedTime = par2;
+    if(par1 == 3) this.tile.maxCopyTime = par2;
     }
     
-    @SuppressWarnings("unchecked")
 	@Override
     public void detectAndSendChanges()
     {
-    	// TODO Auto-generated method stub
-        for (int i = 0; i < this.inventorySlots.size(); ++i)
-        {
-            ItemStack itemstack = ((Slot)this.inventorySlots.get(i)).getStack();
-            ItemStack itemstack1 = (ItemStack)this.inventoryItemStacks.get(i);
-
-            if (!ItemStack.areItemStacksEqual(itemstack1, itemstack))
-            {
-                itemstack1 = itemstack == null ? null : itemstack.copy();
-                this.inventoryItemStacks.set(i, itemstack1);
-
-                for (int j = 0; j < this.crafters.size(); ++j)
-                {
-                    ((ICrafting)this.crafters.get(j)).sendSlotContents(this, i, itemstack1);
-                }
-            }
-        }
+		super.detectAndSendChanges();
     	Iterator<?> var1 = this.crafters.iterator();
     	while (var1.hasNext())
     	{
@@ -100,9 +89,22 @@ public class SpawnEggCraftContainerCopyingMachine extends Container{
     		{
     			var2.sendProgressBarUpdate(this, 1, this.tile.maxBurnTime);
     		}
+    		
+    		if (this.lastHadCopyedTime  != this.tile.hadCopyedTime)
+    		{
+    			var2.sendProgressBarUpdate(this, 2, this.tile.hadCopyedTime);
+    		}
+    		
+    		if (this.lastMaxCopyTime  != this.tile.maxCopyTime)
+    		{
+    			var2.sendProgressBarUpdate(this, 3, this.tile.maxCopyTime);
+    		}
     	}
   	 this.lastTableBurnTime = this.tile.tableBurnTime;
   	 this.lastMaxBurnTime = this.tile.maxBurnTime;
+  	 this.lastHadCopyedTime  = this.tile.hadCopyedTime;
+  	 this.lastMaxCopyTime  = this.tile.maxCopyTime;
+  	 
 }
     
     @Override

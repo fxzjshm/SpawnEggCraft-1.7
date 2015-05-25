@@ -1,19 +1,9 @@
 package eNTeR.fxz.spawneggcraft.block;
 
-import cpw.mods.fml.common.registry.GameRegistry;
-import net.minecraft.block.Block;
-import net.minecraft.block.material.Material;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.inventory.IInventory;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemArmor;
-import net.minecraft.item.ItemBlock;
-import net.minecraft.item.ItemHoe;
 import net.minecraft.item.ItemStack;
-import net.minecraft.item.ItemSword;
-import net.minecraft.item.ItemTool;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
 import net.minecraft.tileentity.TileEntity;
@@ -23,112 +13,53 @@ public class SpawnEggCraftTileEntityCopyingMachine extends TileEntity implements
 	public int tableBurnTime = 0;
 	public int maxBurnTime = 0;
 	private ItemStack stack[] = new ItemStack[3];
+	public int hadCopyedTime = 0;
+	public int maxCopyTime = 0;
 	
     @Override
     public void updateEntity() {
-            // TODO Auto-generated method stub
-            // 判断燃烧时间
-            if(tableBurnTime > 0)
-            {
-                    // 取得修复的物品
-                    ItemStack repairItem = getStackInSlot(0);
-                    // 取得修复好的物品
-                    ItemStack outputItem = getStackInSlot(1);
-                    // 确定开始修复的条件之一：修复物品槽不为空，已修复物品槽为空
-                    if(repairItem != null && outputItem == null)
-                    {
-                            // 判断被修复的物品是否为工具或武器
-                            if(repairItem.getItem() instanceof ItemTool || repairItem.getItem() instanceof ItemArmor)
-                            {
-                                    // 判断物品是否要修理
-                                    if(repairItem.getItemDamage() > 0)
-                                    {
-                                            // 修复物品
-                                            repairItem.setItemDamage(repairItem.getItemDamage() - 1);
-                                    }else{
-                                    	stack[1] = repairItem;
-                                    	stack[0] = null;
-                                    }
-                            }
-                    }
-                    // 减少燃烧时间
-                    tableBurnTime -= 1;
-            }
-            else // 没有燃料的情况下
-            {
-                    // 如果有被修复的物品
-                    if(getStackInSlot(0) != null)
-                    {
-                            // 取得燃料槽的物品
-                            ItemStack burnItem = getStackInSlot(2);
-                            // 取得物品的燃烧值
-                        int getBurnTime = getItemBurnTime(burnItem);
-                        // 判断物品是否能燃烧
-                        if(getBurnTime > 0)
-                        {
-                                maxBurnTime = getBurnTime;
-                                tableBurnTime = getBurnTime;
-                                // 如果燃烧物品为岩浆桶
-                                if(net.minecraft.item.Item.getIdFromItem(burnItem.getItem()) == net.minecraft.item.Item.getIdFromItem(Items.lava_bucket))
-                                {
-                                        // 取得空桶
-                                        setInventorySlotContents(2, new ItemStack(Items.bucket, 1));
-                                }
-                                else
-                                {
-                                        // 其他物品就减少
-                                        if(burnItem.stackSize - 1 > 0)
-                                        {
-                                                burnItem.stackSize--;
-                                                setInventorySlotContents(2, burnItem);
-                                        }
-                                        else
-                                        {
-                                                setInventorySlotContents(2, null);
-                                        }
-                                }
-                        }
-                    }
-            }
+    	ItemStack inputStack = getStackInSlot(0);
+    	ItemStack outputStack = getStackInSlot(1);
+    	ItemStack foodStack = getStackInSlot(2);
+    	if((inputStack != null && inputStack.getItem().equals(Items.spawn_egg)) && (outputStack == null || (outputStack.getItem().equals(Items.spawn_egg) && outputStack.getItemDamage() == inputStack.getItemDamage())))
+    	{
+    		maxCopyTime = getItemNeedTime(foodStack);
+    		maxBurnTime = getItemBurnTime(foodStack);
+    		
+    		if(tableBurnTime == 0){
+    			tableBurnTime = maxBurnTime;
+    			stack[2].stackSize = stack[2].stackSize - 1;
+    		}
+    		
+    		if(hadCopyedTime >= maxCopyTime){
+    			if(outputStack == null){
+    				stack[1] = inputStack;
+    			}else{
+    				stack[1].stackSize = stack[1].stackSize + 1;
+    			}
+    			hadCopyedTime = hadCopyedTime - maxCopyTime;
+    		}
+    		
+    		hadCopyedTime = hadCopyedTime + 1;
+    		tableBurnTime = tableBurnTime - 1;
+    		
+    	}
+    }
+    
+    public static int getItemNeedTime(ItemStack par0ItemStack)
+    {
+    	//TODO Add infomation
+		return 1000;
+    	
     }
     
     public static int getItemBurnTime(ItemStack par0ItemStack)
     {
-        if (par0ItemStack == null)
-        {
-            return 0;
-        }
-        else
-        {
-            int var1 = net.minecraft.item.Item.getIdFromItem(par0ItemStack.getItem());
-            Item var2 = par0ItemStack.getItem();
-
-            if (par0ItemStack.getItem() instanceof ItemBlock && net.minecraft.block.Block.getBlockById(var1) != null)
-            {
-                Block var3 = net.minecraft.block.Block.getBlockById(var1);
-
-                if (var3 == Blocks.log)
-                {
-                    return 150;
-                }
-
-                if (var3.getMaterial() == Material.wood)
-                {
-                    return 300;
-                }
-            }
-            if (var2 instanceof ItemTool && ((ItemTool) var2).getToolMaterialName().equals("WOOD")) return 200;
-            if (var2 instanceof ItemSword && ((ItemSword) var2).getToolMaterialName().equals("WOOD")) return 200;
-            if (var2 instanceof ItemHoe && ((ItemHoe) var2).getToolMaterialName().equals("WOOD")) return 200;
-            if (var1 == net.minecraft.item.Item.getIdFromItem(Items.stick)) return 100;
-            if (var1 == net.minecraft.item.Item.getIdFromItem(Items.coal)) return 1600;
-            if (var1 == net.minecraft.item.Item.getIdFromItem(Items.lava_bucket)) return 20000;
-            if (var1 == net.minecraft.block.Block.getIdFromBlock(Blocks.sapling)) return 100;
-            if (var1 == net.minecraft.item.Item.getIdFromItem(Items.blaze_rod)) return 2400;
-            return GameRegistry.getFuelValue(par0ItemStack);
-        }
+    	//TODO Add infomation
+		return 1000;
+    	
     }
-
+    
 	@Override
 	public int getSizeInventory() {
 		// TODO Auto-generated method stub
@@ -242,15 +173,19 @@ public class SpawnEggCraftTileEntityCopyingMachine extends TileEntity implements
                 this.stack[var5] = ItemStack.loadItemStackFromNBT(var4);
             }
         }
-        this.tableBurnTime = par1NBTTagCompound.getShort("tableBurnTime");
-        this.maxBurnTime = par1NBTTagCompound.getShort("maxBurnTime");
+        this.tableBurnTime = par1NBTTagCompound.getInteger("tableBurnTime");
+        this.maxBurnTime = par1NBTTagCompound.getInteger("maxBurnTime");
+        this.hadCopyedTime = par1NBTTagCompound.getInteger("hadCopyedTime");
+        this.maxCopyTime = par1NBTTagCompound.getInteger("maxCopyTime");
     }
 
     public void writeToNBT(NBTTagCompound par1NBTTagCompound)
     {
         super.writeToNBT(par1NBTTagCompound);
-        par1NBTTagCompound.setShort("tableBurnTime", (short)this.tableBurnTime);
-        par1NBTTagCompound.setShort("maxBurnTime", (short)this.maxBurnTime);
+        par1NBTTagCompound.setInteger("tableBurnTime", this.tableBurnTime);
+        par1NBTTagCompound.setInteger("maxBurnTime", this.maxBurnTime);
+        par1NBTTagCompound.setInteger("hadCopyedTime", this.hadCopyedTime);
+        par1NBTTagCompound.setInteger("maxCopyTime", this.maxCopyTime);
         NBTTagList var2 = new NBTTagList();
         for (int var3 = 0; var3 < this.stack.length; ++var3)
         {
