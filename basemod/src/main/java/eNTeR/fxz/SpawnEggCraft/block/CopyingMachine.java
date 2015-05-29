@@ -1,16 +1,24 @@
 package eNTeR.fxz.spawneggcraft.block;
 
 import cpw.mods.fml.common.network.internal.FMLNetworkHandler;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 import eNTeR.fxz.spawneggcraft.SpawnEggCraft;
 import net.minecraft.block.BlockContainer;
 import net.minecraft.block.material.Material;
+import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.ChatComponentText;
+import net.minecraft.util.IIcon;
 import net.minecraft.world.World;
 
 public class CopyingMachine extends BlockContainer{
 
+	public IIcon top;
+	public IIcon bottom;
+	private String warning = "Make resources!";
+	
 	public CopyingMachine(Material p_i45394_1_) {
 		super(p_i45394_1_);
 	}
@@ -30,7 +38,8 @@ public class CopyingMachine extends BlockContainer{
         		}
         	catch(Exception error){
     		    p_149727_5_.addChatMessage(new ChatComponentText("GUI has crashed!"));
-        	}
+    		    return false;
+        		}
         		return true;
         		
     }
@@ -40,22 +49,19 @@ public class CopyingMachine extends BlockContainer{
 		return new SpawnEggCraftTileEntityCopyingMachine();
 	}
 	
-	/*
-	@Override
-	public IIcon getBlockTextureFromSide(int side)
-	{
-		if (side == 1)
-		{
-			return 5;
-		}
-		else if (side == 0)
-		{
-			return 6;
-		}
-		else
-		{
-			return 4;
-		}
-	}*/
-
+    @SideOnly(Side.CLIENT)
+    @Override
+    public void registerBlockIcons(IIconRegister p_149651_1_)
+    {
+        this.blockIcon = p_149651_1_.registerIcon(this.getTextureName() + "_side");
+        this.top = p_149651_1_.registerIcon(this.getTextureName() + "_top");
+        this.bottom = p_149651_1_.registerIcon(this.getTextureName() + "_bottom");
+    }
+    
+    @Override
+    @SideOnly(Side.CLIENT)
+    public IIcon getIcon(int p_149691_1_, int p_149691_2_)
+    {
+        return p_149691_1_ == 1 ? this.top : (p_149691_1_ == 0 ? this.bottom : this.blockIcon);
+    }
 }

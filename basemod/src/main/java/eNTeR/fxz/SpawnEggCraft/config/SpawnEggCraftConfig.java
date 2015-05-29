@@ -1,8 +1,11 @@
 package eNTeR.fxz.spawneggcraft.config;
+
 import java.io.File;
 import java.io.IOException;
 
 import net.minecraftforge.common.config.Configuration;
+
+/**@author yuxuanchiadm, fxz*/
 public class SpawnEggCraftConfig {
 
     private static SpawnEggCraftConfig instance;

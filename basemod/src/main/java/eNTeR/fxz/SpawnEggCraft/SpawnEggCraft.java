@@ -277,7 +277,7 @@ public class SpawnEggCraft {
 			Character.valueOf('2'), new ItemStack(Items.ender_pearl, 1), 
 		});	
 		//Ghast
-		GameRegistry.addRecipe(new ItemStack(Items.spawn_egg, LANZ_JBU,61), new Object[]{
+		GameRegistry.addRecipe(new ItemStack(Items.spawn_egg, LANZ_JBU,56), new Object[]{
 			"010", 
 			"121", 
 			"010", 
