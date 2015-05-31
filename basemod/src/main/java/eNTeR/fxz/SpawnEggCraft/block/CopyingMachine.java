@@ -26,6 +26,7 @@ public class CopyingMachine extends BlockContainer{
 	@Override
 	public boolean onBlockActivated(World p_149727_1_, int p_149727_2_, int p_149727_3_, int p_149727_4_, EntityPlayer p_149727_5_, int p_149727_6_, float p_149727_7_, float p_149727_8_, float p_149727_9_)
     {
+		p_149727_5_.addChatMessage(new ChatComponentText(this.getTextureName()));
 		TileEntity tileEntity = p_149727_1_.getTileEntity(p_149727_2_,p_149727_3_,p_149727_4_);
         //如果TileEntity没有被加载或者玩家在潜行，则不打开GUI。
         if (tileEntity == null || p_149727_5_.isSneaking()) {
@@ -38,6 +39,7 @@ public class CopyingMachine extends BlockContainer{
         		}
         	catch(Exception error){
     		    p_149727_5_.addChatMessage(new ChatComponentText("GUI has crashed!"));
+    		    error.printStackTrace();
     		    return false;
         		}
         		return true;

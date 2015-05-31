@@ -10,8 +10,8 @@ import net.minecraft.util.StatCollector;
 
 public class SpawnEggCopyingMachineGUI extends GuiContainer{
 	
-	private SpawnEggCraftTileEntityCopyingMachine tile =new SpawnEggCraftTileEntityCopyingMachine();
-	ResourceLocation back = new ResourceLocation("fxz","textures/gui/back.png");
+	private SpawnEggCraftTileEntityCopyingMachine tile = new SpawnEggCraftTileEntityCopyingMachine();
+	public ResourceLocation back = new ResourceLocation("fxz","textures/gui/back.png");
 	public SpawnEggCopyingMachineGUI(SpawnEggCraftTileEntityCopyingMachine tile, InventoryPlayer inv) {
         //为该Container GUI制定正确的Container，也就是BlockExample的Container。
         super(new SpawnEggCraftContainerCopyingMachine(tile, inv));
@@ -44,7 +44,7 @@ public class SpawnEggCopyingMachineGUI extends GuiContainer{
       float hadCopyedTime = tile.hadCopyedTime;
       float maxCopyTime = tile.maxCopyTime;
     		  if(hadCopyedTime > 0 && maxCopyTime > 0){
-    			  //this.drawTexturedModalRect();
+    			  this.drawTexturedModalRect(this.guiLeft + 77, this.guiTop + 20, 176, 14, (int)((float)hadCopyedTime / maxCopyTime), 17);
     		  }
      }
 
