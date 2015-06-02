@@ -64,5 +64,10 @@ public class SpawnEggCopyingMachineGUI extends GuiContainer{
                  // 描绘火焰图像
              this.drawTexturedModalRect(this.guiLeft + 81, this.guiTop + 37 + (int)(14 - 14 * ((float)b / maxBurnTime)), 176, (int)(14 - 14 * ((float)b / maxBurnTime)), 14, (int)(14 * ((float)b / maxBurnTime)));
         }
+         float hadCopyedTime = tile.hadCopyedTime;
+         float maxCopyTime = tile.maxCopyTime;
+       		  if(hadCopyedTime > 0 && maxCopyTime > 0){
+       			  this.drawTexturedModalRect(this.guiLeft + 77, this.guiTop + 20, 176, 14, (int)((float)hadCopyedTime / maxCopyTime), 17);
+       		  }
      }
 }

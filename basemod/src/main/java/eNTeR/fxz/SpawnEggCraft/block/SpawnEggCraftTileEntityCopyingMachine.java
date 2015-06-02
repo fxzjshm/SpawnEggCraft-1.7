@@ -26,14 +26,19 @@ public class SpawnEggCraftTileEntityCopyingMachine extends TileEntity implements
     		maxCopyTime = getItemNeedTime(foodStack);
     		maxBurnTime = getItemBurnTime(foodStack);
     		
-    		if(tableBurnTime == 0){
-    			tableBurnTime = maxBurnTime;
-    			stack[2].stackSize = stack[2].stackSize - 1;
+    		if(tableBurnTime <= 0){
+    			if(foodStack != null){
+    				maxBurnTime = getItemBurnTime(stack[2]);
+    				tableBurnTime = tableBurnTime + maxBurnTime;
+    				stack[2].stackSize = stack[2].stackSize - 1;
+    			}
+    			return;
     		}
     		
     		if(hadCopyedTime >= maxCopyTime){
-    			if(outputStack == null){
+    			if(outputStack == null || outputStack.stackSize >= 64){
     				stack[1] = inputStack;
+    				stack[1].stackSize = 1;
     			}else{
     				stack[1].stackSize = stack[1].stackSize + 1;
     			}
@@ -49,14 +54,14 @@ public class SpawnEggCraftTileEntityCopyingMachine extends TileEntity implements
     public static int getItemNeedTime(ItemStack par0ItemStack)
     {
     	//TODO Add infomation
-		return 1000;
+		return 100;
     	
     }
     
     public static int getItemBurnTime(ItemStack par0ItemStack)
     {
     	//TODO Add infomation
-		return 1000;
+		return 100;
     	
     }
     

@@ -57,7 +57,7 @@ public class CopyingMachine extends BlockContainer{
     {
         this.blockIcon = p_149651_1_.registerIcon(this.getTextureName() + "_side");
         this.top = p_149651_1_.registerIcon(this.getTextureName() + "_top");
-        this.bottom = p_149651_1_.registerIcon(this.getTextureName() + "_bottom");
+        this.bottom = p_149651_1_.registerIcon("ic2:blockMachine");
     }
     
     @Override
