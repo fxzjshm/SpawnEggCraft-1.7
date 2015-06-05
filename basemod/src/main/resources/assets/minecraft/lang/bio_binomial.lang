@@ -1,0 +1,21 @@
+
+language.name=Binomial Nomenclature
+language.region=World
+language.code=bio_binomial
+
+entity.Spider.name=Araneida/Araneae (Spider)
+entity.Villager.name=Homo sapiens (Villager)
+
+entity.Pig.name=Sus scrofa (Pig)
+entity.Sheep.name=Ovis aries (Sheep)
+entity.Cow.name=Bos gaurus (Cow)
+entity.Chicken.name=Gallus domesticus (Chicken)
+entity.Squid.name=Loligo chinensis (Squid)
+entity.Wolf.name=Canis lupus (Wolf)
+entity.Ozelot.name=Felis domesticus (Ocelot)
+entity.Cat.name=Felis domesticus (Cat)
+entity.Bat.name=Vespertilio superans (Bat)
+entity.EntityHorse.name=Equus Calibus (Horse)
+entity.horse.name=Equus Calibus (Horse)
+entity.donkey.name=Equus asinus (Donkey)
+entity.mule.name=Equus asinus (Mule)
