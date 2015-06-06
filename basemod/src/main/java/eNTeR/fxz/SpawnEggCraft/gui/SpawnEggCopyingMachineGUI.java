@@ -24,8 +24,8 @@ public class SpawnEggCopyingMachineGUI extends GuiContainer{
                  super.drawGuiContainerForegroundLayer(par1, par2);
       this.fontRendererObj.drawString(StatCollector.translateToLocal("Spawn Egg Copying Machine"), 45, 6, 4210752);
       this.fontRendererObj.drawString(StatCollector.translateToLocal("container.inventory"), 8, this.ySize - 96 + 2, 4210752);
-      drawCenteredString(fontRendererObj, String.valueOf(tile.hadCopyedTime), 0, 0, 4210752);
-      drawCenteredString(fontRendererObj, String.valueOf(tile.maxCopyTime), 0, 100, 4210752);
+      //drawCenteredString(fontRendererObj, String.valueOf(tile.hadCopyedTime), 0, 0, 4210752);
+      //drawCenteredString(fontRendererObj, String.valueOf(tile.maxCopyTime), 0, 100, 4210752);
 	 }
 
      @Override
@@ -48,8 +48,8 @@ public class SpawnEggCopyingMachineGUI extends GuiContainer{
     		  if(hadCopyedTime > 0 && maxCopyTime > 0){
     			  this.drawTexturedModalRect(this.guiLeft + 77, this.guiTop + 20, 176, 14, (int)(24*(hadCopyedTime / maxCopyTime)), 17);
     		  }
-    	      drawCenteredString(fontRendererObj, String.valueOf(tile.hadCopyedTime), 0, 0, 4210752);
-    	      drawCenteredString(fontRendererObj, String.valueOf(tile.maxCopyTime), 0, 100, 4210752);
+    	      //drawCenteredString(fontRendererObj, String.valueOf(tile.hadCopyedTime), 0, 0, 4210752);
+    	      //drawCenteredString(fontRendererObj, String.valueOf(tile.maxCopyTime), 0, 100, 4210752);
      }
 
      @Override
