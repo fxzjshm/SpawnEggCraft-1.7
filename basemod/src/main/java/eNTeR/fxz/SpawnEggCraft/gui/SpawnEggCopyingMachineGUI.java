@@ -24,7 +24,9 @@ public class SpawnEggCopyingMachineGUI extends GuiContainer{
                  super.drawGuiContainerForegroundLayer(par1, par2);
       this.fontRendererObj.drawString(StatCollector.translateToLocal("Spawn Egg Copying Machine"), 45, 6, 4210752);
       this.fontRendererObj.drawString(StatCollector.translateToLocal("container.inventory"), 8, this.ySize - 96 + 2, 4210752);
-     }
+      drawCenteredString(fontRendererObj, String.valueOf(tile.hadCopyedTime), 0, 0, 4210752);
+      drawCenteredString(fontRendererObj, String.valueOf(tile.maxCopyTime), 0, 100, 4210752);
+	 }
 
      @Override
      protected void drawGuiContainerBackgroundLayer(float var1, int var2, int var3) {
@@ -41,11 +43,13 @@ public class SpawnEggCopyingMachineGUI extends GuiContainer{
               // 描绘火焰图像
           this.drawTexturedModalRect(this.guiLeft + 81, this.guiTop + 37 + (int)(14 - 14 * ((float)b / maxBurnTime)), 176, (int)(14 - 14 * ((float)b / maxBurnTime)), 14, (int)(14 * ((float)b / maxBurnTime)));
      }
-      float hadCopyedTime = tile.hadCopyedTime;
-      float maxCopyTime = tile.maxCopyTime;
+      float hadCopyedTime = tile.hadCopyedTime*1.0F;
+      float maxCopyTime = tile.maxCopyTime*1.0F;
     		  if(hadCopyedTime > 0 && maxCopyTime > 0){
-    			  this.drawTexturedModalRect(this.guiLeft + 77, this.guiTop + 20, 176, 14, (int)((float)hadCopyedTime / maxCopyTime), 17);
+    			  this.drawTexturedModalRect(this.guiLeft + 77, this.guiTop + 20, 176, 14, (int)(24*(hadCopyedTime / maxCopyTime)), 17);
     		  }
+    	      drawCenteredString(fontRendererObj, String.valueOf(tile.hadCopyedTime), 0, 0, 4210752);
+    	      drawCenteredString(fontRendererObj, String.valueOf(tile.maxCopyTime), 0, 100, 4210752);
      }
 
      @Override
@@ -64,10 +68,10 @@ public class SpawnEggCopyingMachineGUI extends GuiContainer{
                  // 描绘火焰图像
              this.drawTexturedModalRect(this.guiLeft + 81, this.guiTop + 37 + (int)(14 - 14 * ((float)b / maxBurnTime)), 176, (int)(14 - 14 * ((float)b / maxBurnTime)), 14, (int)(14 * ((float)b / maxBurnTime)));
         }
-         float hadCopyedTime = tile.hadCopyedTime;
-         float maxCopyTime = tile.maxCopyTime;
+         float hadCopyedTime = tile.hadCopyedTime*1.0F;
+         float maxCopyTime = tile.maxCopyTime*1.0F;
        		  if(hadCopyedTime > 0 && maxCopyTime > 0){
-       			  this.drawTexturedModalRect(this.guiLeft + 77, this.guiTop + 20, 176, 14, (int)((float)hadCopyedTime / maxCopyTime), 17);
+       			  this.drawTexturedModalRect(this.guiLeft + 77, this.guiTop + 20, 176, 14, (int)(24*(hadCopyedTime / maxCopyTime)), 17);
        		  }
      }
 }

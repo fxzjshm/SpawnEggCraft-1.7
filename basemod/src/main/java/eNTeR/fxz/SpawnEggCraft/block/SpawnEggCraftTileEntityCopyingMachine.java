@@ -18,16 +18,13 @@ public class SpawnEggCraftTileEntityCopyingMachine extends TileEntity implements
 	
     @Override
     public void updateEntity() {
-    	ItemStack inputStack = getStackInSlot(0);
-    	ItemStack outputStack = getStackInSlot(1);
-    	ItemStack foodStack = getStackInSlot(2);
-    	if((inputStack != null && inputStack.getItem().equals(Items.spawn_egg)) && (outputStack == null || (outputStack.getItem().equals(Items.spawn_egg) && outputStack.getItemDamage() == inputStack.getItemDamage())))
+    	if((stack[0] != null && stack[0].getItem().equals(Items.spawn_egg)) && (stack[1] == null || (stack[1].getItem().equals(Items.spawn_egg) && stack[1].getItemDamage() == stack[0].getItemDamage())))
     	{
-    		maxCopyTime = getItemNeedTime(foodStack);
-    		maxBurnTime = getItemBurnTime(foodStack);
+    		maxCopyTime = getItemNeedTime(stack[0]);
+    		maxBurnTime = getItemBurnTime(stack[2]);
     		
     		if(tableBurnTime <= 0){
-    			if(foodStack != null){
+    			if(stack[2] != null){
     				maxBurnTime = getItemBurnTime(stack[2]);
     				tableBurnTime = tableBurnTime + maxBurnTime;
     				stack[2].stackSize = stack[2].stackSize - 1;
@@ -36,13 +33,23 @@ public class SpawnEggCraftTileEntityCopyingMachine extends TileEntity implements
     		}
     		
     		if(hadCopyedTime >= maxCopyTime){
-    			if(outputStack == null || outputStack.stackSize >= 64){
-    				stack[1] = inputStack;
+    			if(stack[1] == null){
+    				stack[1] = stack[0].copy();
     				stack[1].stackSize = 1;
     			}else{
+    				if(stack[1].stackSize >= 64){
+    					
+    					if(stack[0].stackSize >= 64){
+    						return;
+    					}
+    					
+    				stack[0].stackSize = stack[0].stackSize + 1;
+    				}else{
     				stack[1].stackSize = stack[1].stackSize + 1;
+    				}
     			}
     			hadCopyedTime = hadCopyedTime - maxCopyTime;
+    			return;
     		}
     		
     		hadCopyedTime = hadCopyedTime + 1;
@@ -53,9 +60,80 @@ public class SpawnEggCraftTileEntityCopyingMachine extends TileEntity implements
     
     public static int getItemNeedTime(ItemStack par0ItemStack)
     {
-    	//TODO Add infomation
-		return 100;
+    	String caveSpider_59;
+    	int id = par0ItemStack.getItemDamage();
+    	double time = 0;
     	
+    	//Chicken
+    	if(id == 93)  time = 55.84043721;
+    	
+    	//Pig
+    	if(id == 90)  time = 23.04262327;
+    	
+    	//Cow
+    	if(id == 92)  time = 61.52131163;
+    	
+    	//Sheep
+    	if(id == 91)  time = 44;
+    	
+    	//Villager
+    	if(id == 120) time = 4411.075414;
+    	
+    	//Wolf
+    	if(id == 95)  time = 34.76808744;
+    	
+    	//Cat
+    	if(id == 98)  time = 185;
+    	
+    	//MushroomCow
+    	if(id == 96)  time = 95.52131163;
+    	
+    	//Squid
+    	if(id == 94)  time = 78.30126228;
+    	
+    	//Bat
+    	if(id == 65)  time = 15.43253156;
+    	
+    	//Witch
+    	if(id == 66)  time = 4609.075414;
+    	
+    	//Silverfish
+    	if(id == 60)  time = 76.80874423;
+    	
+    	//CaveSpider
+    	//if(id == 59)  time = 100;
+    	
+    	//ZombiePigman
+    	if(id == 57)  time = 57.43475411;
+    	
+    	//MagmaCube
+    	if(id == 62)  time = 700.5171689;
+    	
+    	//Blaze
+    	if(id == 61)  time = 214.0064484;
+    	
+    	//Enderman
+    	if(id == 58)  time = 120.9432426;
+    	
+    	//Ghast
+    	if(id == 56)  time = 1786;
+    	
+    	//Slime
+    	if(id == 55)  time = 656.0994531;
+    	
+    	//Zombie
+    	if(id == 54)  time = 10.76808744;
+    	
+    	//Spider
+    	if(id == 52)  time = 160;
+    	
+    	//Skeleton
+    	if(id == 51)  time = 23.5;
+    	
+    	//Creeper
+    	if(id == 50)  time = 433.7301262;
+    	
+    	return ((int)time);
     }
     
     public static int getItemBurnTime(ItemStack par0ItemStack)

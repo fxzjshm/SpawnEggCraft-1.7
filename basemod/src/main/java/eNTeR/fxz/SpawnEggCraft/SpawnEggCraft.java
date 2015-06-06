@@ -256,7 +256,7 @@ public class SpawnEggCraft {
 			"010", 
 			Character.valueOf('0'), new ItemStack(Items.egg, 1),
 			Character.valueOf('1'), new ItemStack(Items.blaze_powder, 1), 
-			Character.valueOf('2'), new ItemStack(Items.magma_cream, 1), 
+			Character.valueOf('2'), new ItemStack(Items.magma_cream, 9), 
 		});	
 		//Blaze
 		GameRegistry.addRecipe(new ItemStack(Items.spawn_egg, LANZ_JBU,61), new Object[]{
@@ -290,9 +290,18 @@ public class SpawnEggCraft {
 			"010", 
 			"121", 
 			"010", 
-			Character.valueOf('0'), new ItemStack(Items.egg,1),
-			Character.valueOf('1'), new ItemStack(Items.wheat_seeds,1), 
-			Character.valueOf('2'), new ItemStack(SpawnEggCraft.BlockSlime,1), 
+			Character.valueOf('0'), new ItemStack(Items.egg, 1),
+			Character.valueOf('1'), new ItemStack(Items.wheat_seeds, 1), 
+			Character.valueOf('2'), new ItemStack(SpawnEggCraft.BlockSlime, 1), 
+		});	
+		//Slime
+		GameRegistry.addRecipe(new ItemStack(Items.spawn_egg, LANZ_JBU,55), new Object[]{
+			"010", 
+			"121", 
+			"010", 
+			Character.valueOf('0'), new ItemStack(Items.egg, 1),
+			Character.valueOf('1'), new ItemStack(Items.wheat_seeds, 1), 
+			Character.valueOf('2'), new ItemStack(Items.slime_ball, 9), 
 		});	
 		//Zombie
 		GameRegistry.addRecipe(new ItemStack(Items.spawn_egg, LANZ_JBU,54), new Object[]{
