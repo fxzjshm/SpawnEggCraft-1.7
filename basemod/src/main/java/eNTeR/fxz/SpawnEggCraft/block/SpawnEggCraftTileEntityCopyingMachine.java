@@ -3,6 +3,7 @@ package eNTeR.fxz.spawneggcraft.block;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Items;
 import net.minecraft.inventory.IInventory;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
@@ -21,15 +22,19 @@ public class SpawnEggCraftTileEntityCopyingMachine extends TileEntity implements
     	if((stack[0] != null && stack[0].getItem().equals(Items.spawn_egg)) && (stack[1] == null || (stack[1].getItem().equals(Items.spawn_egg) && stack[1].getItemDamage() == stack[0].getItemDamage())))
     	{
     		maxCopyTime = getItemNeedTime(stack[0]);
-    		maxBurnTime = getItemBurnTime(stack[2]);
+    		maxBurnTime = getItemFeedTime(stack[2]);
     		
     		if(tableBurnTime <= 0){
     			if(stack[2] != null){
-    				maxBurnTime = getItemBurnTime(stack[2]);
+    				maxBurnTime = getItemFeedTime(stack[2]);
     				tableBurnTime = tableBurnTime + maxBurnTime;
+    				if(stack[2].stackSize > 1){
     				stack[2].stackSize = stack[2].stackSize - 1;
+    				}else{
+    					stack[2] = null;
+    				}
     			}
-    			return;
+    			//return;
     		}
     		
     		if(hadCopyedTime >= maxCopyTime){
@@ -65,64 +70,64 @@ public class SpawnEggCraftTileEntityCopyingMachine extends TileEntity implements
     	double time = 0;
     	
     	//Chicken
-    	if(id == 93)  time = 55.84043721;
+    	if(id == 93)  time = 56.00541248;
     	
     	//Pig
-    	if(id == 90)  time = 23.04262327;
+    	if(id == 90)  time = 24.03247487;
     	
     	//Cow
-    	if(id == 92)  time = 61.52131163;
+    	if(id == 92)  time = 62.01623744;
     	
     	//Sheep
     	if(id == 91)  time = 44;
     	
     	//Villager
-    	if(id == 120) time = 4411.075414;
+    	if(id == 120) time = 4424.438411;
     	
     	//Wolf
-    	if(id == 95)  time = 34.76808744;
+    	if(id == 95)  time = 34.8010825;
     	
     	//Cat
     	if(id == 98)  time = 185;
     	
     	//MushroomCow
-    	if(id == 96)  time = 95.52131163;
+    	if(id == 96)  time = 96.01623744;
     	
     	//Squid
-    	if(id == 94)  time = 78.30126228;
+    	if(id == 94)  time = 74.21348847;
     	
     	//Bat
-    	if(id == 65)  time = 15.43253156;
+    	if(id == 65)  time = 15.33033721;
     	
     	//Witch
-    	if(id == 66)  time = 4609.075414;
+    	if(id == 66)  time = 4622.438411;
     	
     	//Silverfish
-    	if(id == 60)  time = 76.80874423;
+    	if(id == 60)  time = 80.10824957;
     	
     	//CaveSpider
-    	//if(id == 59)  time = 100;
+    	if(id == 59)  time = 200;
     	
     	//ZombiePigman
-    	if(id == 57)  time = 57.43475411;
+    	if(id == 57)  time = 57.46774916;
     	
     	//MagmaCube
-    	if(id == 62)  time = 700.5171689;
+    	if(id == 62)  time = 651.7725224;
     	
     	//Blaze
-    	if(id == 61)  time = 214.0064484;
+    	if(id == 61)  time = 214.9303099;
     	
     	//Enderman
-    	if(id == 58)  time = 120.9432426;
+    	if(id == 58)  time = 125.4837232;
     	
     	//Ghast
     	if(id == 56)  time = 1786;
     	
     	//Slime
-    	if(id == 55)  time = 656.0994531;
+    	if(id == 55)  time = 609.294443;
     	
     	//Zombie
-    	if(id == 54)  time = 10.76808744;
+    	if(id == 54)  time = 10.8010825;
     	
     	//Spider
     	if(id == 52)  time = 160;
@@ -131,15 +136,79 @@ public class SpawnEggCraftTileEntityCopyingMachine extends TileEntity implements
     	if(id == 51)  time = 23.5;
     	
     	//Creeper
-    	if(id == 50)  time = 433.7301262;
+    	if(id == 50)  time = 433.3213488;
     	
     	return ((int)time);
     }
     
-    public static int getItemBurnTime(ItemStack par0ItemStack)
+    public static int getItemFeedTime(ItemStack par0ItemStack)
     {
-    	//TODO Add infomation
-		return 100;
+    	Item item = par0ItemStack.getItem();
+    	double time = 0;
+    	
+    	//Potato
+    	if(item.equals(Items.potato))time = 10.24437944;
+    	
+    	//Bread
+    	if(item.equals(Items.bread))time = 51.16255801;
+    	
+    	//Melon
+    	if(item.equals(Items.melon))time = 11.28794814;
+    	
+    	//Cake
+    	if(item.equals(Items.cake))time = 453.8849789;
+    	
+    	//Moshroom Soup
+    	if(item.equals(Items.mushroom_stew))time = 22.99851533;
+    	
+    	//Apple
+    	if(item.equals(Items.apple))time = 33.25566271;
+    	
+    	//Rotten Flesh
+    	if(item.equals(Items.rotten_flesh))time = 1.786218442;
+    	
+    	//Carrot
+    	if(item.equals(Items.carrot))time = 14.44504016;
+    	
+    	//Raw Chicken
+    	if(item.equals(Items.chicken))time = 7.892076674;
+    	
+    	//Raw Fish
+    	if(item.equals(Items.fish))time = 15.89693767;
+    	
+    	//Raw Porkchop
+    	if(item.equals(Items.porkchop))time = 19.02301556;
+    	
+    	//Raw Beef
+    	if(item.equals(Items.beef))time = 26.34184229;
+    	
+    	//Cooked Beef
+    	if(item.equals(Items.cooked_beef))time = 48.27854273;
+    	
+    	//Cooked Chicken
+    	if(item.equals(Items.cooked_chicken))time = 34.01622599;
+    	
+    	//Cooked Fish
+    	if(item.equals(Items.cooked_fished))time = 30.14936454;
+    	
+    	//Cooked Porkchop
+    	if(item.equals(Items.cooked_porkchop))time = 40.95971601;
+    	
+    	//Cookie
+    	if(item.equals(Items.cookie))time = 20.48974787;
+    	
+    	//Pumpkin Pie
+    	if(item.equals(Items.pumpkin_pie))time = 55.60725932;
+    	
+    	//Bone
+    	if(item.equals(Items.bone))time = 23.29723624;
+    	
+    	//Golden Apple
+    	if(item.equals(Items.golden_apple))time = 1885.340263;
+    	
+
+    	
+		return ((int)time);
     	
     }
     

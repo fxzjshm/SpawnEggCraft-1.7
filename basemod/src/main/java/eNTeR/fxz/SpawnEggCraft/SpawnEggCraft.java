@@ -36,6 +36,7 @@ import cpw.mods.fml.common.registry.GameRegistry;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import eNTeR.fxz.spawneggcraft.block.CopyingMachine;
+import eNTeR.fxz.spawneggcraft.block.MagmaCreamBlock;
 import eNTeR.fxz.spawneggcraft.block.SpawnEggCraftTileEntityCopyingMachine;
 import eNTeR.fxz.spawneggcraft.command.CommandBoom;
 import eNTeR.fxz.spawneggcraft.config.SpawnEggCraftConfig;
@@ -47,19 +48,21 @@ import eNTeR.fxz.spawneggcraft.gui.SpawnEggCopyingMachineGuiHandler;
 @Mod(modid=SpawnEggCraft.modid, name=SpawnEggCraft.name, version=SpawnEggCraft.version)
 public class SpawnEggCraft {
 	/**The ID of this mod.*/
-	public static final String modid ="SpawnEggCraft";
+	public static final String modid ="SpawnEggCraft_basemod";
 	/**A user friendly name for this mod.*/
 	public static final String name ="SpawnEggCraft";
 	/**The version of this mod.*/
-	public static final String version ="0.1.1";
+	public static final String version ="0.9.9";
 	/**The number of the recipe output with spawn eggs.*/
     public static int LANZ_JBU = 1;
     /**The item : Specimen.*/
-    public static final Item Specimen = new eNTeR.fxz.spawneggcraft.item.Specimen().setUnlocalizedName("Specimen").setTextureName("fxz:Specimen").setMaxStackSize(64).setCreativeTab(CreativeTabs.tabMisc);
+    public static final Item specimen = new eNTeR.fxz.spawneggcraft.item.Specimen().setUnlocalizedName("Specimen").setTextureName("fxz:Specimen").setMaxStackSize(64).setCreativeTab(CreativeTabs.tabMisc);
     /**The block: Copying machine of spawn eggs.*/
-    public static final Block SpawnEggCopyingMachine = new CopyingMachine(Material.rock).setBlockName("SpawnEggCopyingMachine").setBlockTextureName("fxz:SpawnEggCopyingMachine").setHardness(3.0f).setResistance(20.0f).setCreativeTab(CreativeTabs.tabDecorations);
+    public static final Block spawnEggCopyingMachine = new CopyingMachine(Material.rock).setBlockName("SpawnEggCopyingMachine").setBlockTextureName("fxz:SpawnEggCopyingMachine").setHardness(3.0f).setResistance(20.0f).setCreativeTab(CreativeTabs.tabDecorations);
     /**The block: Slime block which in 1.8.*/
-    public static final Block BlockSlime = new net.minecraft.block.BlockSlime().setBlockName("BlockSlime");
+    public static final Block blockSlime = new net.minecraft.block.BlockSlime().setBlockName("BlockSlime");
+    
+    public static final Block magmaCreamBlock = new MagmaCreamBlock(Material.clay).setBlockName("MagmaCreamBlock").setBlockTextureName("fxz:MagmaCreamBlock");
 	/**The instance of this class.*/
     public static final SpawnEggCraft INSTANCE = new SpawnEggCraft();
     /**An instance of java.util.Random.*/
@@ -91,14 +94,16 @@ public class SpawnEggCraft {
 		
 		//Items
 		//Specimen
-		GameRegistry.registerItem(Specimen, "Specimen");
+		GameRegistry.registerItem(specimen, "Specimen");
 		
 		//Blocks
 		//SpawnEggCopyingMachine
-		GameRegistry.registerBlock(SpawnEggCopyingMachine,"SpawnEggCopyingMachine");
+		GameRegistry.registerBlock(spawnEggCopyingMachine,"SpawnEggCopyingMachine");
 		GameRegistry.registerTileEntity(SpawnEggCraftTileEntityCopyingMachine.class, "SpawnEggCopyingTileEntity");
 		//BlockSlime
-		GameRegistry.registerBlock(BlockSlime,"BlockSlime");
+		GameRegistry.registerBlock(blockSlime,"BlockSlime");
+		//MagmaCreamBlock
+		GameRegistry.registerBlock(magmaCreamBlock,"MagmaCreamBlock");
 		
 		//GuiHandler
 		NetworkRegistry.INSTANCE.registerGuiHandler(modid, new SpawnEggCopyingMachineGuiHandler());
@@ -256,7 +261,7 @@ public class SpawnEggCraft {
 			"010", 
 			Character.valueOf('0'), new ItemStack(Items.egg, 1),
 			Character.valueOf('1'), new ItemStack(Items.blaze_powder, 1), 
-			Character.valueOf('2'), new ItemStack(Items.magma_cream, 9), 
+			Character.valueOf('2'), new ItemStack(magmaCreamBlock, 1), 
 		});	
 		//Blaze
 		GameRegistry.addRecipe(new ItemStack(Items.spawn_egg, LANZ_JBU,61), new Object[]{
@@ -292,16 +297,7 @@ public class SpawnEggCraft {
 			"010", 
 			Character.valueOf('0'), new ItemStack(Items.egg, 1),
 			Character.valueOf('1'), new ItemStack(Items.wheat_seeds, 1), 
-			Character.valueOf('2'), new ItemStack(SpawnEggCraft.BlockSlime, 1), 
-		});	
-		//Slime
-		GameRegistry.addRecipe(new ItemStack(Items.spawn_egg, LANZ_JBU,55), new Object[]{
-			"010", 
-			"121", 
-			"010", 
-			Character.valueOf('0'), new ItemStack(Items.egg, 1),
-			Character.valueOf('1'), new ItemStack(Items.wheat_seeds, 1), 
-			Character.valueOf('2'), new ItemStack(Items.slime_ball, 9), 
+			Character.valueOf('2'), new ItemStack(SpawnEggCraft.blockSlime, 1), 
 		});	
 		//Zombie
 		GameRegistry.addRecipe(new ItemStack(Items.spawn_egg, LANZ_JBU,54), new Object[]{
@@ -350,7 +346,7 @@ public class SpawnEggCraft {
 		});
 		//Items
 		//Specimen
-		GameRegistry.addRecipe(new ItemStack(SpawnEggCraft.Specimen,1), new Object[]{
+		GameRegistry.addRecipe(new ItemStack(SpawnEggCraft.specimen,1), new Object[]{
 			"01",
 			Character.valueOf('0'), new ItemStack(Items.book, 1),
 			Character.valueOf('1'), new ItemStack(Items.nether_star, 1), 
@@ -358,15 +354,36 @@ public class SpawnEggCraft {
 		//SlimeBall
 		GameRegistry.addRecipe(new ItemStack(Items.slime_ball, 9), new Object[]{
 			"0",
-			Character.valueOf('0'), new ItemStack(SpawnEggCraft.BlockSlime, 1),
+			Character.valueOf('0'), new ItemStack(SpawnEggCraft.blockSlime, 1),
+		});
+		//MagmaCream
+		GameRegistry.addRecipe(new ItemStack(Items.magma_cream, 9), new Object[]{
+			"0",
+			Character.valueOf('0'), new ItemStack(SpawnEggCraft.magmaCreamBlock, 1),
 		});
 		//Blocks
 		//BlockSlime
-		GameRegistry.addRecipe(new ItemStack(SpawnEggCraft.BlockSlime,1), new Object[]{
+		GameRegistry.addRecipe(new ItemStack(SpawnEggCraft.blockSlime,1), new Object[]{
 			"000",
 			"000",
 			"000",
 			Character.valueOf('0'), new ItemStack(Items.slime_ball, 1),
+		});
+		//MagmaCreamBlock
+		GameRegistry.addRecipe(new ItemStack(SpawnEggCraft.magmaCreamBlock,1), new Object[]{
+			"000",
+			"000",
+			"000",
+			Character.valueOf('0'), new ItemStack(Items.magma_cream, 1),
+		});
+		//mushroom
+		GameRegistry.addRecipe(new ItemStack(Blocks.brown_mushroom, 1), new Object[]{
+			"0",
+			Character.valueOf('0'), new ItemStack(Blocks.red_mushroom, 1),
+		});
+		GameRegistry.addRecipe(new ItemStack(Blocks.red_mushroom, 1), new Object[]{
+			"0",
+			Character.valueOf('0'), new ItemStack(Blocks.brown_mushroom, 1),
 		});
 	    
 		//registry
@@ -553,7 +570,7 @@ public class SpawnEggCraft {
     	int z = (int)event.entityLiving.posZ;
     	Block block = event.entityLiving.worldObj.getBlock((int)event.entityLiving.posX, (int)event.entityLiving.posY - 1, (int)event.entityLiving.posZ);
     	System.out.println(event.entityLiving.getClass().getName()+" : " + block.getClass().getName() + " X:" + x + " Y:" + y + " Z:" + z);
-    	if (block.equals(BlockSlime)) {
+    	if (block.equals(blockSlime)) {
     		if (event.distance < 0.5F) {
     			event.distance = 0.0F;
     			return;
