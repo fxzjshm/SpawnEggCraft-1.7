@@ -16,17 +16,22 @@ public class SpawnEggCraftTileEntityCopyingMachine extends TileEntity implements
 	private ItemStack stack[] = new ItemStack[3];
 	public int hadCopyedTime = 0;
 	public int maxCopyTime = 0;
+	public ItemStack lastItemStack;
 	
     @Override
     public void updateEntity() {
     	if((stack[0] != null && stack[0].getItem().equals(Items.spawn_egg)) && (stack[1] == null || (stack[1].getItem().equals(Items.spawn_egg) && stack[1].getItemDamage() == stack[0].getItemDamage())))
     	{
     		maxCopyTime = getItemNeedTime(stack[0]);
-    		maxBurnTime = getItemFeedTime(stack[2]);
+    		if(stack[2] != null){
+    			maxBurnTime = getItemFeedTime(stack[2]);
+    			lastItemStack = stack[2].copy();
+    		}
     		
     		if(tableBurnTime <= 0){
     			if(stack[2] != null){
     				maxBurnTime = getItemFeedTime(stack[2]);
+    				if(maxBurnTime == 0)return;
     				tableBurnTime = tableBurnTime + maxBurnTime;
     				if(stack[2].stackSize > 1){
     				stack[2].stackSize = stack[2].stackSize - 1;
@@ -34,7 +39,7 @@ public class SpawnEggCraftTileEntityCopyingMachine extends TileEntity implements
     					stack[2] = null;
     				}
     			}
-    			//return;
+    			return;
     		}
     		
     		if(hadCopyedTime >= maxCopyTime){
@@ -141,10 +146,11 @@ public class SpawnEggCraftTileEntityCopyingMachine extends TileEntity implements
     	return ((int)time);
     }
     
-    public static int getItemFeedTime(ItemStack par0ItemStack)
+    public static int getItemFeedTime(ItemStack foodstack)
     {
-    	Item item = par0ItemStack.getItem();
     	double time = 0;
+    	if(foodstack != null){
+    	Item item = foodstack.getItem();
     	
     	//Potato
     	if(item.equals(Items.potato))time = 10.24437944;
@@ -200,12 +206,18 @@ public class SpawnEggCraftTileEntityCopyingMachine extends TileEntity implements
     	//Pumpkin Pie
     	if(item.equals(Items.pumpkin_pie))time = 55.60725932;
     	
+    	//Bone meal
+    	if(item.equals(Items.dye) && foodstack.getItemDamage() == 15)time = 5.82430906;
+    	
     	//Bone
     	if(item.equals(Items.bone))time = 23.29723624;
     	
     	//Golden Apple
-    	if(item.equals(Items.golden_apple))time = 1885.340263;
+    	if(item.equals(Items.golden_apple)&& foodstack.getItemDamage() == 0)time = 2415.481816;
     	
+    	//Golden Apple *
+    	if(item.equals(Items.golden_apple)&& foodstack.getItemDamage() == 1)time = 15727.27897;
+    	}
 
     	
 		return ((int)time);
@@ -313,16 +325,17 @@ public class SpawnEggCraftTileEntityCopyingMachine extends TileEntity implements
 	public void readFromNBT(NBTTagCompound par1NBTTagCompound)
     {
         super.readFromNBT(par1NBTTagCompound);
-        NBTTagList var2 = par1NBTTagCompound.getTagList("Items",0);
+        NBTTagList nbttaglist = par1NBTTagCompound.getTagList("Items", 10);
         this.stack = new ItemStack[this.getSizeInventory()];
-        for (int var3 = 0; var3 < var2.tagCount(); ++var3)
+
+        for (int i = 0; i < nbttaglist.tagCount(); ++i)
         {
-        	//TODO
-            NBTTagCompound var4 = (NBTTagCompound)var2.getCompoundTagAt(var3);
-            byte var5 = var4.getByte("Slot");
-            if (var5 >= 0 && var5 < this.stack.length)
+            NBTTagCompound nbttagcompound1 = nbttaglist.getCompoundTagAt(i);
+            byte b0 = nbttagcompound1.getByte("Slot");
+
+            if (b0 >= 0 && b0 < this.stack.length)
             {
-                this.stack[var5] = ItemStack.loadItemStackFromNBT(var4);
+                this.stack[b0] = ItemStack.loadItemStackFromNBT(nbttagcompound1);
             }
         }
         this.tableBurnTime = par1NBTTagCompound.getInteger("tableBurnTime");
@@ -338,18 +351,20 @@ public class SpawnEggCraftTileEntityCopyingMachine extends TileEntity implements
         par1NBTTagCompound.setInteger("maxBurnTime", this.maxBurnTime);
         par1NBTTagCompound.setInteger("hadCopyedTime", this.hadCopyedTime);
         par1NBTTagCompound.setInteger("maxCopyTime", this.maxCopyTime);
-        NBTTagList var2 = new NBTTagList();
-        for (int var3 = 0; var3 < this.stack.length; ++var3)
+        NBTTagList nbttaglist = new NBTTagList();
+
+        for (int i = 0; i < this.stack.length; ++i)
         {
-            if (this.stack[var3] != null)
+            if (this.stack[i] != null)
             {
-                NBTTagCompound var4 = new NBTTagCompound();
-                var4.setByte("Slot", (byte)var3);
-                this.stack[var3].writeToNBT(var4);
-                var2.appendTag(var4);
+                NBTTagCompound nbttagcompound1 = new NBTTagCompound();
+                nbttagcompound1.setByte("Slot", (byte)i);
+                this.stack[i].writeToNBT(nbttagcompound1);
+                nbttaglist.appendTag(nbttagcompound1);
             }
         }
-        par1NBTTagCompound.setTag("Items", var2);
+
+        par1NBTTagCompound.setTag("Items", nbttaglist);
     }
     
 }

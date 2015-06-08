@@ -1,7 +1,7 @@
 
-language.name=Binomial Nomenclature
-language.region=World
-language.code=bio_binomial
+language.name=Binomial_Nomenclature
+language.region=Biology
+language.code=latina_Binomial
 
 entity.Spider.name=Araneida/Araneae [Spider]
 entity.Villager.name=Homo sapiens [Villager]

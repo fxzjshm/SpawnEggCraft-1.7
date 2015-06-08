@@ -82,13 +82,12 @@ public class SpawnEggCraft {
 		SpawnEggCraftConfig.InitliazeConfig(file);
 		try
 		{
-			Number = SpawnEggCraftConfig.GetGeneralProperties("Number","2");
+			Number = SpawnEggCraftConfig.GetGeneralProperties("Number","1");
 			
 		}
 		catch(Exception error)
 		{ 
-		    System.out.println(error.getMessage());
-		    System.out.println(error.getStackTrace());
+			error.printStackTrace();
 		}
 		SpawnEggCraftConfig.SaveConfig();
 		
@@ -114,7 +113,13 @@ public class SpawnEggCraft {
 	@EventHandler
 	public void load(FMLInitializationEvent event)
 	{
+		try{
 	    LANZ_JBU=Integer.valueOf(Number);
+		}catch(Exception error){
+			error.printStackTrace();
+			System.out.println("Don't input any other things, only numbers, please!");
+			LANZ_JBU = 1;
+		}
 		//Recipes
 		//Spawn_eggs
 		//Chicken
@@ -160,7 +165,7 @@ public class SpawnEggCraft {
 			"121", 
 			"010", 
 			Character.valueOf('0'), new ItemStack(Items.egg, 1),
-			Character.valueOf('1'), new ItemStack(Items.golden_apple, 1), 
+			Character.valueOf('1'), new ItemStack(Items.golden_apple, 1, 0), 
 			Character.valueOf('2'), new ItemStack(Items.emerald, 1), 
 		});
 		//wolf
@@ -557,8 +562,8 @@ public class SpawnEggCraft {
 	/**@author darkyoooooo*/
     @EventHandler
     public void registerCommand(FMLServerStartingEvent event) {
-        ServerCommandManager serverCommandManager = (ServerCommandManager) event.getServer().getCommandManager();
-        serverCommandManager.registerCommand(new CommandBoom());
+    	ServerCommandManager serverCommandManager = (ServerCommandManager) event.getServer().getCommandManager();
+		serverCommandManager.registerCommand(new CommandBoom());
      }
     
     //TODO

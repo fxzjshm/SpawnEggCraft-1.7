@@ -17,7 +17,6 @@ public class CopyingMachine extends BlockContainer{
 
 	public IIcon top;
 	public IIcon bottom;
-	private String warning = "Make resources!";
 	
 	public CopyingMachine(Material p_i45394_1_) {
 		super(p_i45394_1_);
@@ -54,8 +53,8 @@ public class CopyingMachine extends BlockContainer{
     @Override
     public void registerBlockIcons(IIconRegister p_149651_1_)
     {
-        this.blockIcon = p_149651_1_.registerIcon(this.getTextureName() + "_side");
-        this.top = p_149651_1_.registerIcon(this.getTextureName() + "_top");
+        this.blockIcon = p_149651_1_.registerIcon(this.getTextureName());
+        this.top = p_149651_1_.registerIcon("ic2:blockAdvMachine");
         this.bottom = p_149651_1_.registerIcon("ic2:blockMachine");
     }
     
