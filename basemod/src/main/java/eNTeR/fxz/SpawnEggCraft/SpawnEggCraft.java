@@ -22,14 +22,12 @@ import net.minecraft.util.AxisAlignedBB;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.ServerChatEvent;
 import net.minecraftforge.event.entity.living.LivingDeathEvent;
-import net.minecraftforge.event.entity.living.LivingFallEvent;
 import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.Mod.EventHandler;
 import cpw.mods.fml.common.event.FMLInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import cpw.mods.fml.common.event.FMLServerStartingEvent;
-import cpw.mods.fml.common.eventhandler.EventPriority;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import cpw.mods.fml.common.network.NetworkRegistry;
 import cpw.mods.fml.common.registry.GameRegistry;
@@ -41,6 +39,7 @@ import eNTeR.fxz.spawneggcraft.block.SpawnEggCraftTileEntityCopyingMachine;
 import eNTeR.fxz.spawneggcraft.command.CommandBoom;
 import eNTeR.fxz.spawneggcraft.config.SpawnEggCraftConfig;
 import eNTeR.fxz.spawneggcraft.gui.SpawnEggCopyingMachineGuiHandler;
+import eNTeR.fxz.spawneggcraft.item.SpawnEggWither;
 
 /**The main class of SpawnEggCraft.
  * 
@@ -57,6 +56,8 @@ public class SpawnEggCraft {
     public static int LANZ_JBU = 1;
     /**The item : Specimen.*/
     public static final Item specimen = new eNTeR.fxz.spawneggcraft.item.Specimen().setUnlocalizedName("Specimen").setTextureName("fxz:Specimen").setMaxStackSize(64).setCreativeTab(CreativeTabs.tabMisc);
+    
+    public static final Item spawnEggWither = new SpawnEggWither().setUnlocalizedName("Spawn Wither").setTextureName("fxz:SpawnEggWither").setMaxStackSize(64).setCreativeTab(CreativeTabs.tabMisc);
     /**The block: Copying machine of spawn eggs.*/
     public static final Block spawnEggCopyingMachine = new CopyingMachine(Material.rock).setBlockName("SpawnEggCopyingMachine").setBlockTextureName("fxz:SpawnEggCopyingMachine").setHardness(3.0f).setResistance(20.0f).setCreativeTab(CreativeTabs.tabDecorations);
     /**The block: Slime block which in 1.8.*/
@@ -94,6 +95,7 @@ public class SpawnEggCraft {
 		//Items
 		//Specimen
 		GameRegistry.registerItem(specimen, "Specimen");
+		GameRegistry.registerItem(spawnEggWither, "Spawn Wither");
 		
 		//Blocks
 		//SpawnEggCopyingMachine
@@ -567,6 +569,7 @@ public class SpawnEggCraft {
      }
     
     //TODO
+    /*
     @SubscribeEvent(priority = EventPriority.HIGHEST,receiveCanceled = true)
     public void livingFallEvent(LivingFallEvent event){
     	if(!event.entityLiving.worldObj.isRemote){
@@ -585,5 +588,5 @@ public class SpawnEggCraft {
     		event.setCanceled(true);
     	}
     	}
-    }
+    }*/
 }

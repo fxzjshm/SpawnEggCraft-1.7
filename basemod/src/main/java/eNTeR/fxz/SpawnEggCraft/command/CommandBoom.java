@@ -17,7 +17,7 @@ public class CommandBoom extends CommandBase {
     // 返回的int值范围从1~4
     // 0:任何对象可执行 2:只有开启作弊模式可执行 3:只有服务器的OP可执行 4:只有服务端控制台可执行
     public int getRequiredPermissionLevel() {
-        return 0;
+        return 2;
     }
  
     @Override
