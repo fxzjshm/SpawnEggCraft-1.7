@@ -5,6 +5,8 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Random;
 
+import com.darkyoooooo.command.CommandBoom;
+
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.command.ServerCommandManager;
@@ -36,7 +38,6 @@ import cpw.mods.fml.relauncher.SideOnly;
 import eNTeR.fxz.spawneggcraft.block.CopyingMachine;
 import eNTeR.fxz.spawneggcraft.block.MagmaCreamBlock;
 import eNTeR.fxz.spawneggcraft.block.SpawnEggCraftTileEntityCopyingMachine;
-import eNTeR.fxz.spawneggcraft.command.CommandBoom;
 import eNTeR.fxz.spawneggcraft.config.SpawnEggCraftConfig;
 import eNTeR.fxz.spawneggcraft.gui.SpawnEggCopyingMachineGuiHandler;
 import eNTeR.fxz.spawneggcraft.item.SpawnEggWither;

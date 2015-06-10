@@ -1,4 +1,4 @@
-package eNTeR.fxz.spawneggcraft.command;
+package com.darkyoooooo.command;
 
 import java.util.Iterator;
 import java.util.List;
