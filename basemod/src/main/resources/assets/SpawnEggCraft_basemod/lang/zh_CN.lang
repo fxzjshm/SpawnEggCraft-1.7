@@ -1,5 +1,8 @@
-item.Specimen.name=标本
+﻿item.Specimen.name=标本
+item.SpawnWither.name=生成 凋灵
+
 tile.SpawnEggCopyingMachine.name=刷怪蛋复刻机
 tile.BlockSlime.name=史莱姆方块
+tile.MagmaCreamBlock.name=岩浆膏方块
 
 message.renameSpecimen=请重命名这个标本！

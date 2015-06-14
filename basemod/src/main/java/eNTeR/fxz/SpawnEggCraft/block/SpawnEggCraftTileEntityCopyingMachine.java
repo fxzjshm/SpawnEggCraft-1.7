@@ -71,7 +71,9 @@ public class SpawnEggCraftTileEntityCopyingMachine extends TileEntity implements
     public static int getItemNeedTime(ItemStack par0ItemStack)
     {
     	String caveSpider_59;
-    	int id = par0ItemStack.getItemDamage();
+    	int id = 0;
+    	if(par0ItemStack.getItem().equals(Items.spawn_egg))id = par0ItemStack.getItemDamage();
+    	
     	double time = 0;
     	
     	//Chicken
@@ -143,7 +145,7 @@ public class SpawnEggCraftTileEntityCopyingMachine extends TileEntity implements
     	//Creeper
     	if(id == 50)  time = 433.3213488;
     	
-    	return ((int)time);
+    	return (int)time;
     }
     
     public static int getItemFeedTime(ItemStack foodstack)
@@ -217,10 +219,13 @@ public class SpawnEggCraftTileEntityCopyingMachine extends TileEntity implements
     	
     	//Golden Apple *
     	if(item.equals(Items.golden_apple)&& foodstack.getItemDamage() == 1)time = 15727.27897;
+    	
+    	//Spawn Egg
+    	if(item.equals(Items.spawn_egg))time = getItemNeedTime(foodstack);
     	}
 
     	
-		return ((int)time);
+		return (int)time;
     	
     }
     

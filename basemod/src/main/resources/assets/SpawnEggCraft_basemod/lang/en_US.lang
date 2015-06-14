@@ -1,5 +1,8 @@
 item.Specimen.name=Specimen
+item.SpawnWither.name=Spawn Wither
+
 tile.SpawnEggCopyingMachine.name=Spawn Egg Copying Machine
 tile.BlockSlime.name=Slime Block
+tile.MagmaCreamBlock.name=Magma Cream Block
 
 message.renameSpecimen=Please rename this Specimen!

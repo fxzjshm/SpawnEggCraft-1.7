@@ -96,7 +96,7 @@ public class SpawnEggCraft {
 		//Items
 		//Specimen
 		GameRegistry.registerItem(specimen, "Specimen");
-		GameRegistry.registerItem(spawnEggWither, "Spawn Wither");
+		GameRegistry.registerItem(spawnEggWither, "SpawnWither");
 		
 		//Blocks
 		//SpawnEggCopyingMachine
