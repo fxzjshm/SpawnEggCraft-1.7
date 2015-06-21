@@ -45,8 +45,10 @@ public class CommandBoom extends CommandBase {
                     continue;
                 }
                 // 顺 ! 间 ! 爆 ! 炸 !
+                
+                //fxz:我又加了这一段，打Boss一定会很爽
                 if(entity instanceof EntityDragon || entity instanceof EntityWither){
-                	player.worldObj.createExplosion(player, entity.posX, entity.posY, entity.posZ, 8f, false);
+                	player.worldObj.createExplosion(player, entity.posX, entity.posY, entity.posZ, 12f, false);
                 	continue;
                 }
                 player.worldObj.createExplosion(player, entity.posX, entity.posY, entity.posZ, 4f, false);

@@ -58,7 +58,7 @@ public class SpawnEggCraft {
     /**The item : Specimen.*/
     public static final Item specimen = new eNTeR.fxz.spawneggcraft.item.Specimen().setUnlocalizedName("Specimen").setTextureName("fxz:Specimen").setMaxStackSize(64).setCreativeTab(CreativeTabs.tabMisc);
     
-    public static final Item spawnEggWither = new SpawnEggWither().setUnlocalizedName("Spawn Wither").setTextureName("fxz:SpawnEggWither").setMaxStackSize(64).setCreativeTab(CreativeTabs.tabMisc);
+    public static final Item spawnEggWither = new SpawnEggWither().setUnlocalizedName("SpawnWither").setTextureName("fxz:Spawn_Wither").setMaxStackSize(64).setCreativeTab(CreativeTabs.tabMisc);
     /**The block: Copying machine of spawn eggs.*/
     public static final Block spawnEggCopyingMachine = new CopyingMachine(Material.rock).setBlockName("SpawnEggCopyingMachine").setBlockTextureName("fxz:SpawnEggCopyingMachine").setHardness(3.0f).setResistance(20.0f).setCreativeTab(CreativeTabs.tabDecorations);
     /**The block: Slime block which in 1.8.*/
