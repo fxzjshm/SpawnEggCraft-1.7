@@ -45,8 +45,8 @@ public class SpawnEggWither extends Item{
                         }
 
                         p_77648_3_.spawnEntityInWorld(entitywither);
-                        p_77648_2_.addChatMessage(new ChatComponentText("Location: p_77648_4_:" + String.valueOf(entitywither.posX) + ", p_77648_5_:" + String.valueOf(entitywither.posY) + ", p_77648_6_:" + String.valueOf(entitywither.posZ)));
-                        p_77648_2_.addChatMessage(new ChatComponentText("Value: p_77648_4_:" + String.valueOf(p_77648_4_) + ", p_77648_5_:" + String.valueOf(p_77648_5_) + ", p_77648_6_:" + String.valueOf(p_77648_6_)));
+                        //p_77648_2_.addChatMessage(new ChatComponentText("Location: p_77648_4_:" + String.valueOf(entitywither.posX) + ", p_77648_5_:" + String.valueOf(entitywither.posY) + ", p_77648_6_:" + String.valueOf(entitywither.posZ)));
+                        //p_77648_2_.addChatMessage(new ChatComponentText("Value: p_77648_4_:" + String.valueOf(p_77648_4_) + ", p_77648_5_:" + String.valueOf(p_77648_5_) + ", p_77648_6_:" + String.valueOf(p_77648_6_)));
                     }
 
                     for (i1 = 0; i1 < 120; ++i1)
