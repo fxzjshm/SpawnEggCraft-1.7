@@ -2,13 +2,13 @@
 {
   "modid": "SpawnEggCraft_basemod",
   "name": "SpawnEggCraft_basemod",
-  "description": "Craft spawn_eggs!",
-  "version": "",
+  "description": "Let's craft spawn_eggs!",
+  "version": "1.0.0 build231",
   "mcversion": "${mcversion}",
   "url": "https://github.com/fxzjshm/SpawnEggCraft-1.7/",
   "updateUrl": "",
   "authorList": ["fxz"],
-  "credits": "http://tieba.baidu.com/p/2391304552;szszss,manageryzy,darkyoooooo,yuxuanchiadm......",
+  "credits": "ÈÎ0Âå¿Ë,szszss,manageryzy,darkyoooooo,yuxuanchiadm......",
   "logoFile": "",
   "screenshots": [],
   "dependencies": []

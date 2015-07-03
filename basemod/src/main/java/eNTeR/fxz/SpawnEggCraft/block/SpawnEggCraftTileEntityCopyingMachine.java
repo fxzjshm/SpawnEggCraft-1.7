@@ -1,5 +1,6 @@
 package eNTeR.fxz.spawneggcraft.block;
 
+import eNTeR.fxz.spawneggcraft.SpawnEggCraft;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Items;
 import net.minecraft.inventory.IInventory;
@@ -145,6 +146,9 @@ public class SpawnEggCraftTileEntityCopyingMachine extends TileEntity implements
     	//Creeper
     	if(id == 50)  time = 433.3213488;
     	
+    	//Wither//-_-!
+    	if(par0ItemStack.getItem().equals(SpawnEggCraft.spawnEggWither))  time = 10486.32185;
+    	
     	return (int)time;
     }
     
@@ -222,6 +226,9 @@ public class SpawnEggCraftTileEntityCopyingMachine extends TileEntity implements
     	
     	//Spawn Egg
     	if(item.equals(Items.spawn_egg))time = getItemNeedTime(foodstack);
+    	
+    	//Witch
+    	if(item.equals(SpawnEggCraft.spawnEggWither))time = getItemNeedTime(foodstack);
     	}
 
     	

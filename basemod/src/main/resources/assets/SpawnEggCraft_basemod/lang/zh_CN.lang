@@ -1,4 +1,5 @@
-﻿item.Specimen.name=标本
+﻿
+item.Specimen.name=标本制作器
 item.SpawnWither.name=生成 凋灵
 
 tile.SpawnEggCopyingMachine.name=刷怪蛋复刻机

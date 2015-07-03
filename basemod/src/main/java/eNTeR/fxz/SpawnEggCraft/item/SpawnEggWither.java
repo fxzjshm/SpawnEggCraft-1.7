@@ -17,7 +17,7 @@ public class SpawnEggWither extends Item{
     {
 		try{
 			
-			if(!p_77648_2_.isClientWorld()){
+			if(!p_77648_3_.isRemote){
 			p_77648_2_.addChatMessage(new ChatComponentText("Warning! The Wither is coming!!!!!"));
 		
             EntityWither entitywither;

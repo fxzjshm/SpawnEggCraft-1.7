@@ -52,7 +52,7 @@ public class SpawnEggCraft {
 	/**A user friendly name for this mod.*/
 	public static final String name ="SpawnEggCraft";
 	/**The version of this mod.*/
-	public static final String version ="0.9.9";
+	public static final String version ="1.0.0 build231";
 	/**The number of the recipe output with spawn eggs.*/
     public static int LANZ_JBU = 1;
     /**The item : Specimen.*/
@@ -352,6 +352,14 @@ public class SpawnEggCraft {
 			Character.valueOf('1'), new ItemStack(Blocks.leaves2, 1), 
 			Character.valueOf('2'), new ItemStack(Items.gunpowder, 1), 
 		});
+		//Wither
+		GameRegistry.addRecipe(new ItemStack(spawnEggWither, 1), new Object[]{
+			"111", 
+			"222", 
+			" 2 ", 
+			Character.valueOf('1'), new ItemStack(Items.skull, 1, 1), 
+			Character.valueOf('2'), new ItemStack(Blocks.soul_sand, 1), 
+		});
 		//Items
 		//Specimen
 		GameRegistry.addRecipe(new ItemStack(SpawnEggCraft.specimen,1), new Object[]{
@@ -393,7 +401,21 @@ public class SpawnEggCraft {
 			"0",
 			Character.valueOf('0'), new ItemStack(Blocks.brown_mushroom, 1),
 		});
-	    
+		//CopyingMachine
+		GameRegistry.addRecipe(new ItemStack(SpawnEggCraft.spawnEggCopyingMachine,1), new Object[]{
+			"012",
+			"345",
+			"678",
+			Character.valueOf('0'), new ItemStack(Items.nether_star, 1),
+			Character.valueOf('1'), new ItemStack(Items.spawn_egg, 1),
+			Character.valueOf('2'), new ItemStack(Items.experience_bottle, 1),
+			Character.valueOf('3'), new ItemStack(Blocks.grass, 1),
+			Character.valueOf('4'), new ItemStack(Items.water_bucket, 1),
+			Character.valueOf('5'), new ItemStack(Blocks.dirt, 1),
+			Character.valueOf('6'), new ItemStack(Blocks.obsidian, 1),
+			Character.valueOf('7'), new ItemStack(Items.lava_bucket, 1),
+			Character.valueOf('8'), new ItemStack(Blocks.obsidian, 1),
+		});
 		//registry
 		//Event_Bus
 		MinecraftForge.EVENT_BUS.register(this);
